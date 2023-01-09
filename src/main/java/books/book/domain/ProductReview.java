@@ -1,13 +1,12 @@
 package books.book.domain;
 
-import books.user.domain.User;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
+import books.user.domain.User;
 
 @Entity
 @Table(name = "product_review")

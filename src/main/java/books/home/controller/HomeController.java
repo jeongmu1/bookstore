@@ -29,8 +29,8 @@ public class HomeController {
         this.categoryRepo = categoryRepo;
     }
 
-    @GetMapping
-    public String showMainPage(Model model) {
-        return "home";
-    }
+//    @GetMapping
+//    public String showMainPage(Model model) {
+//        return "home";
+//    }
 }

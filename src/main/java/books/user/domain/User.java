@@ -6,13 +6,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -20,6 +22,11 @@ public class User {
     @NotNull
     @Column(name = "username", nullable = false, length = 50)
     private String username;
+
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "name", nullable = false, length = 45)
+    private String name;
 
     @Size(max = 64)
     @NotNull
@@ -38,7 +45,7 @@ public class User {
 
     @NotNull
     @Column(name = "enabled", nullable = false)
-    private boolean enabled;
+    private Byte enabled;
 
     @Size(max = 5)
     @Column(name = "zip_code", length = 5)
@@ -55,5 +62,16 @@ public class User {
     @NotNull
     @Column(name = "update_time", nullable = false)
     private Timestamp updateTime;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Authority> authorities = new LinkedHashSet<>();
+
+    @PrePersist
+    public void createTime() {
+        if (this.createTime == null) {
+            this.createTime = new Timestamp(System.currentTimeMillis());
+        }
+        this.updateTime = new Timestamp(System.currentTimeMillis());
+    }
 
 }
