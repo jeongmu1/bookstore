@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 public class ProductCategory {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

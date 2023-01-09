@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 public class ProductImage {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

@@ -1,22 +1,23 @@
 package books.common;
 
-import books.user.UserDetailService;
+import books.user.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailService userDetailService;
+    private final UserDetailsService userDetailService;
 
     @Autowired
-    public SecurityConfig(UserDetailService userDetailService) {
+    public SecurityConfig(UserDetailsService userDetailService) {
         this.userDetailService = userDetailService;
     }
 
@@ -36,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/css/**").permitAll();
+                .antMatchers("/", "/**").access("permitAll");
     }
 
     @Override

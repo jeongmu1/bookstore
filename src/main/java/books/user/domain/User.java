@@ -16,6 +16,7 @@ import java.util.Set;
 public class User {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max = 50)
@@ -33,7 +34,7 @@ public class User {
     @Column(name = "email", nullable = false, length = 64)
     private String email;
 
-    @Size(max = 50)
+    @Size(max = 60)
     @NotNull
     @Column(name = "password", nullable = false, length = 50)
     private String password;

@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 public class Authority {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

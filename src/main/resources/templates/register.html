@@ -35,9 +35,30 @@
 <!-- End Header -->
 <!-- Main -->
 <div id="main" class="shell">
-    <form method="POST" th:action="@{/register}" id="registerForm">
-        <label for="username">Username: </label>
+    <form method="POST" th:action="@{/register}" id="registrationForm">
+
+        <label for="username">아이디: </label>
         <input type="text" name="username"><br/>
+
+        <label for="password">비밀번호: </label>
+        <input type="password" name="password"><br/>
+
+        <label for="name">이름: </label>
+        <input type="text" name="name"><br/>
+
+        <label for="phone">전화번호: </label>
+        <input type="text" name="phone"><br/>
+
+        <label for="email">E-mail: </label>
+        <input type="text" name="email"><br/>
+
+        <label for="zipCode">우편번호: </label>
+        <input type="text" name="zipCode"><br/>
+
+        <label for="addressDetail">상세주소: </label>
+        <input type="text" name="addressDetail"><br/>
+
+        <input type="submit" value="회원가입">
     </form>
 
 </div>

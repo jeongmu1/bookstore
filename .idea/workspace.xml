@@ -4,29 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="HomeController 메소드 미구현&#10;UserDetailsImpl 메소드 미구현">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/ReviewLike.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAuthorityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/UserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="로그인 폼 제작&#10;home 수정">
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/BookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/CategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/ProductCategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/ProductImageRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/ProductReviewRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/PublisherRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/RegistrationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductReview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/Publisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/Publisher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/UserDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/UserDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/UserDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/UserDetailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/ReviewLike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/ReviewLike.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +43,9 @@
       <list>
         <option value="com.haulmont.jpb.JpaRepository" />
         <option value="com.haulmont.jpb.JpaEntity" />
-        <option value="Interface" />
         <option value="HTML File" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -99,36 +104,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "모듈",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "495180092bd0712a4c50027fe52ccb8a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;495180092bd0712a4c50027fe52ccb8a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
@@ -170,7 +175,8 @@
       <updated>1672905075587</updated>
       <workItem from="1672905076753" duration="29308000" />
       <workItem from="1673003122990" duration="5268000" />
-      <workItem from="1673152637285" duration="20169000" />
+      <workItem from="1673152637285" duration="30386000" />
+      <workItem from="1673252827420" duration="90000" />
     </task>
     <task id="LOCAL-00001" summary="Entity 생성">
       <created>1673001159169</created>
@@ -193,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673009677525</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="로그인 폼 제작&#10;home 수정">
+      <created>1673240929342</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673240929342</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +226,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Entity 생성" />
     <MESSAGE value="HomeController 메소드 미구현&#10;UserDetailsImpl 메소드 미구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="HomeController 메소드 미구현&#10;UserDetailsImpl 메소드 미구현" />
+    <MESSAGE value="로그인 폼 제작&#10;home 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="로그인 폼 제작&#10;home 수정" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

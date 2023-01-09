@@ -19,9 +19,13 @@ public class RegistrationForm {
     public User toUser(PasswordEncoder passwordEncoder) {
         User user = new User();
         user.setUsername(username);
-        user.setUsername(email);
+        user.setName(name);
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
         user.setPhone(phone);
+        user.setZipCode(zipCode);
+        user.setAddressDetail(addressDetail);
+        user.setEnabled(new Integer(1).byteValue());
         return user;
     }
 }

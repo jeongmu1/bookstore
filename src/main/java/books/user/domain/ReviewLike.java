@@ -10,6 +10,7 @@ import java.time.Instant;
 public class ReviewLike {
     @Id
     @Column(name = "`int`", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
