@@ -31,7 +31,11 @@ public class ProductImage {
     private boolean enabled;
 
     @NotNull
-    @Column(name = "create_time", nullable = false)
+    @Column(name = "create_time", nullable = false, updatable = false)
     private Timestamp createTime;
 
+    @PrePersist
+    public void persistTime() {
+        this.createTime = new Timestamp(System.currentTimeMillis());
+    }
 }

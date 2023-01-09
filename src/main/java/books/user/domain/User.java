@@ -57,7 +57,7 @@ public class User {
     private String addressDetail;
 
     @NotNull
-    @Column(name = "create_time", nullable = false)
+    @Column(name = "create_time", nullable = false, updatable = false)
     private Timestamp createTime;
 
     @NotNull
@@ -68,11 +68,14 @@ public class User {
     private Set<Authority> authorities = new LinkedHashSet<>();
 
     @PrePersist
-    public void createTime() {
-        if (this.createTime == null) {
-            this.createTime = new Timestamp(System.currentTimeMillis());
-        }
-        this.updateTime = new Timestamp(System.currentTimeMillis());
+    public void persistTime() {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        this.createTime = currentTime;
+        this.updateTime = currentTime;
     }
 
+    @PreUpdate
+    public void updateTime() {
+        this.updateTime = new Timestamp(System.currentTimeMillis());
+    }
 }

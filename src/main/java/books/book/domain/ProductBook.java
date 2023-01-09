@@ -51,7 +51,7 @@ public class ProductBook {
     private boolean enabled;
 
     @NotNull
-    @Column(name = "create_time", nullable = false)
+    @Column(name = "create_time", nullable = false, updatable = false)
     private Timestamp createTime;
 
     @NotNull
@@ -70,4 +70,15 @@ public class ProductBook {
     @OneToMany(mappedBy = "productBook")
     private Set<ProductImage> productImages = new LinkedHashSet<>();
 
+    @PrePersist
+    public void persistTime() {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        this.createTime = currentTime;
+        this.updateTime = currentTime;
+    }
+
+    @PreUpdate
+    public void updateTime() {
+        this.updateTime = new Timestamp(System.currentTimeMillis());
+    }
 }
