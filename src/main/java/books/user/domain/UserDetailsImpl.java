@@ -6,23 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
 public class UserDetailsImpl implements UserDetails {
     private User user;
+    private List<Authority> authorities;
 
-    public UserDetailsImpl(User user) {
+    public UserDetailsImpl(User user, List<Authority> authorities) {
         this.user = user;
+        this.authorities = authorities;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new HashSet<>();
-        user.getAuthorities().stream()
-                .forEach(authority -> {
-                    collection.add((GrantedAuthority) () -> authority.getAuthority());
+        authorities.forEach(authority -> {
+                    collection.add((GrantedAuthority) authority::getAuthority);
                 });
         return collection;
     }
@@ -58,6 +60,6 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     private boolean isEnabledAccount() {
-        return user.getEnabled() == 1;
+        return user.isEnabled();
     }
 }
