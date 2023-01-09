@@ -37,5 +37,6 @@ public class ProductImage {
     @PrePersist
     public void persistTime() {
         this.createTime = new Timestamp(System.currentTimeMillis());
+        this.enabled = true;
     }
 }

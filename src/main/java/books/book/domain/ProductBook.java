@@ -75,6 +75,7 @@ public class ProductBook {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         this.createTime = currentTime;
         this.updateTime = currentTime;
+        this.enabled = true;
     }
 
     @PreUpdate

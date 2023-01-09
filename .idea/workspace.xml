@@ -4,34 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="로그인 폼 제작&#10;home 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/BookRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/CategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/ProductCategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/ProductImageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/ProductReviewRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/book/repository/PublisherRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/RegistrationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="create, update Time 기본시간 정의">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/productForm.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductCategory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/Publisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/Publisher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/repository/CategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/repository/ProductCategoryRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/UserDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/UserDetailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/UserDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/UserDetailServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/ReviewLike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/ReviewLike.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAuthorityRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +34,9 @@
       <list>
         <option value="com.haulmont.jpb.JpaRepository" />
         <option value="com.haulmont.jpb.JpaEntity" />
-        <option value="HTML File" />
         <option value="Class" />
         <option value="Interface" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -84,6 +75,7 @@
     </option>
   </component>
   <component name="JpbToolWindowState">
+    <option name="isDesignerTabSelected" value="false" />
     <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -176,7 +168,7 @@
       <workItem from="1672905076753" duration="29308000" />
       <workItem from="1673003122990" duration="5268000" />
       <workItem from="1673152637285" duration="30386000" />
-      <workItem from="1673252827420" duration="90000" />
+      <workItem from="1673252827420" duration="11724000" />
     </task>
     <task id="LOCAL-00001" summary="Entity 생성">
       <created>1673001159169</created>
@@ -206,7 +198,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673240929342</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="회원가입 구현 (예외처리 x)&#10;로그인 no Session 발생&#10;관리자 페이지 제작 시작">
+      <created>1673253126169</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1673253126169</updated>
+    </task>
+    <task id="LOCAL-00006" summary="create, update Time 기본시간 정의">
+      <created>1673255326290</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1673255326290</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,7 +233,9 @@
     <MESSAGE value="Entity 생성" />
     <MESSAGE value="HomeController 메소드 미구현&#10;UserDetailsImpl 메소드 미구현" />
     <MESSAGE value="로그인 폼 제작&#10;home 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="로그인 폼 제작&#10;home 수정" />
+    <MESSAGE value="회원가입 구현 (예외처리 x)&#10;로그인 no Session 발생&#10;관리자 페이지 제작 시작" />
+    <MESSAGE value="create, update Time 기본시간 정의" />
+    <option name="LAST_COMMIT_MESSAGE" value="create, update Time 기본시간 정의" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

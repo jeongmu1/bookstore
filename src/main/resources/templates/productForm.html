@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+</head>
+<body>
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a href="#" id="user">Guest</a> .</p>
+        <p><a href="#" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>Shopping Cart (0) <a href="#"
+                                                                                                                class="sum">$0.00</a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+
+    <form method="POST" th:action="@{/admin/product}" id="productForm" th:object="${productBook}">
+        <label>제목: </label>
+<!--        <input type="text" th:field="*{title}"><br/>-->
+<!--        <input type="text" th:field="*{author}">-->
+
+        <div th:object="${publisher}">
+            <select th:field="*{publisher}">
+                <option th:each="p : ${publishers}" th:value="${p.name}" th:text="${p.name}"/><br/>
+            </select>
+        </div>
+
+    </form>
+</div>
+<!-- End Main-->
+</body>
+</html>
