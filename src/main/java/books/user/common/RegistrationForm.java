@@ -25,7 +25,6 @@ public class RegistrationForm {
         user.setPhone(phone);
         user.setZipCode(zipCode);
         user.setAddressDetail(addressDetail);
-        user.setEnabled(new Integer(1).byteValue());
         return user;
     }
 }

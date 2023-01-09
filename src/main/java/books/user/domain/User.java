@@ -46,7 +46,7 @@ public class User {
 
     @NotNull
     @Column(name = "enabled", nullable = false)
-    private Byte enabled;
+    private boolean enabled;
 
     @Size(max = 5)
     @Column(name = "zip_code", length = 5)
@@ -72,6 +72,7 @@ public class User {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         this.createTime = currentTime;
         this.updateTime = currentTime;
+        this.enabled = true;
     }
 
     @PreUpdate
