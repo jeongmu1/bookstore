@@ -132,3 +132,6 @@ textarea { overflow: auto; }
 #newsletter .form-buttons { float: right; display: inline; text-align: right; padding-right: 2px; }
 #newsletter .submit-btn { margin-top: 4px; display: inline-block; font-size: 10px; line-height: 16px; height: 24px; background: url(images/submit-btn.png); padding: 0 8px 0 10px; border: 0; color: #fff; text-transform: uppercase; cursor: pointer; }
 #newsletter .submit-btn:hover { color: #015faa; }
+
+.form-check-boxes { float: left }
+.clearfix { clear: both}

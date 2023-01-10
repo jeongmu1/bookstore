@@ -7,7 +7,7 @@
     <title>DN Book Store</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
 </head>
 <body>
 <!-- Header -->
@@ -37,17 +37,42 @@
 <!-- Main -->
 <div id="main" class="shell">
 
-    <form method="POST" th:action="@{/admin/product}" id="productForm" th:object="${productBook}">
-        <label>제목: </label>
-<!--        <input type="text" th:field="*{title}"><br/>-->
-<!--        <input type="text" th:field="*{author}">-->
-
-        <div th:object="${publisher}">
-            <select th:field="*{publisher}">
-                <option th:each="p : ${publishers}" th:value="${p.name}" th:text="${p.name}"/><br/>
-            </select>
+    <form method="post" th:action="@{/admin/product}">
+        <div>
+            <label for=title>제목: </label>
+            <input type="text" id="title" name="title" placeholder="책 제목">
         </div>
+        <div>
+            <label for="publisher">출판사: </label>
+            <input type="text" id="publisher" name="publisher" placeholder="출판사">
+        </div>
+        <div>
+            <label for="author">작가: </label>
+            <input type="text" id="author" name="author" placeholder="작가">
+        </div>
+        <div>
+            <label for="translator">역자:</label>
+            <input type="text" id="translator" name="translator" placeholder="번역본 등록 시 입력하세요">
+        </div>
+        <div>
+            <label for="price">가격: </label>
+            <input type="text" id="price" name="price" placeholder="책 가격">
+        </div>
+        <div>
+            <label for="discount">할인율: </label>
+            <input type="text" id="discount" name="discount" placeholder="할인율(0~100%)">
+        </div>
+        <div>
+            <h5>카테고리 설정</h5>
+            <div th:each="category : ${categories}" class="form-check-boxes">
+                <input type="checkbox" th:field="*{categories}" th:value="${category.category}">
+                <label th:text="${category.category}">example</label>
+            </div>
+        </div><br>
 
+        <div class="clearfix">
+            <input type="submit" value="등록">
+        </div>
     </form>
 </div>
 <!-- End Main-->
