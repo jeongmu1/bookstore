@@ -41,7 +41,7 @@ public class AdminController {
         List<Publisher> publishers = new ArrayList<>();
         publisherRepository.findAll().forEach(i -> publishers.add(i));
 
-        model.addAttribute(categories).addAttribute(publishers);
+        model.addAttribute("categories", categories).addAttribute("publishers", publishers);
 
         return "productForm";
     }
