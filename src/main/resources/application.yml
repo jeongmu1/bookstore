@@ -12,3 +12,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
+
+bookstore:
+  books:
+    images: /Users/gangjeongmu/Documents/book_store/book_images

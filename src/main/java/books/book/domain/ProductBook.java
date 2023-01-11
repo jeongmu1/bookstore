@@ -1,18 +1,23 @@
 package books.book.domain;
 
 import books.order.domain.ProductOrderProduct;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "product_book")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class ProductBook {
     @Id
     @Column(name = "id", nullable = false)
@@ -27,6 +32,7 @@ public class ProductBook {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "publisher_id", nullable = false)
+    @ToString.Exclude
     private Publisher publisher;
 
     @Size(max = 45)
@@ -34,17 +40,9 @@ public class ProductBook {
     @Column(name = "author", nullable = false, length = 45)
     private String author;
 
-    @Size(max = 45)
-    @Column(name = "translator", length = 45)
-    private String translator;
-
     @NotNull
     @Column(name = "price", nullable = false)
     private int price;
-
-    @NotNull
-    @Column(name = "discount", nullable = false)
-    private int discount;
 
     @NotNull
     @Column(name = "enabled", nullable = false)
@@ -59,15 +57,19 @@ public class ProductBook {
     private Timestamp updateTime;
 
     @OneToMany(mappedBy = "productBook")
+    @ToString.Exclude
     private Set<ProductReview> productReviews = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "productBook")
+    @ToString.Exclude
     private Set<ProductOrderProduct> productOrderProducts = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "productBook")
+    @ToString.Exclude
     private Set<ProductCategory> productCategories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "productBook")
+    @ToString.Exclude
     private Set<ProductImage> productImages = new LinkedHashSet<>();
 
     @PrePersist
@@ -81,5 +83,18 @@ public class ProductBook {
     @PreUpdate
     public void updateTime() {
         this.updateTime = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ProductBook that = (ProductBook) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

@@ -68,9 +68,13 @@
                 <input type="checkbox" th:field="*{categories}" th:value="${category.category}">
                 <label th:text="${category.category}">example</label>
             </div>
-        </div><br>
-
+        </div>
+        <br>
         <div class="clearfix">
+            <input type="file" name="pic">
+        </div>
+
+        <div>
             <input type="submit" value="등록">
         </div>
     </form>

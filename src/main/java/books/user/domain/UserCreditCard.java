@@ -1,35 +1,39 @@
-package books.book.domain;
+package books.user.domain;
 
-import books.user.domain.User;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product_review")
+@Table(name = "user_credit_card")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class ProductReview {
+public class UserCreditCard {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Size(max = 16)
     @NotNull
-    @Column(name = "product_score", nullable = false)
-    private Byte productScore;
+    @Column(name = "cc_number", nullable = false, length = 16)
+    private String ccNumber;
 
+    @Size(max = 5)
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_book_id", nullable = false)
-    @ToString.Exclude
-    private ProductBook productBook;
+    @Column(name = "cc_expiration", nullable = false, length = 5)
+    private String ccExpiration;
+
+    @Size(max = 3)
+    @NotNull
+    @Column(name = "cc_cvv", nullable = false, length = 3)
+    private String ccCvv;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -37,12 +41,12 @@ public class ProductReview {
     @ToString.Exclude
     private User user;
 
-    @Lob
-    @Column(name = "comment")
-    private String comment;
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
 
     @NotNull
-    @Column(name = "create_time", nullable = false, updatable = false)
+    @Column(name = "create_time", nullable = false)
     private Timestamp createTime;
 
     @PrePersist
@@ -54,7 +58,7 @@ public class ProductReview {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductReview that = (ProductReview) o;
+        UserCreditCard that = (UserCreditCard) o;
         return id != null && Objects.equals(id, that.id);
     }
 

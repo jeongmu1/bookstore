@@ -1,18 +1,23 @@
 package books.order.domain;
 
 import books.user.domain.User;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "product_order")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class ProductOrder {
     @Id
     @Column(name = "id", nullable = false)
@@ -22,6 +27,7 @@ public class ProductOrder {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
     private User user;
 
     @Size(max = 16)
@@ -68,11 +74,25 @@ public class ProductOrder {
     private Timestamp createTime;
 
     @OneToMany(mappedBy = "productOrder")
+    @ToString.Exclude
     private Set<ProductOrderProduct> productOrderProducts = new LinkedHashSet<>();
 
     @PrePersist
     public void persistTime() {
         this.createTime = new Timestamp(System.currentTimeMillis());
         this.enabled = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ProductOrder that = (ProductOrder) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

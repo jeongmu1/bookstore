@@ -4,7 +4,7 @@
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
     <option name="reverseEngineeringLastDbConnectionId" value="e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0" />
-    <option name="reLastEntityCreationPackage" value="src/main/java/books/user/domain" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/books/order/domain" />
     <option name="newEntityIdStrategy" />
   </component>
 </project>

@@ -1,4 +1,4 @@
-package books.user.domain;
+package books.order.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -9,34 +9,28 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-@Table(name = "authorities")
+@Table(name = "delivery_state")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Authority {
+public class DeliveryState {
     @Id
-    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    @ToString.Exclude
-    private User user;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     @Size(max = 45)
     @NotNull
-    @Column(name = "authority", nullable = false, length = 45)
-    private String authority;
+    @Column(name = "delivery_state", nullable = false, length = 45)
+    private String deliveryState;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Authority authority = (Authority) o;
-        return id != null && Objects.equals(id, authority.id);
+        DeliveryState that = (DeliveryState) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

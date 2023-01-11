@@ -1,14 +1,11 @@
 package books.user.domain;
 
-import books.user.repository.UserRepository;
+
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.transaction.Transactional;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Data
 public class UserDetailsImpl implements UserDetails {

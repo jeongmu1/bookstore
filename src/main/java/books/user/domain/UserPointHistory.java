@@ -1,6 +1,6 @@
-package books.book.domain;
+package books.user.domain;
 
-import books.user.domain.User;
+import books.order.domain.PointHistoryDetail;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -10,26 +10,21 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product_review")
+@Table(name = "user_point_history")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class ProductReview {
+public class UserPointHistory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @NotNull
-    @Column(name = "product_score", nullable = false)
-    private Byte productScore;
-
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_book_id", nullable = false)
+    @JoinColumn(name = "point_history_detail_id", nullable = false)
     @ToString.Exclude
-    private ProductBook productBook;
+    private PointHistoryDetail pointHistoryDetail;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -37,12 +32,8 @@ public class ProductReview {
     @ToString.Exclude
     private User user;
 
-    @Lob
-    @Column(name = "comment")
-    private String comment;
-
     @NotNull
-    @Column(name = "create_time", nullable = false, updatable = false)
+    @Column(name = "create_time", nullable = false)
     private Timestamp createTime;
 
     @PrePersist
@@ -54,7 +45,7 @@ public class ProductReview {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductReview that = (ProductReview) o;
+        UserPointHistory that = (UserPointHistory) o;
         return id != null && Objects.equals(id, that.id);
     }
 

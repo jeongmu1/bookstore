@@ -1,22 +1,28 @@
 package books.user.domain;
 
-import lombok.Data;
+import books.book.domain.ProductReview;
+import books.order.domain.ProductOrder;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class User {
     @Id
-    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Size(max = 50)
@@ -24,17 +30,12 @@ public class User {
     @Column(name = "username", nullable = false, length = 50)
     private String username;
 
-    @Size(max = 45)
-    @NotNull
-    @Column(name = "name", nullable = false, length = 45)
-    private String name;
-
     @Size(max = 64)
     @NotNull
     @Column(name = "email", nullable = false, length = 64)
     private String email;
 
-    @Size(max = 60)
+    @Size(max = 50)
     @NotNull
     @Column(name = "password", nullable = false, length = 50)
     private String password;
@@ -48,16 +49,12 @@ public class User {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @Size(max = 5)
-    @Column(name = "zip_code", length = 5)
-    private String zipCode;
-
-    @Size(max = 45)
-    @Column(name = "address_detail", length = 45)
-    private String addressDetail;
+    @NotNull
+    @Column(name = "point", nullable = false)
+    private Integer point;
 
     @NotNull
-    @Column(name = "create_time", nullable = false, updatable = false)
+    @Column(name = "create_time", nullable = false)
     private Timestamp createTime;
 
     @NotNull
@@ -65,7 +62,28 @@ public class User {
     private Timestamp updateTime;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private Set<Authority> authorities = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private Set<ProductOrder> productOrders = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private Set<UserPointHistory> userPointHistories = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private Set<UserAddress> userAddresses = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private Set<ProductReview> productReviews = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private Set<UserCreditCard> userCreditCards = new LinkedHashSet<>();
 
     @PrePersist
     public void persistTime() {
@@ -78,5 +96,18 @@ public class User {
     @PreUpdate
     public void updateTime() {
         this.updateTime = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
