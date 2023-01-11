@@ -1,4 +1,4 @@
-package books.user;
+package books.user.service;
 
 import books.user.domain.Authority;
 import books.user.domain.User;
@@ -27,14 +27,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            Optional<List<Authority>> optionalAuthorities = userAuthorityRepo.findByUser(user);
-            return optionalAuthorities.map(authorities -> new UserDetailsImpl(user, authorities)).orElse(null);
+        return userRepository
+                .findByUsername(username)
+                .map(user -> userAuthorityRepo
+                        .findByUser(user)
+                        .map(authorities -> new UserDetailsImpl(user, authorities))
+                        .orElse(null))
+                .orElse(null);
 
-        }
-
-        return null;
     }
 }
