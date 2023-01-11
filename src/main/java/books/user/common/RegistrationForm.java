@@ -18,6 +18,8 @@ public class RegistrationForm {
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
         user.setPhone(phone);
+        user.setPoint(0);
+        user.setEnabled(true);
         return user;
     }
 }
