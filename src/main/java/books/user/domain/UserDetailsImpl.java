@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 public class UserDetailsImpl implements UserDetails {
@@ -19,11 +20,10 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collection = new HashSet<>();
-        authorities.forEach(authority -> {
-                    collection.add((GrantedAuthority) authority::getAuthority);
-                });
-        return collection;
+        return authorities
+                .stream()
+                .map(authority -> (GrantedAuthority) authority::getAuthority)
+                .collect(Collectors.toSet());
     }
 
     @Override

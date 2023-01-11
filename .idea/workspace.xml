@@ -4,30 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/DeliveryState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/PointHistoryDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserCreditCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserPointHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="loadUserByUsername 메소드 내부 함수형 표현으로 변경">
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/UserServiceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAddressRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserCCRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/book/domain/ProductReview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrderProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrderProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/ReviewLike.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/controller/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/RegistrationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserAddress.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAuthorityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserDetailsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,14 +33,27 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="com.haulmont.jpb.JpaRepository" />
-        <option value="Class" />
-        <option value="Interface" />
         <option value="HTML File" />
         <option value="com.haulmont.jpb.JpaEntity" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="develop" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -93,6 +101,7 @@
     </option>
   </component>
   <component name="JpbToolWindowState">
+    <option name="isDesignerTabSelected" value="false" />
     <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -187,7 +196,7 @@
       <workItem from="1673152637285" duration="30386000" />
       <workItem from="1673252827420" duration="11724000" />
       <workItem from="1673312221137" duration="14451000" />
-      <workItem from="1673398307902" duration="4490000" />
+      <workItem from="1673398307902" duration="26850000" />
     </task>
     <task id="LOCAL-00001" summary="Entity 생성">
       <created>1673001159169</created>
@@ -266,7 +275,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673340914919</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="User Entity 에 적립금, 신용카드(여러 개 저장가능) 추가&#10;배송상태 추가예정">
+      <created>1673408937539</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1673408937539</updated>
+    </task>
+    <task id="LOCAL-00013" summary="loadUserByUsername 메소드 내부 함수형 표현으로 변경">
+      <created>1673433390068</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1673433390068</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +317,9 @@
     <MESSAGE value="getMapping 메소드에 데이터 전달 추가" />
     <MESSAGE value="loadUserByUsername 메소드의 Transactional 어노테이션 제거" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="User Entity 에 적립금, 신용카드(여러 개 저장가능) 추가&#10;배송상태 추가예정" />
+    <MESSAGE value="loadUserByUsername 메소드 내부 함수형 표현으로 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="loadUserByUsername 메소드 내부 함수형 표현으로 변경" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

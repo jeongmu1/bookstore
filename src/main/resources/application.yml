@@ -16,3 +16,5 @@ spring:
 bookstore:
   books:
     images: /Users/gangjeongmu/Documents/book_store/book_images
+  point:
+    buying-saving-rate: 10

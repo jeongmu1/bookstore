@@ -1,7 +1,5 @@
 package books.user.service;
 
-import books.user.domain.Authority;
-import books.user.domain.User;
 import books.user.domain.UserDetailsImpl;
 import books.user.repository.UserAuthorityRepository;
 import books.user.repository.UserRepository;
@@ -11,16 +9,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
     private final UserAuthorityRepository userAuthorityRepo;
 
     @Autowired
-    public UserDetailServiceImpl(UserRepository userRepository, UserAuthorityRepository userAuthorityRepo) {
+    public UserDetailsServiceImpl(UserRepository userRepository, UserAuthorityRepository userAuthorityRepo) {
         this.userRepository = userRepository;
         this.userAuthorityRepo = userAuthorityRepo;
     }
@@ -29,10 +24,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository
                 .findByUsername(username)
-                .map(user -> userAuthorityRepo
+                .flatMap(user -> userAuthorityRepo
                         .findByUser(user)
-                        .map(authorities -> new UserDetailsImpl(user, authorities))
-                        .orElse(null))
+                        .map(authorities -> new UserDetailsImpl(user, authorities)))
                 .orElse(null);
 
     }

@@ -35,9 +35,9 @@ public class User {
     @Column(name = "email", nullable = false, length = 64)
     private String email;
 
-    @Size(max = 50)
+    @Size(max = 60)
     @NotNull
-    @Column(name = "password", nullable = false, length = 50)
+    @Column(name = "password", nullable = false, length = 60)
     private String password;
 
     @Size(max = 15)

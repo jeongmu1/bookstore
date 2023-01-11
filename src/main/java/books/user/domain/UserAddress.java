@@ -47,6 +47,10 @@ public class UserAddress {
     private User user;
 
     @NotNull
+    @Column(name = "default_flag", nullable = false)
+    private boolean defaultFlag;
+
+    @NotNull
     @Column(name = "create_time", nullable = false)
     private Timestamp createTime;
 
@@ -55,14 +59,15 @@ public class UserAddress {
     private Timestamp updateTime;
 
     @PrePersist
-    public void persistTime() {
+    public void prePersist() {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         this.createTime = currentTime;
         this.updateTime = currentTime;
+        this.defaultFlag = false;
     }
 
     @PreUpdate
-    public void updateTime() {
+    public void preUpdate() {
         this.updateTime = new Timestamp(System.currentTimeMillis());
     }
 
