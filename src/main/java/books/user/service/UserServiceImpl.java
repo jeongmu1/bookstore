@@ -1,22 +1,19 @@
 package books.user.service;
 
+import books.common.PageSizeProps;
+import books.user.domain.*;
 import books.order.domain.ProductOrder;
 import books.order.repository.CartRepository;
 import books.order.repository.OrderRepository;
 import books.user.common.RegistrationForm;
-import books.user.domain.Authority;
-import books.user.domain.User;
-import books.user.domain.UserAddress;
-import books.user.repository.UserAddressRepository;
-import books.user.repository.UserAuthorityRepository;
-import books.user.repository.UserCCRepository;
-import books.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import books.user.repository.*;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,15 +24,16 @@ public class UserServiceImpl implements UserService {
     private final CartRepository cartRepo;
     private final OrderRepository orderRepo;
     private final PasswordEncoder encoder;
+    private final UserPointHistoryRepository userPointHistoryRepo;
+    private PageSizeProps pageSizeProps;
 
-    @Autowired
     public UserServiceImpl(UserRepository userRepo
             , UserAuthorityRepository authorityRepo
             , UserAddressRepository userAddressRepo
-            , UserCCRepository userCCRepo
-            , CartRepository cartRepo
-            , OrderRepository orderRepo
-            , PasswordEncoder encoder) {
+            , UserCCRepository userCCRepo, CartRepository cartRepo
+            , OrderRepository orderRepo, PasswordEncoder encoder
+            , UserPointHistoryRepository userPointHistoryRepo
+            , PageSizeProps pageSizeProps) {
         this.userRepo = userRepo;
         this.authorityRepo = authorityRepo;
         this.userAddressRepo = userAddressRepo;
@@ -43,15 +41,49 @@ public class UserServiceImpl implements UserService {
         this.cartRepo = cartRepo;
         this.orderRepo = orderRepo;
         this.encoder = encoder;
+        this.userPointHistoryRepo = userPointHistoryRepo;
+        this.pageSizeProps = pageSizeProps;
     }
 
+    @Override
     public User getUserInfo(User user) {
-        return null;
+
+        return user;
+    }
+
+    @Override
+    public List<ProductOrder> getUserOrdersPage(User user, int page) {
+        return orderRepo
+                .findAllByUserOrderByCreateTimeDesc(user, PageRequest.of(page - 1, pageSizeProps.getUserOrders()))
+                .orElse(null);
+    }
+
+    @Override
+    public ProductOrder getOrderDetail(String orderUuid) {
+        return orderRepo
+                .findProductOrderByOrderUuid(orderUuid)
+                .orElse(null);
+    }
+
+    @Override
+    public List<UserPointHistory> getUserPointHistoriesPage(User user) {
+        return userPointHistoryRepo
+                .findAllByUserOrderByCreateTimeDesc(user)
+                .orElse(null);
     }
 
     @Override
     public Set<UserAddress> getUserAddresses(User user) {
-        return userAddressRepo.findUserAddressesByUser(user).orElse(null);
+        return userAddressRepo
+                .findAllByUser(user)
+                .orElse(null);
+    }
+
+    @Override
+    public Set<UserCreditCard> getUserCreditCards(User user) {
+        return userCCRepo
+                .findAllByUser(user)
+                .orElse(null);
     }
 
     @Override

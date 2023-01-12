@@ -1,6 +1,5 @@
 package books.user.domain;
 
-import books.order.domain.PointHistoryDetail;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -21,7 +20,7 @@ public class UserPointHistory {
     private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "point_history_detail_id", nullable = false)
     @ToString.Exclude
     private PointHistoryDetail pointHistoryDetail;
@@ -35,6 +34,18 @@ public class UserPointHistory {
     @NotNull
     @Column(name = "create_time", nullable = false)
     private Timestamp createTime;
+
+    @NotNull
+    @Column(name = "point_change", nullable = false)
+    private Integer pointChange;
+
+    public Integer getPointChange() {
+        return pointChange;
+    }
+
+    public void setPointChange(Integer pointChange) {
+        this.pointChange = pointChange;
+    }
 
     @PrePersist
     public void persistTime() {
