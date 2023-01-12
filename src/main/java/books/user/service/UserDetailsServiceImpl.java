@@ -1,6 +1,6 @@
 package books.user.service;
 
-import books.user.domain.UserDetailsImpl;
+import books.user.common.UserDetailsImpl;
 import books.user.repository.UserAuthorityRepository;
 import books.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

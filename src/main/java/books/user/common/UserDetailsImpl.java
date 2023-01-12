@@ -1,6 +1,8 @@
-package books.user.domain;
+package books.user.common;
 
 
+import books.user.domain.Authority;
+import books.user.domain.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
