@@ -8,14 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class RegistrationForm {
     private String username;
     private String name;
-    private String email;
     private String password;
     private String phone;
 
     public User toUser(PasswordEncoder passwordEncoder) {
         User user = new User();
         user.setUsername(username);
-        user.setEmail(email);
+        user.setName(name);
         user.setPassword(passwordEncoder.encode(password));
         user.setPhone(phone);
         user.setPoint(0);
