@@ -1,4 +1,4 @@
-package books.order.domain;
+package books.user.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -19,6 +19,10 @@ public class PointHistoryDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @NotNull
+    @Column(name = "`using`", nullable = false)
+    private boolean using;
 
     @Size(max = 45)
     @NotNull
