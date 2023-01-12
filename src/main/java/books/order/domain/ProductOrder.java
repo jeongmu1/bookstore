@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "product_order")
@@ -77,10 +78,32 @@ public class ProductOrder {
     @ToString.Exclude
     private Set<ProductOrderProduct> productOrderProducts = new LinkedHashSet<>();
 
+    @Size(max = 36)
+    @NotNull
+    @Column(name = "order_uuid", nullable = false, length = 36)
+    private String orderUuid;
+
+    @NotNull
+    @Column(name = "update_time", nullable = false)
+    private Timestamp updateTime;
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
     @PrePersist
-    public void persistTime() {
-        this.createTime = new Timestamp(System.currentTimeMillis());
+    public void persist() {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        this.createTime = currentTime;
+        this.updateTime = currentTime;
         this.enabled = true;
+
+        this.orderUuid = UUID.randomUUID().toString();
+    }
+
+    @PreUpdate
+    void update() {
+        this.updateTime = new Timestamp(System.currentTimeMillis());
     }
 
     @Override
