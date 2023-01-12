@@ -36,16 +36,17 @@ public class AdminController {
     @GetMapping(value = "/product")
     public String showProductForm(Model model) {
         List<Category> categories = new ArrayList<>();
-        categoryRepository.findAll().forEach(i -> categories.add(i));
+        categoryRepository.findAll().forEach(categories::add);
 
         List<Publisher> publishers = new ArrayList<>();
-        publisherRepository.findAll().forEach(i -> publishers.add(i));
+        publisherRepository.findAll().forEach(publishers::add);
 
         model.addAttribute("categories", categories).addAttribute("publishers", publishers);
 
         return "productForm";
     }
 
+    // 수정 필요
     @PostMapping(value = "/product")
     public String addProduct(@Valid ProductBook productBook,
                              @RequestParam Map<String, Object> params) {
