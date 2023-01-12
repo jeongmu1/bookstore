@@ -11,10 +11,15 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
     open-in-view: false
+    show-sql: true
 
 bookstore:
   books:
     images: /Users/gangjeongmu/Documents/book_store/book_images
   point:
     buying-saving-rate: 10
+  page-size:
+    userOrders: 10
+    pointHistories: 10
