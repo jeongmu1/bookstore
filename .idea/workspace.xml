@@ -4,25 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="loadUserByUsername 메소드 내부 함수형 표현으로 변경">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/OrderRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/UserServiceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAddressRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserCCRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="User 상세화면 구현 중">
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/common/PageSizeProps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserPointHistoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/account/addressInfo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/account/info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/account/payInfo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/account/pointHistory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/TestConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/PointHistoryDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/PointHistoryDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/OrderRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/RegistrationForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/controller/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/controller/UserServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/UserServiceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserAddress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/UserDetailsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/UserPointHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/UserPointHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +42,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="com.haulmont.jpb.JpaRepository" />
-        <option value="HTML File" />
         <option value="com.haulmont.jpb.JpaEntity" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -142,7 +151,7 @@
     &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;spring.boot&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;495180092bd0712a4c50027fe52ccb8a&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -163,7 +172,17 @@
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.UserTest.findPointHistoriesTest">
+    <configuration name="UserTest.findPointHistoriesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DNBookStore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserTest" />
+      <option name="METHOD_NAME" value="findPointHistoriesTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="books.BookApplication" />
@@ -179,6 +198,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserTest.findPointHistoriesTest" />
         <item itemvalue="Spring Boot.BookApplication" />
       </list>
     </recent_temporary>
@@ -196,7 +216,8 @@
       <workItem from="1673152637285" duration="30386000" />
       <workItem from="1673252827420" duration="11724000" />
       <workItem from="1673312221137" duration="14451000" />
-      <workItem from="1673398307902" duration="26850000" />
+      <workItem from="1673398307902" duration="45516000" />
+      <workItem from="1673512416717" duration="11120000" />
     </task>
     <task id="LOCAL-00001" summary="Entity 생성">
       <created>1673001159169</created>
@@ -289,7 +310,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673433390068</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="회원가입 메소드를 RegistrationController 내부에서 처리하는 것이 아닌 UserService 에서 처리하도록 변경">
+      <created>1673441354808</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1673441354808</updated>
+    </task>
+    <task id="LOCAL-00015" summary="User 상세화면 구현 중">
+      <created>1673441378860</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1673441378860</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +354,9 @@
     <MESSAGE value="commit" />
     <MESSAGE value="User Entity 에 적립금, 신용카드(여러 개 저장가능) 추가&#10;배송상태 추가예정" />
     <MESSAGE value="loadUserByUsername 메소드 내부 함수형 표현으로 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="loadUserByUsername 메소드 내부 함수형 표현으로 변경" />
+    <MESSAGE value="회원가입 메소드를 RegistrationController 내부에서 처리하는 것이 아닌 UserService 에서 처리하도록 변경" />
+    <MESSAGE value="User 상세화면 구현 중" />
+    <option name="LAST_COMMIT_MESSAGE" value="User 상세화면 구현 중" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

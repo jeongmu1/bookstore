@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "bookstore.page-size.pointHistory",
+      "type": "java.lang.String",
+      "description": "Description for bookstore.page-size.pointHistory."
+  }
+] }
