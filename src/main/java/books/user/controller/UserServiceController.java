@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/account")
@@ -22,43 +24,43 @@ public class UserServiceController {
     }
 
     @GetMapping
-    public String showUserDetailsMain(@AuthenticationPrincipal User user, Model model) { // 유저 정보 조회
-        model.addAttribute("user", user);
-        return "userDetail";
+    public String showUserDetailsMain(@AuthenticationPrincipal User user
+            , Model model
+            , @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+        model.addAttribute("orders", userService.getUserOrdersPage(user, page));
+        Map<String, String> userInfo = new HashMap<>();
+        userInfo.put("user.username", user.getUsername());
+        userInfo.put("user.name", user.getName());
+        userInfo.put("user.point", user.getPoint().toString());
+        // 아직 구현안됨
+        return "account/info";
     }
 
-    @GetMapping("/update")
-    public String updateUserInfoForm(@AuthenticationPrincipal User user) { // 유저 정보 수정
-
-        return "updateUserForm";
+    @GetMapping("/orderDetail")
+    public String showOrderDetail(@AuthenticationPrincipal User user
+            , @RequestParam(value = "orderUuid") String orderUuid
+            , Model model) {
+        model.addAttribute("order", userService.getOrderDetail(orderUuid));
+        return "account/orderDetail";
+        // 아직 미구현
     }
 
-    @PostMapping("/update")
-    public String updateUser() {
-        return null;
+    @GetMapping("/pointHistory")
+    public String showPointHistories(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("histories", userService.getUserPointHistoriesPage(user));
+
+        return "account/pointHistory";
     }
 
-    @GetMapping("/address")
+    @GetMapping("/addressInfo")
     public String showUserAddresses(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("addresses", userService.getUserAddresses(user));
-        return "userAddress";
+        return "account/addressInfo";
     }
 
-    @GetMapping("/address/update")
-    public String updateUserAddressForm(@AuthenticationPrincipal User user) {
-
-        return "updateUserAddressForm";
-    }
-
-    @GetMapping("/orderHistory")
-    public String showOrderHistory(@AuthenticationPrincipal User user) {
-
-        return "orderHistory";
-    }
-
-    @GetMapping("/pointDetail")
-    public String showPointDetail(@AuthenticationPrincipal User user) { // 포인트 변동내역 조회
-
-        return "pointDetail";
+    @GetMapping("/payInfo")
+    public String showUserCreditCards(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("creditCards", userService.getUserCreditCards(user));
+        return "account/payInfo";
     }
 }
