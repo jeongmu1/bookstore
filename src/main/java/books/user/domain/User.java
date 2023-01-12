@@ -30,10 +30,10 @@ public class User {
     @Column(name = "username", nullable = false, length = 50)
     private String username;
 
-    @Size(max = 64)
+    @Size(max = 45)
     @NotNull
-    @Column(name = "email", nullable = false, length = 64)
-    private String email;
+    @Column(name = "name", nullable = false, length = 45)
+    private String name;
 
     @Size(max = 60)
     @NotNull
@@ -66,10 +66,12 @@ public class User {
     private Set<Authority> authorities = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
+    @OrderBy("createTime desc")
     @ToString.Exclude
     private Set<ProductOrder> productOrders = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
+    @OrderBy("createTime desc")
     @ToString.Exclude
     private Set<UserPointHistory> userPointHistories = new LinkedHashSet<>();
 
