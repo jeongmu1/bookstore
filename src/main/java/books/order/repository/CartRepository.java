@@ -8,5 +8,5 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface CartRepository extends CrudRepository<ProductOrderProduct, Long> {
-    public Optional<Set<ProductOrderProduct>> findAllByProductOrder(ProductOrder productOrder);
+    public Set<ProductOrderProduct> findAllByProductOrder(ProductOrder productOrder);
 }
