@@ -87,9 +87,10 @@ public class ProductOrder {
     @Column(name = "update_time", nullable = false)
     private Timestamp updateTime;
 
-    public Timestamp getUpdateTime() {
-        return updateTime;
-    }
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "rprsn_book", nullable = false, length = 45)
+    private String rprsnBook;
 
     @PrePersist
     public void persist() {
