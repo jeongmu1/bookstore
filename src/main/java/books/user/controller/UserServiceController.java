@@ -1,5 +1,6 @@
 package books.user.controller;
 
+import books.order.domain.ProductOrder;
 import books.user.domain.User;
 import books.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/account")
@@ -27,12 +28,11 @@ public class UserServiceController {
     public String showUserDetailsMain(@AuthenticationPrincipal User user
             , Model model
             , @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
-        model.addAttribute("orders", userService.getUserOrdersPage(user, page));
-        Map<String, String> userInfo = new HashMap<>();
-        userInfo.put("user.username", user.getUsername());
-        userInfo.put("user.name", user.getName());
-        userInfo.put("user.point", user.getPoint().toString());
-        // 아직 구현안됨
+        List<ProductOrder> orders = userService.getUserOrdersPage(user, page);
+
+        model.addAttribute("orders", orders.stream().map(this::getOrderMap).collect(Collectors.toList()));
+        model.addAttribute("user", getSimpleUserInfo(user));
+
         return "account/info";
     }
 
@@ -40,9 +40,8 @@ public class UserServiceController {
     public String showOrderDetail(@AuthenticationPrincipal User user
             , @RequestParam(value = "orderUuid") String orderUuid
             , Model model) {
-        model.addAttribute("order", userService.getOrderDetail(orderUuid));
+
         return "account/orderDetail";
-        // 아직 미구현
     }
 
     @GetMapping("/pointHistory")
@@ -62,5 +61,21 @@ public class UserServiceController {
     public String showUserCreditCards(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("creditCards", userService.getUserCreditCards(user));
         return "account/payInfo";
+    }
+
+    private Map<String, String> getSimpleUserInfo(User user) {
+        Map<String, String> simpleUserInfoMap = new HashMap<>();
+        simpleUserInfoMap.put("name", user.getName());
+        simpleUserInfoMap.put("point", user.getPoint().toString());
+        return simpleUserInfoMap;
+    }
+
+    private Map<String, String> getOrderMap(ProductOrder order) {
+        Map<String, String> orderMap = new HashMap<>();
+        orderMap.put("orderUuid", order.getOrderUuid());
+        orderMap.put("rprsn_book", order.getRprsnBook());
+        orderMap.put("deliveryName", order.getDeliveryName());
+        orderMap.put("orderDate", order.getCreateTime().toString());
+        return orderMap;
     }
 }
