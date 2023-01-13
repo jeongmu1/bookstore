@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private final OrderRepository orderRepo;
     private final PasswordEncoder encoder;
     private final UserPointHistoryRepository userPointHistoryRepo;
-    private PageSizeProps pageSizeProps;
+    private final PageSizeProps pageSizeProps;
 
     public UserServiceImpl(UserRepository userRepo
             , UserAuthorityRepository authorityRepo
@@ -60,9 +60,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ProductOrder getOrderDetail(String orderUuid) {
-        return orderRepo
-                .findProductOrderByOrderUuid(orderUuid)
-                .orElse(null);
+       return orderRepo.findProductOrderByOrderUuid(orderUuid)
+                .map(this::applyProductOrder).orElse(null);
     }
 
     @Override
@@ -99,4 +98,8 @@ public class UserServiceImpl implements UserService {
         authorityRepo.save(auth);
     }
 
+    private ProductOrder applyProductOrder(ProductOrder productOrder) {
+        productOrder.setProductOrderProducts(cartRepo.findAllByProductOrder(productOrder));
+        return productOrder;
+    }
 }
