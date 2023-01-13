@@ -1,6 +1,6 @@
 package books.order.domain;
 
-import books.book.domain.ProductBook;
+import books.product.domain.ProductBook;
 import lombok.*;
 import org.hibernate.Hibernate;
 

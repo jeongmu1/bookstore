@@ -1,9 +1,9 @@
 package books.admin.controller;
 
 import books.admin.service.AdminProductService;
-import books.book.domain.*;
-import books.book.repository.CategoryRepository;
-import books.book.repository.PublisherRepository;
+import books.product.domain.*;
+import books.product.repository.CategoryRepository;
+import books.product.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

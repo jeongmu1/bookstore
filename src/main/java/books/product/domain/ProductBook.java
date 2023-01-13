@@ -1,4 +1,4 @@
-package books.book.domain;
+package books.product.domain;
 
 import books.order.domain.ProductOrderProduct;
 import lombok.*;

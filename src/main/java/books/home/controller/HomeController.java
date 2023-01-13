@@ -1,12 +1,14 @@
 package books.home.controller;
 
-import books.book.repository.CategoryRepository;
-import books.book.repository.ProductCategoryRepository;
-import books.home.repository.ProductBookRepository;
+import books.product.repository.CategoryRepository;
+import books.product.repository.ProductBookRepository;
+import books.product.repository.ProductCategoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 @Slf4j
+@Controller
 public class HomeController {
 
     private ProductBookRepository productBookRepo;

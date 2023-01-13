@@ -1,6 +1,6 @@
-package books.book.repository;
+package books.product.repository;
 
-import books.book.domain.ProductCategory;
+import books.product.domain.ProductCategory;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ProductCategoryRepository extends CrudRepository<ProductCategory, Long> {
