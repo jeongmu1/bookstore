@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <!--    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css">-->
+
+    <link rel="shortcut icon" href="/css/images/favicon.ico">
+    <link rel="stylesheet" href="/css/yes-style.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a href="#" id="user">Guest</a> .</p>
+        <p><a href="#" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>Shopping Cart (0) <a href="#"
+                                                                                                                class="sum">$0.00</a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <!-- Product-info -->
+    <div class="topColLft">
+        <!-- 상품 이미지 -->
+        <div class="gd_imgArea">
+            <span class="gd_img">
+                <em class="imgBdr">
+                    <img src="/images/booksample.jpeg">
+                </em>
+            </span>
+        </div>
+        <!-- 상품 이미지 끝 -->
+        <div class="topColRgt">
+            <!-- 제목 영역 -->
+            <div class="gd_titArea">
+                <h2 class="gd_name">이것이 자바다</h2>
+            </div>
+            <span class="gd_pubArea">
+                <span class="gd_auth">
+                    신용권 저
+                </span>
+                <em class="divi"></em>
+                <span class="gd_pub">
+                    한빛미디어
+                </span>
+            </span>
+            <span class="gd_ratingArea">
+                <span id="spanGdRating" class="gd_rating">
+                    <em class="yes_b">10.0</em>
+                </span>
+                <span class="gd_reviewCount">
+                    회원리뷰(<em class="txC_blue">10</em>)건
+                </span>
+            </span>
+            <!-- 제목 영역 끝 -->
+            <!-- 판매 정보 시작 -->
+            <div class="gd_infoBot">
+                <div class="gd_infoTb">
+                    <table summary="상품 가격정보 테이블">
+                        <colgroup>
+                            <col width="110">
+                            <col width="*">
+                        </colgroup>
+                        <caption>상품 가격정보</caption>
+                        <tbody>
+                        <tr class="accentRow">
+                            <th scope="row">판매가</th>
+                            <td>
+                                <span class="nor_price">
+                                    <em class="yes_m">36,000</em>
+                                    원
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                포인트
+                            </th>
+                            <td>
+                                <ul class="gd_infoLi">
+                                    <li>
+                                        <em class="yes_m"></em>
+                                        3,600원 (10% 적립)
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 판매 정보 끝 -->
+        </div>
+        <!-- 구매 버튼 -->
+        <div id="gd_actions" class="gd_action" style="min-height: 670px;">
+            <div class="gd_actionContGrp">
+                <!-- 판매상태 영역 시작 -->
+                <div class="gd_actionCont">
+                    <p class="gd_saleState">
+                        <em class="txC_black">판매중</em>
+                    </p>
+                </div>
+                <!-- 판매상태 영역 끝 -->
+                <!-- 수량 -->
+                <dl class="gd_len">
+                    <dt>수량</dt>
+                    <dd>
+                        <span class="yesIpt ipt_wSizeF">
+                            <input name="ORD_GOODS_CNT" type="text" class="ac yes_m">
+                        </span>
+                    </dd>
+                </dl>
+                <!-- 수량 끝 -->
+                <!-- 결제 버튼 영역 -->
+                <a href="*" onclick="" class="btnC m_size btn_blue">
+                    <span class="bWrap">
+                        <em class="txt">카트에 넣기</em>
+                    </span>
+                </a>
+                <a href="*" onclick="" class="btnC m_size btn_sBlue">
+                    <span class="bWrap">
+                        <em class="txt">바로구매</em>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main-->
+</body>
+</html>
