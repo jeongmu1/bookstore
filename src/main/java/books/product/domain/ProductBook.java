@@ -30,7 +30,7 @@ public class ProductBook {
     private String title;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "publisher_id", nullable = false)
     @ToString.Exclude
     private Publisher publisher;

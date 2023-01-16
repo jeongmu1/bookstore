@@ -5,18 +5,17 @@
     <meta charset="UTF-8">
     <title>DN Book Store</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <!--    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>-->
-    <!--    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>-->
-    <!--    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css">-->
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
 
-    <link rel="shortcut icon" href="/css/images/favicon.ico">
-    <link rel="stylesheet" href="/css/yes-style.css">
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <!-- Header -->
 <div id="header" class="shell">
-    <div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
     <!-- Navigation -->
     <div id="navigation">
         <ul>
@@ -46,7 +45,7 @@
         <div class="gd_imgArea">
             <span class="gd_img">
                 <em class="imgBdr">
-                    <img src="/images/booksample.jpeg">
+                    <img th:src="@{/images/{image}(image = ${image.fileName})}">
                 </em>
             </span>
         </div>
@@ -54,23 +53,23 @@
         <div class="topColRgt">
             <!-- 제목 영역 -->
             <div class="gd_titArea">
-                <h2 class="gd_name">이것이 자바다</h2>
+                <h2 class="gd_name" th:text="${book.title}"></h2>
             </div>
             <span class="gd_pubArea">
-                <span class="gd_auth">
-                    신용권 저
+                <span class="gd_auth" th:text="${book.author}">
+                     저
                 </span>
                 <em class="divi"></em>
-                <span class="gd_pub">
+                <span class="gd_pub" th:text="${publisher}">
                     한빛미디어
                 </span>
             </span>
             <span class="gd_ratingArea">
                 <span id="spanGdRating" class="gd_rating">
-                    <em class="yes_b">10.0</em>
+                    <em class="yes_b" th:text="${rate}"></em>
                 </span>
                 <span class="gd_reviewCount">
-                    회원리뷰(<em class="txC_blue">10</em>)건
+                    회원리뷰(<em class="txC_blue" th:text="${sizeOfReviews}"></em>)건
                 </span>
             </span>
             <!-- 제목 영역 끝 -->
@@ -88,8 +87,8 @@
                             <th scope="row">판매가</th>
                             <td>
                                 <span class="nor_price">
-                                    <em class="yes_m">36,000</em>
-                                    원
+                                    <em class="yes_m"
+                                        th:text="${#numbers.formatInteger(book.price,3,'COMMA') + '원'}"></em>
                                 </span>
                             </td>
                         </tr>
@@ -100,8 +99,9 @@
                             <td>
                                 <ul class="gd_infoLi">
                                     <li>
-                                        <em class="yes_m"></em>
-                                        3,600원 (10% 적립)
+                                        <em class="yes_m"
+                                            th:text="${#numbers.formatInteger(savingRate,3,'COMMA') + '원'}">
+                                            (10% 적립)</em>
                                     </li>
                                 </ul>
                             </td>
@@ -113,36 +113,61 @@
             <!-- 판매 정보 끝 -->
         </div>
         <!-- 구매 버튼 -->
-        <div id="gd_actions" class="gd_action" style="min-height: 670px;">
+        <div id="gd_actions" class="gd_action" >
             <div class="gd_actionContGrp">
                 <!-- 판매상태 영역 시작 -->
                 <div class="gd_actionCont">
                     <p class="gd_saleState">
-                        <em class="txC_black">판매중</em>
+                        <em class="txC_black" th:if="${book.enabled}">판매중</em>
+                        <em class="txC_black" th:if="${!book.enabled}">재고 없음</em>
                     </p>
                 </div>
                 <!-- 판매상태 영역 끝 -->
                 <!-- 수량 -->
+                </form>
                 <dl class="gd_len">
                     <dt>수량</dt>
                     <dd>
                         <span class="yesIpt ipt_wSizeF">
-                            <input name="ORD_GOODS_CNT" type="text" class="ac yes_m">
+                            <input class="ac yes_m" name="ORD_GOODS_CNT" type="text" maxlength="4">
                         </span>
                     </dd>
                 </dl>
                 <!-- 수량 끝 -->
                 <!-- 결제 버튼 영역 -->
-                <a href="*" onclick="" class="btnC m_size btn_blue">
+                <!--                <a th:href="*" th:onclick="" class="btnC m_size btn_blue">-->
+                <!--                <a href="*" onclick="" class="btnC m_size btn_blue">-->
+                <a class="btn-gradient cyan">
                     <span class="bWrap">
                         <em class="txt">카트에 넣기</em>
                     </span>
                 </a>
-                <a href="*" onclick="" class="btnC m_size btn_sBlue">
+                <!--                <a th:href="*" th:onclick="" class="btnC m_size btn_sBlue">-->
+                <!--                <a href="*" onclick="" class="btnC m_size btn_sBlue">-->
+                <a class="btn-gradient cyan">
                     <span class="bWrap">
                         <em class="txt">바로구매</em>
                     </span>
                 </a>
+            </div>
+        </div>
+        <div class="infoSetCont_wrap reviewRow_cont tp_tab yesComLoadingArea">
+            <div class="reviewInfoGrp lnkExtend" th:each="review : ${reviews}">
+                <div class="reviewInfoTop">
+                    <div class="review_etc">
+                        <span class="review_rating">
+                            평점
+                            <em th:text="${review.productScore}"></em>
+                            점
+                        </span>
+                    </div>
+                    <em class="txt_id" th:text="${review.user.username}"></em>
+                    <em class="divi">
+                        |
+                    </em>
+                    <em class="txt_date" th:text="${review.createTime}"></em>
+                </div>
+                <em th:text="${review.comment}" class="review_cropLnk"></em>
             </div>
         </div>
     </div>

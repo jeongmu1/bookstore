@@ -27,7 +27,7 @@ public class Publisher {
     @Column(name = "create_time", nullable = false)
     private Timestamp createTime;
 
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER)
     private Set<ProductBook> productBooks = new LinkedHashSet<>();
 
 }

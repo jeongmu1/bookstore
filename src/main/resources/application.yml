@@ -19,7 +19,7 @@ bookstore:
   books:
     images: /Users/gangjeongmu/Documents/book_store/book_images
   point:
-    buying-saving-rate: 10
+    savingRate: 10
   page-size:
     userOrders: 10
     pointHistories: 10
