@@ -72,6 +72,31 @@ public class ProductBook {
     @ToString.Exclude
     private Set<ProductImage> productImages = new LinkedHashSet<>();
 
+    @NotNull
+    @Lob
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @NotNull
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @PrePersist
     public void persistTime() {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());

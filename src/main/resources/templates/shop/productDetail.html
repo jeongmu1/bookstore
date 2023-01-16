@@ -60,10 +60,16 @@
                      저
                 </span>
                 <em class="divi"></em>
-                <span class="gd_pub" th:text="${publisher}">
-                    한빛미디어
-                </span>
+                <span class="gd_pub" th:text="${publisher}"></span>
             </span>
+            <!-- 판매상태 영역 시작 -->
+            <div class="gd_actionCont">
+                <p class="gd_saleState">
+                    <em class="txC_black" th:if="${book.enabled}">판매중</em>
+                    <em class="txC_black" th:if="${!book.enabled}">재고 없음</em>
+                </p>
+            </div>
+            <br>
             <span class="gd_ratingArea">
                 <span id="spanGdRating" class="gd_rating">
                     <em class="yes_b" th:text="${rate}"></em>
@@ -109,20 +115,24 @@
                         </tbody>
                     </table>
                 </div>
+                <br>
+                <div id="infoset_introduce" class="gd_infoSet">
+                    <div class="tm_infoSet">
+                        <h4 class="tit_txt">책소개</h4>
+                    </div>
+                    <div class="infoSetCont_wrap">
+                        <div class="infoWrap_txt">
+                            <em th:text="${book.description}"></em>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <br>
             <!-- 판매 정보 끝 -->
         </div>
         <!-- 구매 버튼 -->
-        <div id="gd_actions" class="gd_action" >
+        <div id="gd_actions" class="gd_action">
             <div class="gd_actionContGrp">
-                <!-- 판매상태 영역 시작 -->
-                <div class="gd_actionCont">
-                    <p class="gd_saleState">
-                        <em class="txC_black" th:if="${book.enabled}">판매중</em>
-                        <em class="txC_black" th:if="${!book.enabled}">재고 없음</em>
-                    </p>
-                </div>
-                <!-- 판매상태 영역 끝 -->
                 <!-- 수량 -->
                 </form>
                 <dl class="gd_len">
@@ -150,6 +160,7 @@
                     </span>
                 </a>
             </div>
+            <br>
         </div>
         <div class="infoSetCont_wrap reviewRow_cont tp_tab yesComLoadingArea">
             <div class="reviewInfoGrp lnkExtend" th:each="review : ${reviews}">
@@ -168,6 +179,7 @@
                     <em class="txt_date" th:text="${review.createTime}"></em>
                 </div>
                 <em th:text="${review.comment}" class="review_cropLnk"></em>
+                <br>
             </div>
         </div>
     </div>
