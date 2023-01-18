@@ -81,21 +81,9 @@ public class ProductBook {
     @Column(name = "stock", nullable = false)
     private Integer stock;
 
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @NotNull
+    @Column(name = "display", nullable = false)
+    private boolean display;
 
     @PrePersist
     public void persistTime() {

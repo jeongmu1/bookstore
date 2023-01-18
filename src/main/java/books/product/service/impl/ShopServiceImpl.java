@@ -1,10 +1,11 @@
-package books.product.service;
+package books.product.service.impl;
 
 import books.product.domain.Category;
 import books.product.domain.ProductBook;
 import books.product.domain.ProductCategory;
 import books.product.domain.ProductReview;
 import books.product.repository.*;
+import books.product.service.ShopService;
 import books.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -10,4 +10,5 @@ import org.springframework.context.annotation.Configuration;
 public class PageSizeProps {
     private int userOrders;
     private int pointHistories;
+    private int mainProducts;
 }

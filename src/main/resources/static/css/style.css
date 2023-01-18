@@ -386,7 +386,8 @@ textarea {
     float: left;
     display: inline;
     width: 150px;
-    height: 343px;
+    height: 320px;
+    overflow: hidden;
     margin: 0 15px 14px 0;
 }
 
@@ -394,7 +395,7 @@ textarea {
     display: block;
     padding: 7px;
     width: 136px;
-    height: 329px;
+    height: 315px;
 }
 
 .products ul li a.info:hover {
@@ -409,8 +410,10 @@ textarea {
 }
 
 .products .product {
-    width: 134px;
+    width: 150px;
     position: relative;
+    overflow: hidden;
+
 }
 
 .products img {
@@ -443,7 +446,7 @@ textarea {
 .product .buy-btn .price {
     padding: 0 7px;
     background: url(images/price.png) repeat-x 0 0;
-    font-size: 22px;
+    font-size: 15px;
     line-height: 29px;
     position: absolute;
     top: 0;
