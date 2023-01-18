@@ -6,12 +6,14 @@ import books.user.domain.User;
 import books.user.domain.UserAddress;
 import books.user.domain.UserCreditCard;
 import books.user.domain.UserPointHistory;
+import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface UserService {
-    public User getUserInfo(User user);
+    User getUserInfo(User user);
 
     List<ProductOrder> getUserOrdersPage(User user, int page);
 
@@ -23,5 +25,8 @@ public interface UserService {
 
     Set<UserCreditCard> getUserCreditCards(User user);
 
-    public void processRegistration(RegistrationForm form);
+    void processRegistration(RegistrationForm form);
+
+    Optional<User> loadUserByUsername(String username);
+
 }

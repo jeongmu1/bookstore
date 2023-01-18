@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/shop")
 public class ShopController {
@@ -24,7 +26,7 @@ public class ShopController {
 
     @GetMapping("/product")
     public String showProductDetail(@RequestParam long itemId
-            , Model model) {
+            , Model model, Principal principal) {
         ProductBook book = shopService.getProductDetails(itemId);
         model.addAttribute("book", book);
         model.addAttribute("categories", shopService.getCategoriesByBook(book));
