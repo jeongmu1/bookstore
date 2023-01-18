@@ -1,10 +1,7 @@
 package books.admin.controller;
 
-import books.admin.service.AdminProductService;
+import books.admin.service.AdminService;
 import books.product.domain.*;
-import books.product.repository.CategoryRepository;
-import books.product.repository.PublisherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +12,11 @@ import java.util.*;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private final AdminProductService adminProductService;
-    private final CategoryRepository categoryRepository;
-    private final PublisherRepository publisherRepository;
 
-    @Autowired
-    public AdminController(AdminProductService adminProductService,
-                           CategoryRepository categoryRepository,
-                           PublisherRepository publisherRepository) {
-        this.adminProductService = adminProductService;
-        this.categoryRepository = categoryRepository;
-        this.publisherRepository = publisherRepository;
+    private final AdminService adminService;
+
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
     }
 
     @GetMapping
@@ -35,13 +26,8 @@ public class AdminController {
 
     @GetMapping(value = "/product")
     public String showProductForm(Model model) {
-        List<Category> categories = new ArrayList<>();
-        categoryRepository.findAll().forEach(categories::add);
-
-        List<Publisher> publishers = new ArrayList<>();
-        publisherRepository.findAll().forEach(publishers::add);
-
-        model.addAttribute("categories", categories).addAttribute("publishers", publishers);
+        model.addAttribute("categories", adminService.findAllCategories())
+                .addAttribute("publishers", adminService.findAllPublishers());
 
         return "productForm";
     }
@@ -50,7 +36,6 @@ public class AdminController {
     @PostMapping(value = "/product")
     public String addProduct(@Valid ProductBook productBook,
                              @RequestParam Map<String, Object> params) {
-        adminProductService.addProduct(productBook, params);
 
         return null;
     }
