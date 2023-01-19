@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+</head>
+<body>
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a href="#" id="user">Guest</a> .</p>
+        <p><a href="#" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>Shopping Cart (0) <a href="#"
+                                                                                                                class="sum">$0.00</a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+
+    <form method="post" th:action="@{/admin/product}">
+        <div>
+            <label for=title>제목: </label>
+            <input type="text" id="title" name="title" placeholder="책 제목">
+        </div>
+        <div>
+            <label for="publisher">출판사: </label>
+            <input type="text" id="publisher" name="publisher" placeholder="출판사">
+        </div>
+        <div>
+            <label for="author">작가: </label>
+            <input type="text" id="author" name="author" placeholder="작가">
+        </div>
+        <div>
+            <label for="price">가격: </label>
+            <input type="text" id="price" name="price" placeholder="책 가격">
+        </div>
+        <div>
+            <h5>카테고리 설정</h5>
+            <div th:each="category : ${categories}" class="form-check-boxes">
+                <input type="checkbox" th:field="*{categories}" th:value="${category.category}">
+                <label th:text="${category.category}">example</label>
+            </div>
+        </div>
+        <br>
+        <div class="clearfix">
+            <input type="file" name="pic">
+        </div>
+
+        <div>
+            <input type="submit" value="등록">
+        </div>
+    </form>
+</div>
+<!-- End Main-->
+</body>
+</html>

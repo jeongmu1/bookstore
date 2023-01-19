@@ -1,26 +1,34 @@
 package books.order.domain;
 
 import books.user.domain.User;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "product_order")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class ProductOrder {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
     private User user;
 
     @Size(max = 16)
@@ -63,10 +71,52 @@ public class ProductOrder {
     private boolean enabled;
 
     @NotNull
-    @Column(name = "create_time", nullable = false)
+    @Column(name = "create_time", nullable = false, updatable = false)
     private Timestamp createTime;
 
     @OneToMany(mappedBy = "productOrder")
+    @ToString.Exclude
     private Set<ProductOrderProduct> productOrderProducts = new LinkedHashSet<>();
 
+    @Size(max = 36)
+    @NotNull
+    @Column(name = "order_uuid", nullable = false, length = 36)
+    private String orderUuid;
+
+    @NotNull
+    @Column(name = "update_time", nullable = false)
+    private Timestamp updateTime;
+
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "rprsn_book", nullable = false, length = 45)
+    private String rprsnBook;
+
+    @PrePersist
+    public void persist() {
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        this.createTime = currentTime;
+        this.updateTime = currentTime;
+        this.enabled = true;
+
+        this.orderUuid = UUID.randomUUID().toString();
+    }
+
+    @PreUpdate
+    void update() {
+        this.updateTime = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ProductOrder that = (ProductOrder) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

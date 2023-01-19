@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+
+</head>
+<body>
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a href="#" id="user">Guest</a> .</p>
+        <p><a href="#" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>Shopping Cart (0) <a href="#"
+                                                                                                                class="sum">$0.00</a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <!-- Product-info -->
+    <div class="topColLft">
+        <!-- 상품 이미지 -->
+        <div class="gd_imgArea">
+            <span class="gd_img">
+                <em class="imgBdr">
+                    <img th:src="@{/images/{image}(image = ${image.fileName})}">
+                </em>
+            </span>
+        </div>
+        <!-- 상품 이미지 끝 -->
+        <div class="topColRgt">
+            <!-- 제목 영역 -->
+            <div class="gd_titArea">
+                <h2 class="gd_name" th:text="${book.title}"></h2>
+            </div>
+            <span class="gd_pubArea">
+                <span class="gd_auth" th:text="${book.author}">
+                     저
+                </span>
+                <em class="divi"></em>
+                <span class="gd_pub" th:text="${publisher}"></span>
+            </span>
+            <!-- 판매상태 영역 시작 -->
+            <div class="gd_actionCont">
+                <p class="gd_saleState">
+                    <em class="txC_black" th:if="${book.enabled}">판매중</em>
+                    <em class="txC_black" th:if="${!book.enabled}">재고 없음</em>
+                </p>
+            </div>
+            <br>
+            <span class="gd_ratingArea">
+                <span id="spanGdRating" class="gd_rating">
+                    <em class="yes_b" th:text="${rate}"></em>
+                </span>
+                <span class="gd_reviewCount">
+                    회원리뷰(<em class="txC_blue" th:text="${sizeOfReviews}"></em>)건
+                </span>
+            </span>
+            <!-- 제목 영역 끝 -->
+            <!-- 판매 정보 시작 -->
+            <div class="gd_infoBot">
+                <div class="gd_infoTb">
+                    <table summary="상품 가격정보 테이블">
+                        <colgroup>
+                            <col width="110">
+                            <col width="*">
+                        </colgroup>
+                        <caption>상품 가격정보</caption>
+                        <tbody>
+                        <tr class="accentRow">
+                            <th scope="row">판매가</th>
+                            <td>
+                                <span class="nor_price">
+                                    <em class="yes_m"
+                                        th:text="${#numbers.formatInteger(book.price,3,'COMMA') + '원'}"></em>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                포인트
+                            </th>
+                            <td>
+                                <ul class="gd_infoLi">
+                                    <li>
+                                        <em class="yes_m"
+                                            th:text="${#numbers.formatInteger(savingRate,3,'COMMA') + '원'}">
+                                            (10% 적립)</em>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div id="infoset_introduce" class="gd_infoSet">
+                    <div class="tm_infoSet">
+                        <h4 class="tit_txt">책소개</h4>
+                    </div>
+                    <div class="infoSetCont_wrap">
+                        <div class="infoWrap_txt">
+                            <em th:text="${book.description}"></em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- 판매 정보 끝 -->
+        </div>
+        <!-- 구매 버튼 -->
+        <div id="gd_actions" class="gd_action">
+            <div class="gd_actionContGrp">
+                <!-- 수량 -->
+                </form>
+                <dl class="gd_len">
+                    <dt>수량</dt>
+                    <dd>
+                        <span class="yesIpt ipt_wSizeF">
+                            <input class="ac yes_m" name="ORD_GOODS_CNT" type="text" maxlength="4">
+                        </span>
+                    </dd>
+                </dl>
+                <!-- 수량 끝 -->
+                <!-- 결제 버튼 영역 -->
+                <!--                <a th:href="*" th:onclick="" class="btnC m_size btn_blue">-->
+                <!--                <a href="*" onclick="" class="btnC m_size btn_blue">-->
+                <a class="btn-gradient cyan">
+                    <span class="bWrap">
+                        <em class="txt">카트에 넣기</em>
+                    </span>
+                </a>
+                <!--                <a th:href="*" th:onclick="" class="btnC m_size btn_sBlue">-->
+                <!--                <a href="*" onclick="" class="btnC m_size btn_sBlue">-->
+                <a class="btn-gradient cyan">
+                    <span class="bWrap">
+                        <em class="txt">바로구매</em>
+                    </span>
+                </a>
+            </div>
+            <br>
+        </div>
+        <div class="infoSetCont_wrap reviewRow_cont tp_tab yesComLoadingArea">
+            <div class="reviewInfoGrp lnkExtend" th:each="review : ${reviews}">
+                <div class="reviewInfoTop">
+                    <div class="review_etc">
+                        <span class="review_rating">
+                            평점
+                            <em th:text="${review.productScore}"></em>
+                            점
+                        </span>
+                    </div>
+                    <em class="txt_id" th:text="${review.user.username}"></em>
+                    <em class="divi">
+                        |
+                    </em>
+                    <em class="txt_date" th:text="${review.createTime}"></em>
+                </div>
+                <em th:text="${review.comment}" class="review_cropLnk"></em>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main-->
+</body>
+</html>
