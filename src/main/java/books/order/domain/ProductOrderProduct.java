@@ -22,7 +22,7 @@ public class ProductOrderProduct {
     private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "product_book_id", nullable = false)
     @ToString.Exclude
     private ProductBook productBook;
@@ -41,9 +41,14 @@ public class ProductOrderProduct {
     @Column(name = "create_time", nullable = false, updatable = false)
     private Timestamp createTime;
 
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
+
     @PrePersist
-    public void persistTime() {
+    public void prePersist() {
         this.createTime = new Timestamp(System.currentTimeMillis());
+        this.enabled = true;
     }
 
     @Override

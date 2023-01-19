@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>DN Book Store</title>
@@ -10,7 +10,6 @@
     <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
-
 </head>
 <body>
 <!-- Header -->
@@ -42,16 +41,50 @@
     <!-- Product-info -->
     <div class="topColLft">
         <!-- 상품 이미지 -->
-        <div class="gd_imgArea">
+        <div class="gd_imgArea" style="float:left;">
             <span class="gd_img">
                 <em class="imgBdr">
-                    <img th:src="@{/images/{image}(image = ${image.fileName})}">
+                    <img th:src="@{/images/{image}(image = ${image.fileName})}" width="175" height="250">
                 </em>
             </span>
         </div>
         <!-- 상품 이미지 끝 -->
         <div class="topColRgt">
             <!-- 제목 영역 -->
+            <!-- 구매 버튼 -->
+            <div id="gd_actions" class="gd_action" style="float:right;">
+                <form method="post" th:action="@{/cart(itemId=${book.id})}" th:object="${Integer}" class="gd_actionContGrp">
+                    <!-- 수량 -->
+                    <dl class="gd_len">
+                        <dt>수량</dt>
+                        <dd>
+                        <span class="yesIpt ipt_wSizeF">
+                            <label for="cartCnt"></label>
+                            <input class="ac yes_m" id="cartCnt" name="cartCnt" type="text" value="1" maxlength="4">
+                        </span>
+                        </dd>
+                    </dl>
+                    <!-- 수량 끝 -->
+                    <!-- 결제 버튼 영역 -->
+                    <input type="submit" class="btn-gradient cyan" value="카트에 넣기">
+                </form>
+                <form method="post" th:action="@{/shop/order(itemId=${book.id})}" class="gd_actionContGrp">
+                    <!-- 수량 -->
+                    <dl class="gd_len">
+                        <dt>수량</dt>
+                        <dd>
+                        <span class="yesIpt ipt_wSizeF">
+                            <label for="orderCnt"></label>
+                            <input class="ac yes_m" id="orderCnt" name="orderCnt" type="text" value="1" maxlength="4">
+                        </span>
+                        </dd>
+                    </dl>
+                    <!-- 수량 끝 -->
+                    <!-- 결제 버튼 영역 -->
+                    <input type="submit" class="btn-gradient cyan" value="바로구매">
+                </form>
+                <br>
+            </div>
             <div class="gd_titArea">
                 <h2 class="gd_name" th:text="${book.title}"></h2>
             </div>
@@ -116,7 +149,7 @@
                     </table>
                 </div>
                 <br>
-                <div id="infoset_introduce" class="gd_infoSet">
+                <div id="infoset_introduce" class="gd_infoSet" style="clear: both">
                     <div class="tm_infoSet">
                         <h4 class="tit_txt">책소개</h4>
                     </div>
@@ -129,38 +162,6 @@
             </div>
             <br>
             <!-- 판매 정보 끝 -->
-        </div>
-        <!-- 구매 버튼 -->
-        <div id="gd_actions" class="gd_action">
-            <div class="gd_actionContGrp">
-                <!-- 수량 -->
-                </form>
-                <dl class="gd_len">
-                    <dt>수량</dt>
-                    <dd>
-                        <span class="yesIpt ipt_wSizeF">
-                            <input class="ac yes_m" name="ORD_GOODS_CNT" type="text" maxlength="4">
-                        </span>
-                    </dd>
-                </dl>
-                <!-- 수량 끝 -->
-                <!-- 결제 버튼 영역 -->
-                <!--                <a th:href="*" th:onclick="" class="btnC m_size btn_blue">-->
-                <!--                <a href="*" onclick="" class="btnC m_size btn_blue">-->
-                <a class="btn-gradient cyan">
-                    <span class="bWrap">
-                        <em class="txt">카트에 넣기</em>
-                    </span>
-                </a>
-                <!--                <a th:href="*" th:onclick="" class="btnC m_size btn_sBlue">-->
-                <!--                <a href="*" onclick="" class="btnC m_size btn_sBlue">-->
-                <a class="btn-gradient cyan">
-                    <span class="bWrap">
-                        <em class="txt">바로구매</em>
-                    </span>
-                </a>
-            </div>
-            <br>
         </div>
         <div class="infoSetCont_wrap reviewRow_cont tp_tab yesComLoadingArea">
             <div class="reviewInfoGrp lnkExtend" th:each="review : ${reviews}">

@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface ProductBookRepository extends JpaRepository<ProductBook, Long> {
 
-    public ProductBook findProductBookById(Long id);
+    ProductBook findProductBookById(Long id);
 
-    public List<ProductBook> findProductBooksByDisplay(boolean display, Pageable pageable);
+    List<ProductBook> findProductBooksByDisplay(boolean display, Pageable pageable);
 
 }

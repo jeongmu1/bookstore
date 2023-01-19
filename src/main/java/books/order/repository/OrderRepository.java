@@ -10,8 +10,9 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface OrderRepository extends CrudRepository<ProductOrder, Long> {
-    public Optional<Set<ProductOrder>> findAllByUser(User user);
+    Optional<ProductOrder> findProductOrderByOrderUuid(String orderUuid);
 
-    public Optional<ProductOrder> findProductOrderByOrderUuid(String orderUuid);
-    public Optional<List<ProductOrder>> findAllByUserOrderByCreateTimeDesc(User user, Pageable pageable);
+    Optional<List<ProductOrder>> findAllByUserOrderByCreateTimeDesc(User user, Pageable pageable);
+
+    Optional<ProductOrder> findProductOrderByUserAndEnabled(User user, boolean enabled);
 }
