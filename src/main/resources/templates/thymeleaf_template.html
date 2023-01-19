@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>DN Book Store</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
     <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
 </head>
 <body>
+
 <!-- Header -->
 <div id="header" class="shell">
-    <div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
     <!-- Navigation -->
     <div id="navigation">
         <ul>
-            <li><a href="#" class="active">Home</a></li>
+            <li><a th:href="@{/}" class="active">Home</a></li>
             <li><a href="#">Products</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="index">
+                    <input type="text" placeholder="search" name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
         </ul>
     </div>
     <!-- End Navigation -->
     <div class="cl">&nbsp;</div>
     <!-- Login-details -->
     <div id="login-details">
-        <p>Welcome, <a href="#" id="user">Guest</a> .</p>
+        <p>Welcome, <a href="#" id="user" th:text="${member}">Guest</a> .</p>
         <p><a href="#" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>Shopping Cart (0) <a href="#"
                                                                                                                 class="sum">$0.00</a>
         </p>
