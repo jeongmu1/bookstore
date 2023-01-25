@@ -8,10 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "product_order")
@@ -32,37 +29,30 @@ public class ProductOrder {
     private User user;
 
     @Size(max = 16)
-    @NotNull
     @Column(name = "cc_number", nullable = false, length = 16)
     private String ccNumber;
 
     @Size(max = 5)
-    @NotNull
     @Column(name = "cc_expiration", nullable = false, length = 5)
     private String ccExpiration;
 
     @Size(max = 3)
-    @NotNull
     @Column(name = "cc_cvv", nullable = false, length = 3)
     private String ccCvv;
 
     @Size(max = 45)
-    @NotNull
     @Column(name = "delivery_name", nullable = false, length = 45)
     private String deliveryName;
 
     @Size(max = 5)
-    @NotNull
     @Column(name = "delivery_zip_code", nullable = false, length = 5)
     private String deliveryZipCode;
 
     @Size(max = 45)
-    @NotNull
     @Column(name = "delivery_address", nullable = false, length = 45)
     private String deliveryAddress;
 
     @Size(max = 15)
-    @NotNull
     @Column(name = "delivery_phone", nullable = false, length = 15)
     private String deliveryPhone;
 
@@ -76,7 +66,7 @@ public class ProductOrder {
 
     @OneToMany(mappedBy = "productOrder")
     @ToString.Exclude
-    private Set<ProductOrderProduct> productOrderProducts = new LinkedHashSet<>();
+    private List<ProductOrderProduct> productOrderProducts = new ArrayList<>();
 
     @Size(max = 36)
     @NotNull
@@ -88,16 +78,28 @@ public class ProductOrder {
     private Timestamp updateTime;
 
     @Size(max = 45)
-    @NotNull
     @Column(name = "rprsn_book", nullable = false, length = 45)
     private String rprsnBook;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "delivery_state_id", nullable = false)
+    private DeliveryState deliveryState;
+
+    public DeliveryState getDeliveryState() {
+        return deliveryState;
+    }
+
+    public void setDeliveryState(DeliveryState deliveryState) {
+        this.deliveryState = deliveryState;
+    }
 
     @PrePersist
     public void persist() {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         this.createTime = currentTime;
         this.updateTime = currentTime;
-        this.enabled = true;
+        this.enabled = false;
 
         this.orderUuid = UUID.randomUUID().toString();
     }

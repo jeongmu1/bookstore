@@ -12,4 +12,11 @@ public interface ProductBookRepository extends JpaRepository<ProductBook, Long> 
 
     List<ProductBook> findProductBooksByDisplay(boolean display, Pageable pageable);
 
+    List<ProductBook> findProductBooksByTitleContaining(String title);
+
+    List<ProductBook> findProductBooksByAuthorContaining(String author);
+
+    List<ProductBook> findProductBooksByPublisherNameContaining(String publisher);
+
+    List<ProductBook> findProductBooksByTitleContainingOrAuthorContainingOrPublisherNameContaining(String title, String author, String publisher);
 }

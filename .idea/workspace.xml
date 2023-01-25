@@ -4,38 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="관리자 페이지 상품추가 기능 구현 예정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/DeliveryStateRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/product/common/CartItemDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/product/controller/CartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/product/service/CartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/CartServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/images/yesUI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/newStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/renewHack.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/settle_dawn.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/yesCom.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/sysimage/font/Yes24B.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/sysimage/font/Yes24M.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/sysimage/renew/detail/bgDetail.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/3/b389f25c8b339ce1b436704fb2621fc200d67653" beforeDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: java.util 패키지 전부 불러오도록 변경">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrderProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrderProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductBookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductBookRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/PublisherRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/PublisherRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/yes-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/yes-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/yesUI.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/yesUI.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/thymeleaf_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/CartServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,37 +116,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "모듈",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "495180092bd0712a4c50027fe52ccb8a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;495180092bd0712a4c50027fe52ccb8a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
@@ -273,56 +245,9 @@
       <workItem from="1673610591145" duration="3286000" />
       <workItem from="1673829902985" duration="71242000" />
       <workItem from="1674002310312" duration="2969000" />
-      <workItem from="1674005346667" duration="71382000" />
-    </task>
-    <task id="LOCAL-00001" summary="Entity 생성">
-      <created>1673001159169</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1673001159169</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Entity 생성">
-      <created>1673007217885</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1673007217885</updated>
-    </task>
-    <task id="LOCAL-00003" summary="HomeController 메소드 미구현&#10;UserDetailsImpl 메소드 미구현">
-      <created>1673009677524</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1673009677525</updated>
-    </task>
-    <task id="LOCAL-00004" summary="로그인 폼 제작&#10;home 수정">
-      <created>1673240929342</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1673240929342</updated>
-    </task>
-    <task id="LOCAL-00005" summary="회원가입 구현 (예외처리 x)&#10;로그인 no Session 발생&#10;관리자 페이지 제작 시작">
-      <created>1673253126169</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1673253126169</updated>
-    </task>
-    <task id="LOCAL-00006" summary="create, update Time 기본시간 정의">
-      <created>1673255326290</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1673255326290</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Product 삽입 구현 중&#10;도서 표지 파일 업로드 구현 필요">
-      <created>1673340705553</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1673340705553</updated>
+      <workItem from="1674005346667" duration="72802000" />
+      <workItem from="1674132125473" duration="110000" />
+      <workItem from="1674608127610" duration="1416000" />
     </task>
     <task id="LOCAL-00008" summary="fileupload dependency 추가">
       <created>1673340754801</created>
@@ -597,7 +522,77 @@
       <option name="project" value="LOCAL" />
       <updated>1674003872723</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="feat: 장바구니 기능 구현&#10;&#10;장바구니 담기 기능, 수량 변경 기능, 항목 삭제, 전체 삭제 구현">
+      <created>1674131139508</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131139508</updated>
+    </task>
+    <task id="LOCAL-00048" summary="fix: thymeleaf 태그 변경">
+      <created>1674131207985</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131207985</updated>
+    </task>
+    <task id="LOCAL-00049" summary="design: 장바구니 페이지 ui 추가">
+      <created>1674131295937</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131295937</updated>
+    </task>
+    <task id="LOCAL-00050" summary="feature: 기본 템플릿 검색 ui 추가">
+      <created>1674131347872</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131347873</updated>
+    </task>
+    <task id="LOCAL-00051" summary="chore: commit">
+      <created>1674131396761</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131396761</updated>
+    </task>
+    <task id="LOCAL-00052" summary="feature: show 메소드에 유저 정보 표시 구현&#10;&#10;spring aop 로 모든 controller 클래스의 show 메소드에 유저 정보 model 에 전달하도록 구현">
+      <created>1674131487058</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131487058</updated>
+    </task>
+    <task id="LOCAL-00053" summary="fix: 사용하지 않는 메소드 제거&#10;&#10;findPublisherByProductBooks(ProductBook book) 메소드 제거">
+      <created>1674131572878</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131572878</updated>
+    </task>
+    <task id="LOCAL-00054" summary="fix: 장바구니 품목 조회 시 제품 정보도 즉시 조회 하도록 변경&#10;&#10;ProductOrderProduct 엔티티 조회 시 ProductBook 도 함께 조회하도록 fetch 방식 LAZY 에서 EAGER 로 변경">
+      <created>1674131688974</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131688974</updated>
+    </task>
+    <task id="LOCAL-00055" summary="fix: 인터페이스 메소드 public 에서 default 로 변경">
+      <created>1674131744021</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131744021</updated>
+    </task>
+    <task id="LOCAL-00056" summary="fix: java.util 패키지 전부 불러오도록 변경">
+      <created>1674131778563</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1674131778563</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,16 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="람다식 -&gt; 메소드 참조로 변경" />
-    <MESSAGE value="email 제거, name 추가" />
-    <MESSAGE value="yaml 에 정의되어 있는 구성요소를 받아오는 클래스 생성" />
-    <MESSAGE value="email 제거, name 생성" />
-    <MESSAGE value="주문번호 column 생성" />
-    <MESSAGE value="JUnit4 에서 5로 변경, UserService 테스트 클래스 작성" />
-    <MESSAGE value="한 페이지에 출력하는 정보 양 정하는 property 설정" />
-    <MESSAGE value="주문번호로 DB 조회하는 메소드 추가" />
-    <MESSAGE value="포인트 사용 또는 적립 표현하는 column 추가" />
-    <MESSAGE value="java 11로 변경" />
     <MESSAGE value="제품 상세페이지 생성" />
     <MESSAGE value="패키지 명 변경 (book -&gt; product)" />
     <MESSAGE value="ProductOrderProductRepository method 반환형 Optional Set -&gt; Set 으로 변경" />
@@ -653,7 +638,17 @@
     <MESSAGE value="메인페이지 전시할 제품 추가 및 전시 구현" />
     <MESSAGE value="logging properties 추가, sql 미출력" />
     <MESSAGE value="관리자 페이지 상품추가 기능 구현 예정" />
-    <option name="LAST_COMMIT_MESSAGE" value="관리자 페이지 상품추가 기능 구현 예정" />
+    <MESSAGE value="feat: 장바구니 기능 구현&#10;&#10;장바구니 담기 기능, 수량 변경 기능, 항목 삭제, 전체 삭제 구현" />
+    <MESSAGE value="fix: thymeleaf 태그 변경" />
+    <MESSAGE value="design: 장바구니 페이지 ui 추가" />
+    <MESSAGE value="feature: 기본 템플릿 검색 ui 추가" />
+    <MESSAGE value="chore: commit" />
+    <MESSAGE value="feature: show 메소드에 유저 정보 표시 구현&#10;&#10;spring aop 로 모든 controller 클래스의 show 메소드에 유저 정보 model 에 전달하도록 구현" />
+    <MESSAGE value="fix: 사용하지 않는 메소드 제거&#10;&#10;findPublisherByProductBooks(ProductBook book) 메소드 제거" />
+    <MESSAGE value="fix: 장바구니 품목 조회 시 제품 정보도 즉시 조회 하도록 변경&#10;&#10;ProductOrderProduct 엔티티 조회 시 ProductBook 도 함께 조회하도록 fetch 방식 LAZY 에서 EAGER 로 변경" />
+    <MESSAGE value="fix: 인터페이스 메소드 public 에서 default 로 변경" />
+    <MESSAGE value="fix: java.util 패키지 전부 불러오도록 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: java.util 패키지 전부 불러오도록 변경" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

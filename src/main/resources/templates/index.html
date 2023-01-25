@@ -15,7 +15,7 @@
 
 <!-- Header -->
 <div id="header" class="shell">
-    <div id="logo"><h1><a href="#">BestSeller</a></h1><span></span></div>
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
     <!-- Navigation -->
     <div id="navigation">
         <ul>
@@ -24,11 +24,19 @@
             <li><a href="#">Profile</a></li>
             <li><a href="#">Contacts</a></li>
             <li>
-                <form th:action="index">
-                    <input type="text" placeholder="search" name="search">
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </li>
+
         </ul>
     </div>
     <!-- End Navigation -->
@@ -36,8 +44,9 @@
     <!-- Login-details -->
     <div id="login-details">
         <p>Welcome, <a href="#" id="user" th:text="${member}">Guest</a> .</p>
-        <p><a href="#" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>Shopping Cart (0) <a href="#"
-                                                                                                                class="sum">$0.00</a>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
         </p>
     </div>
     <!-- End Login-details -->
@@ -52,7 +61,7 @@
                 <h4>Categories</h4>
                 <ul>
                     <li th:each="category : ${categories}">
-                        <a th:text="${category.category}"></a>
+                        <a th:href="@{/shop/search(param=${category.id},type=4)}" th:text="${category.category}"></a>
                     </li>
                 </ul>
             </li>
@@ -75,7 +84,8 @@
                                 <span class="description" th:text="${display.description}"></span>
                             </span>
                             <span class="buy-btn">구매가
-                                <span class="price" th:text="${#numbers.formatInteger(display.price,3,'COMMA') + '₩'}"></span>
+                                <span class="price"
+                                      th:text="${#numbers.formatInteger(display.price,3,'COMMA') + '₩'}"></span>
                             </span>
                         </a>
                     </div>

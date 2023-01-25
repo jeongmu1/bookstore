@@ -1,7 +1,7 @@
 package books.home.service;
 
 import books.common.PageSizeProps;
-import books.home.common.ProductBookDTO;
+import books.home.common.ProductBookDto;
 import books.product.domain.Category;
 import books.product.domain.ProductBook;
 import books.product.domain.ProductImage;
@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,11 +41,11 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductBookDTO> findDisplayBooksForDTOs() {
+    public List<ProductBookDto> findDisplayBooksForDtos() {
         return productBookRepo
                 .findProductBooksByDisplay(true, PageRequest.of(0, pageSizeProps.getMainProducts()))
                 .stream()
-                .map(book -> new ProductBookDTO(book, findProductImageByBook(book)))
+                .map(book -> new ProductBookDto(book, findProductImageByBook(book)))
                 .collect(Collectors.toList());
     }
 

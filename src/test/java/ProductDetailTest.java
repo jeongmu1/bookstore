@@ -16,10 +16,10 @@ class ProductDetailTest {
 
     @Test
     void getDetails() {
-        ProductBook book = shopService.getProductDetails(new Long(1));
+        ProductBook book = shopService.findProductDetails(new Long(1));
         Set<ProductCategory> categories =  book.getProductCategories();
         Set<ProductImage> images = book.getProductImages();
-        Set<ProductReview> reviews = shopService.setUserInProductReviews(book.getProductReviews());
+        Set<ProductReview> reviews = shopService.findUserInProductReviews(book.getProductReviews());
         Publisher publisher = book.getPublisher();
 
         System.out.println(categories);
@@ -41,7 +41,7 @@ class ProductDetailTest {
 
     @Test
     void getAvgScore() {
-        ProductBook book = shopService.getProductDetails(new Long(1));
-        System.out.println(shopService.getProductReviewRate(book));
+        ProductBook book = shopService.findProductDetails(new Long(1));
+        System.out.println(shopService.findProductReviewRate(book));
     }
 }

@@ -110,6 +110,7 @@ public class CartServiceImpl implements CartService {
         ProductOrderProduct item = findItem(principal, itemId);
         if (item != null) {
             cartRepo.deleteById(item.getId());
+            return;
         }
 
         throw new NullPointerException();

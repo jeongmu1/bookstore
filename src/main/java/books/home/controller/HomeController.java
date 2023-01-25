@@ -1,22 +1,16 @@
 package books.home.controller;
 
 import books.home.service.HomeService;
-import books.product.repository.CategoryRepository;
-import books.product.repository.ProductBookRepository;
-import books.product.repository.ProductCategoryRepository;
-import books.user.domain.User;
+import books.product.common.SearchForm;
 import books.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -25,17 +19,21 @@ public class HomeController {
 
     private final HomeService homeService;
 
-    private final UserService userService;
-
     public HomeController(HomeService homeService, UserService userService) {
         this.homeService = homeService;
-        this.userService = userService;
     }
 
     @GetMapping
     public String showMainPage(Model model, Principal principal) {
         model.addAttribute("categories", homeService.findAllCategories());
-        model.addAttribute("displays", homeService.findDisplayBooksForDTOs());
+        model.addAttribute("displays", homeService.findDisplayBooksForDtos());
         return "index";
+    }
+
+    @GetMapping("/search")
+    public String redirectToSearch(SearchForm searchForm, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("param", searchForm.getParam());
+        redirectAttributes.addAttribute("type", searchForm.getType());
+        return "redirect:/shop/search";
     }
 }

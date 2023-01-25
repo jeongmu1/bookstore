@@ -1,21 +1,17 @@
-import books.home.service.HomeServiceImpl;
+import books.product.service.ShopService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-
-
 @SpringBootTest
 @ContextConfiguration(classes = TestConfiguration.class)
-class HomeServiceTest {
+class SearchTest {
     @Autowired
-    private HomeServiceImpl homeService;
+    ShopService shopService;
 
     @Test
-    void queryTest() {
-        System.out.println(homeService.findAllCategories());
-        System.out.println(homeService.findDisplayBooksForDtos());
+    void searchCategoryTest() {
+        System.out.println(shopService.findProductsBySearch("20", 4));
     }
-
 }

@@ -30,8 +30,15 @@
             <li><a href="#">Profile</a></li>
             <li><a href="#">Contacts</a></li>
             <li>
-                <form th:action="index">
-                    <input type="text" placeholder="search" name="search">
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </li>
@@ -42,8 +49,9 @@
     <!-- Login-details -->
     <div id="login-details">
         <p>Welcome, <a href="#" id="user" th:text="${member}">Guest</a> .</p>
-        <p><a href="#" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>Shopping Cart (0) <a href="#"
-                                                                                                                class="sum">$0.00</a>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,3,'COMMA') + '₩'}"></a>
         </p>
     </div>
     <!-- End Login-details -->

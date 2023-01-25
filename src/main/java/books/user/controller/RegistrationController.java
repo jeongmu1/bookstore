@@ -1,13 +1,8 @@
 package books.user.controller;
 
 import books.user.common.RegistrationForm;
-import books.user.domain.Authority;
-import books.user.domain.User;
-import books.user.repository.UserAuthorityRepository;
-import books.user.repository.UserRepository;
 import books.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +20,7 @@ public class RegistrationController {
 
     @GetMapping
     public String registerForm() {
-        return "register";
+        return "account/register";
     }
 
     @PostMapping
