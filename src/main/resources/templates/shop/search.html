@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/search.css}" type="text/css">
+    <!--    <link rel="stylesheet" th:href="@{/css/yesCom.css}" type="text/css">-->
+    <link rel="stylesheet" th:href="@{/css/pcBase.css}" type="text/css">
+    <!--    <link rel="stylesheet" th:href="@{/css/newStyle.css}" type="text/css">-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a href="#" id="user" th:text="${member}">Guest</a> .</p>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <ul class="categories">
+            <li>
+                <h4>Categories</h4>
+                <ul>
+                    <li th:each="category : ${categories}">
+                        <a th:href="@{/shop/search(param=${category.id},type=4)}" th:text="${category.category}"></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+    <!-- content -->
+    <div id="content">
+        <!-- search results -->
+        <div class="sGoodsSec">
+            <section id="goodsListWrap">
+                <div class="sGoodsSecArea">
+                    <!-- base filter -->
+                    <div class="baseFilterRow">
+                        <span class="baseFilter">
+                            <a href="#" class="sort_gb on">인기도순</a>
+                            <a href="#" class="sort_gb on">정확도순</a>
+                            <a href="#" class="sort_gb on">신상품순</a>
+                            <a href="#" class="sort_gb on">최저가순</a>
+                            <a href="#" class="sort_gb on">최고가순</a>
+                            <a href="#" class="sort_gb on">평점순</a>
+                            <a href="#" class="sort_gb on">리뷰순</a>
+                        </span>
+                    </div>
+                    <!-- end base filter -->
+                    <!-- products -->
+                    <ul class="sGLi tp_book tp_chk tp_list">
+                        <li th:each="product : ${products}">
+                            <div class="itemUnit">
+                                <div class="item_img">
+                                    <div class="img_canvas">
+                                        <span class="img_item">
+                                            <span class="img_grp">
+                                                <a th:href="@{/shop/product(itemId=${product.id})}" class="lnk_img">
+                                                    <em class="img_bdr">
+                                                        <img th:src="@{/images/{filename}(filename = ${product.productImage.fileName})}"
+                                                             border="0" alt="제목" style="display: inline;">
+                                                    </em>
+                                                </a>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="item_info">
+                                    <div class="info_row info_name">
+                                        <a th:href="@{/shop/product/(itemId=${product.id})}" class="gd_name"
+                                           th:text="${product.title}"></a>
+                                    </div>
+                                    <div class="info_row info_pubGrp">
+                                        <span class="authPub info_auth">
+                                            <a href="#" th:text="${product.author}">저자</a>
+                                             저
+                                        </span>
+                                        <span class="authPub info_pub">
+                                            <a href="#" th:text="${product.publisher}">출판사</a>
+                                        </span>
+                                    </div>
+                                    <div class="info_row info_price">
+                                        <strong class="txt_num">
+                                            <em class="yes_b"
+                                                th:text="${#numbers.formatInteger(product.price,0,'COMMA')}"></em>
+                                            원
+                                        </strong>
+                                        <span class="txt_num dash">
+                                            <em class="yes_m"
+                                                th:text="${#numbers.formatInteger(product.price,0,'COMMA')}"></em>
+                                            원
+                                        </span>
+                                        <span class="yPoint">
+                                            <em class="bgYUI ico_point"
+                                                th:text="${'포인트적립 ' + #numbers.formatInteger(product.price/10,0,'COMMA')}"></em>
+                                            원
+                                        </span>
+                                    </div>
+                                    <div class="info_row info_rating">
+                                        <span class="rating_grade">
+                                            <span class="bgYUI tRating">리뷰 총점</span>
+                                            <em class="yes_b" th:text="${product.rate}"></em>
+                                            <span class="rating_rvCount">
+                                                <em class="bit">회원리뷰</em>
+                                                (
+                                                <em class="txC_black" th:text="${product.sizeOfReviews}"></em>
+                                                건)
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <!-- end search results -->
+        <div class="cl">&nbsp;</div>
+    </div>
+    <!-- End Content -->
+    <div class="cl">&nbsp;</div>
+</div>
+<!-- End Main -->
+</body>
+</html>

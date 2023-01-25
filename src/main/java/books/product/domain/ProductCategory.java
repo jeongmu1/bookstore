@@ -20,7 +20,7 @@ public class ProductCategory {
     private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "product_book_id", nullable = false)
     @ToString.Exclude
     private ProductBook productBook;

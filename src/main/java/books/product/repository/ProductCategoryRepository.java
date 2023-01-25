@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Set;
 
 public interface ProductCategoryRepository extends CrudRepository<ProductCategory, Long> {
-    public Set<ProductCategory> findAllByProductBook(ProductBook book);
+    Set<ProductCategory> findAllByProductBook(ProductBook book);
+    Set<ProductCategory> findProductCategoriesByCategoryId(Long id);
 }
