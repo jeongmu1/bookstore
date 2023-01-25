@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>DN Book Store</title>
@@ -11,7 +11,7 @@
 <body>
 <!-- Header -->
 <div id="header" class="shell">
-    <div id="logo"><h1><a href="#">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span><a href="#">free css template</a></span></div>
     <!-- Navigation -->
     <div id="navigation">
         <ul>
@@ -19,6 +19,19 @@
             <li><a href="#">Products</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
         </ul>
     </div>
     <!-- End Navigation -->
