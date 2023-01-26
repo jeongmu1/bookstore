@@ -45,8 +45,7 @@ public class CartServiceImpl implements CartService {
     public List<CartItemDto> findCartByUser(@NotNull Principal principal) {
         return cartRepo
                 .findAllByProductOrder(getOrderEntity(userRepo
-                        .findByUsername(principal.getName())
-                        .orElse(null)))
+                        .findByUsername(principal.getName())))
                 .stream()
                 .map(this::itemEntityToDto)
                 .collect(Collectors.toList());
@@ -62,7 +61,7 @@ public class CartServiceImpl implements CartService {
         }
         cartRepo.save(
                 getCartItemEntity(
-                        userRepo.findByUsername(principal.getName()).orElse(null)
+                        userRepo.findByUsername(principal.getName())
                         , productBookRepo.findProductBookById(itemId)
                         , amount
                 ));
@@ -92,8 +91,7 @@ public class CartServiceImpl implements CartService {
 
         List<CartItemDto> cart = cartRepo
                 .findAllByProductOrder(getOrderEntity(userRepo
-                        .findByUsername(principal.getName())
-                        .orElse(null)))
+                        .findByUsername(principal.getName())))
                 .stream()
                 .map(this::itemEntityToDtoForChangeCount)
                 .collect(Collectors.toList());
@@ -120,15 +118,14 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public void deleteAll(@NotNull Principal principal) {
         cartRepo.deleteAllByProductOrder(
-                getOrderEntity(userRepo.findByUsername(principal.getName()).orElse(null))
+                getOrderEntity(userRepo.findByUsername(principal.getName()))
         );
     }
 
     private @Nullable ProductOrderProduct findItem(@NotNull Principal principal, long itemId) {
         List<ProductOrderProduct> cart = cartRepo
                 .findAllByProductOrder(getOrderEntity(userRepo
-                        .findByUsername(principal.getName())
-                        .orElse(null)));
+                        .findByUsername(principal.getName())));
 
         for (ProductOrderProduct product : cart) {
             if (product.getProductBook().getId() == itemId) {

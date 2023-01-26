@@ -15,4 +15,8 @@ public interface OrderRepository extends CrudRepository<ProductOrder, Long> {
     Optional<List<ProductOrder>> findAllByUserOrderByCreateTimeDesc(User user, Pageable pageable);
 
     Optional<ProductOrder> findProductOrderByUserAndEnabled(User user, boolean enabled);
+
+    Integer countByUserAndDeliveryStateId(User user, int deliveryStateId);
+
+    Set<ProductOrder> findAllByUser(User user);
 }

@@ -10,4 +10,6 @@ public interface CartRepository extends CrudRepository<ProductOrderProduct, Long
     List<ProductOrderProduct> findAllByProductOrder(ProductOrder productOrder);
 
     void deleteAllByProductOrder(ProductOrder productOrder);
+
+    Integer countProductOrderProductsByProductOrder(ProductOrder order);
 }
