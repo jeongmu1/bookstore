@@ -83,46 +83,22 @@ public class ShopServiceImpl implements ShopService {
     public List<ProductBookDto> findProductsBySearch(String param, int type) {
         switch (type) {
             case 1:
-                return searchTitle(param);
+                return productBooksToDto(productBookRepo.findProductBooksByTitleContaining(param));
             case 2:
-                return searchAuthor(param);
+                return productBooksToDto(productBookRepo.findProductBooksByAuthorContaining(param));
             case 3:
-                return searchPublisher(param);
+                return productBooksToDto(productBookRepo.findProductBooksByPublisherNameContaining(param));
             case 4:
-                return searchCategory(param);
+                return productCategoryRepo
+                        .findProductCategoriesByCategoryId(Long.parseLong(param))
+                        .stream()
+                        .map(category -> productBookToDto(category.getProductBook()))
+                        .collect(Collectors.toList());
             case 5:
-                return searchTotal(param);
+                return productBooksToDto(productBookRepo.findProductBooksByTitleContainingOrAuthorContainingOrPublisherNameContaining(param, param, param));
             default:
                 throw new InvalidParameterException();
         }
-    }
-
-    private List<ProductBookDto> searchTotal(String param) {
-        List<ProductBook> books = productBookRepo.findProductBooksByTitleContainingOrAuthorContainingOrPublisherNameContaining(param, param, param);
-        return productBooksToDto(books);
-    }
-
-    private List<ProductBookDto> searchTitle(String param) {
-        List<ProductBook> books = productBookRepo.findProductBooksByTitleContaining(param);
-        return productBooksToDto(books);
-    }
-
-    private List<ProductBookDto> searchAuthor(String param) {
-        List<ProductBook> books = productBookRepo.findProductBooksByAuthorContaining(param);
-        return productBooksToDto(books);
-    }
-
-    private List<ProductBookDto> searchPublisher(String param) {
-        List<ProductBook> books = productBookRepo.findProductBooksByPublisherNameContaining(param);
-        return productBooksToDto(books);
-    }
-
-    private List<ProductBookDto> searchCategory(String param) {
-        return productCategoryRepo
-                .findProductCategoriesByCategoryId(Long.parseLong(param))
-                .stream()
-                .map(category -> productBookToDto(category.getProductBook()))
-                .collect(Collectors.toList());
     }
 
     private ProductImage findProductImageByBook(ProductBook book) {

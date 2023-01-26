@@ -19,7 +19,9 @@ public class ShopController {
     private final PointProps pointProps;
     private final HomeService homeService;
 
-    public ShopController(ShopService shopService, PointProps pointProps, HomeService homeService) {
+    public ShopController(ShopService shopService
+            , PointProps pointProps
+            , HomeService homeService) {
         this.shopService = shopService;
         this.pointProps = pointProps;
         this.homeService = homeService;
@@ -42,11 +44,14 @@ public class ShopController {
     /**
      *
      * @param param 검색어 입력
-     * @param type 검색 타입 설정 (1:제목, 2:작가, 3:출판사, 4:카테고리, 5:통합)
+     * @param type  검색 타입 설정 (1:제목, 2:작가, 3:출판사, 4:카테고리, 5:통합)
      * @return 뷰 반환
      */
     @GetMapping("/search")
-    public String showSearchResult(Model model, Principal principal, @RequestParam String param, @RequestParam int type) {
+    public String showSearchResult(Model model, Principal principal
+            , @RequestParam String param
+            , @RequestParam int type
+    ) {
         model.addAttribute("categories", homeService.findAllCategories());
         model.addAttribute("products", shopService.findProductsBySearch(param, type));
         return "shop/search";
