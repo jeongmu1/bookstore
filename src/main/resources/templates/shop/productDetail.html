@@ -41,7 +41,7 @@
     <div class="cl">&nbsp;</div>
     <!-- Login-details -->
     <div id="login-details">
-        <p>Welcome, <a href="#" id="user" th:text="${member}">Guest</a> .</p>
+        <p>Welcome, <a th:href="@{/account}" id="user" th:text="${member}">Guest</a> .</p>
         <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
             <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
             <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>

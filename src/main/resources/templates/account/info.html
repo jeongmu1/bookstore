@@ -1,10 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/design.css}" type="text/css">
 </head>
 <body>
 
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a th:href="@{/account}" id="user" th:text="${member}">Guest</a> .</p>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <div class="wrap">
+        <div class="greenContainer">
+            <div>
+                <div class="name" th:text="${user.name}"></div>
+            </div>
+            <div class="modify">i</div>
+        </div>
+        <div class="summaryContainer">
+            <div class="item">
+                <div class="number" th:text="${user.reviews}"></div>
+                <div>상품후기</div>
+            </div>
+            <a th:href="@{/account/pointInfo}" class="item">
+                <div class="number" th:text="${user.point}"></div>
+                <div>적립금</div>
+            </a>
+        </div>
+        <div class="shippingStatusContainer">
+            <div class="title">
+                주문/배송조회
+            </div>
+            <div class="status">
+
+                <div class="item">
+                    <div>
+                        <div class="green number" th:text="${user.cart}"></div>
+                        <a class="text" th:href="@{/cart}">장바구니</a>
+                    </div>
+                    <div class="icon"> > </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <div class="number" th:text="${user.payedOrders}"></div>
+                        <div class="text">결제완료</div>
+                    </div>
+                    <div class="icon"> > </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <div class="green number" th:text="${user.shippingOrders}"></div>
+                        <div class="text">배송중</div>
+                    </div>
+                    <div class="icon"> > </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <div class="green number" th:text="${user.completedOrders}"></div>
+                        <div class="text">구매확정</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="listContainer">
+            <a href="#" class="item">
+                <div class="icon">ii</div>
+                <div class="text">주문목록</div>
+                <div class="right"> > </div>
+            </a>
+            <a href="#" class="item">
+                <div class="icon">ii</div>
+                <div class="text">상품후기</div>
+                <div class="right"> > </div>
+            </a>
+            <a href="#" class="item">
+                <div class="icon">ii</div>
+                <div class="text">상품문의</div>
+                <div class="right"> > </div>
+            </a>
+            </a>
+        </div>
+        <div class="infoContainer">
+            <a href="#" class="item">
+                <div>공지사항</div>
+            </a>
+            <a href="#" class="item">
+                <div>이용안내</div>
+            </a>
+            <a href="#" class="item">
+                <div>고객센터</div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- End Main-->
 </body>
 </html>
