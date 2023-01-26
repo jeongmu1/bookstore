@@ -39,13 +39,9 @@ public class UserPointHistory {
     @Column(name = "point_change", nullable = false)
     private Integer pointChange;
 
-    public Integer getPointChange() {
-        return pointChange;
-    }
-
-    public void setPointChange(Integer pointChange) {
-        this.pointChange = pointChange;
-    }
+    @NotNull
+    @Column(name = "change_result", nullable = false)
+    private Integer changeResult;
 
     @PrePersist
     public void persistTime() {
