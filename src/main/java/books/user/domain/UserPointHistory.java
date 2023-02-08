@@ -16,6 +16,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserPointHistory {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

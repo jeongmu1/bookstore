@@ -14,6 +14,8 @@ import java.util.*;
 public class CartController {
     private final CartService cartService;
 
+    private static final String REDIRECT_PATH = "redirect:/cart";
+
     public CartController(CartService cartService) {
         this.cartService = cartService;
     }
@@ -29,24 +31,24 @@ public class CartController {
     @PostMapping
     public String productAdd(Principal principal, int cartCnt, @RequestParam long itemId) {
         cartService.addProductInCart(principal, cartCnt, itemId);
-        return "redirect:/cart";
+        return REDIRECT_PATH;
     }
 
     @PostMapping("/amount")
     public String productModify(Principal principal, String count) {
         cartService.modifyProductCount(principal, count);
-        return "redirect:/cart";
+        return REDIRECT_PATH;
     }
 
     @PostMapping("/delete")
     public String productRemove(Principal principal, @RequestParam long itemId) {
         cartService.deleteProduct(principal, itemId);
-        return "redirect:/cart";
+        return REDIRECT_PATH;
     }
 
     @PostMapping("/deleteAll")
     public String productRemoveAll(Principal principal) {
         cartService.deleteAll(principal);
-        return "redirect:/cart";
+        return REDIRECT_PATH;
     }
 }

@@ -35,11 +35,6 @@ public class UserAddress {
     @Column(name = "address", nullable = false, length = 45)
     private String address;
 
-    @Size(max = 45)
-    @NotNull
-    @Column(name = "address_detail", nullable = false, length = 45)
-    private String addressDetail;
-
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -57,6 +52,11 @@ public class UserAddress {
     @NotNull
     @Column(name = "update_time", nullable = false)
     private Timestamp updateTime;
+
+    @Size(max = 15)
+    @NotNull
+    @Column(name = "phone", nullable = false, length = 15)
+    private String phone;
 
     @PrePersist
     public void prePersist() {

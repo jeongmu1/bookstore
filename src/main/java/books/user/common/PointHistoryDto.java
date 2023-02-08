@@ -24,7 +24,7 @@ public class PointHistoryDto {
         private String historyDetail = "";
         private int pointChange = 0;
         private int changeResult = 0;
-        private Character using = null;
+        private char using = '0';
 
         public Builder createTime(String createTime) {
             this.createTime = createTime;

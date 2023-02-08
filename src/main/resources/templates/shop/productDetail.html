@@ -82,14 +82,15 @@
                     <!-- 결제 버튼 영역 -->
                     <input type="submit" class="btn-gradient cyan" value="카트에 넣기">
                 </form>
-                <form method="post" th:action="@{/shop/order(itemId=${book.id})}" class="gd_actionContGrp">
+                <form method="get" th:action="@{/order/product(productBookId=${book.id})}" th:object="${Integer}" class="gd_actionContGrp">
                     <!-- 수량 -->
                     <dl class="gd_len">
                         <dt>수량</dt>
                         <dd>
                         <span class="yesIpt ipt_wSizeF">
-                            <label for="orderCnt"></label>
-                            <input class="ac yes_m" id="orderCnt" name="orderCnt" type="text" value="1" maxlength="4">
+                            <input type="hidden" id="productBookId" name="productBookId" th:value="${book.id}">
+                            <label for="quantity"></label>
+                            <input class="ac yes_m" id="quantity" name="quantity" value="1" type="text" maxlength="4">
                         </span>
                         </dd>
                     </dl>
