@@ -15,7 +15,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class UserAddress {
     @Id
     @Column(name = "id", nullable = false)
