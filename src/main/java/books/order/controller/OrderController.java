@@ -41,8 +41,8 @@ public class OrderController {
 
     @GetMapping("/product")
     public String showDirectOrderForm(Model model, Principal principal
-            , @RequestParam Long productBookId
-            , @RequestParam int quantity) {
+            , @RequestParam int quantity
+            , @RequestParam Long productBookId) {
         List<CartItemDto> cartItemDtos = orderService.findProduct(productBookId, quantity);
         model.addAttribute("address", orderService.findDefaultUserAddress(principal));
         model.addAttribute("cart", cartItemDtos);

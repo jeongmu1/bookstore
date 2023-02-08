@@ -26,8 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -74,7 +72,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void addOrderByCartItems(OrderForm orderForm, Principal principal) throws OverStockException, NoItemException {
+    public void addOrderByCartItems(OrderForm orderForm, Principal principal)
+            throws OverStockException, NoItemException {
         ProductOrder order = getProductOrder(principal);
 
         if (cartRepo.findAllByProductOrder(order).isEmpty()) throw new NoItemException("No items in cart");
@@ -88,10 +87,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity) throws OverStockException {
+    public void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity)
+            throws OverStockException {
         ProductOrderProduct item = new ProductOrderProduct();
         ProductBook book = productBookRepo.findProductBookById(productBookId);
         book.setStock(book.getStock() - quantity);
+        if (book.getStock() < 1) book.setEnabled(false);
+
         productBookRepo.save(book);
 
         if (quantity > book.getStock()) throw new OverStockException("Out of Stock!");
@@ -181,6 +183,7 @@ public class OrderServiceImpl implements OrderService {
         ProductBook book = productOrderProduct.getProductBook();
         if (productOrderProduct.getProductCount() > book.getStock()) throw new OverStockException("Out of Stock!");
         book.setStock(book.getStock() - productOrderProduct.getProductCount());
+        if (book.getStock() < 1) book.setEnabled(false);
         productBookRepo.save(book);
     }
 }

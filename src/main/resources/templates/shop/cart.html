@@ -131,7 +131,8 @@
                                             th:text="${#numbers.formatInteger(item.price * item.amount,3,'COMMA') + '원'}"></strong>
                                 </td>
                                 <td class="goods_order">
-                                    <a href="#" class="btnC btn_wSizeF btn_blue">
+                                    <a th:href="@{/order/product(productBookId=${item.itemId}, quantity=${item.amount})}"
+                                       class="btnC btn_wSizeF btn_blue">
                                         <span class="bWrap">
                                             <em class="txt">주문하기</em>
                                         </span>
@@ -164,7 +165,7 @@
                 <div class="settleSortArea sortBot">
                     <div class="sortLft">
                         <span class="txt_des">전체상품</span>
-                        <a href="#" class="btnC w_80 btn_blue">
+                        <a th:href="@{/order/cart}" class="btnC w_80 btn_blue">
                             <span class="bWrap">
                                 <em class="txt">주문하기</em>
                             </span>
