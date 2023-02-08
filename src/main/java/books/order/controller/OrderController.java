@@ -1,14 +1,21 @@
 package books.order.controller;
 
+import books.order.common.NoItemException;
+import books.order.common.OrderForm;
+import books.order.common.OverStockException;
 import books.order.service.OrderService;
+import books.product.common.CartItemDto;
 import books.product.service.CartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/order")
@@ -21,19 +28,44 @@ public class OrderController {
         this.cartService = cartService;
     }
 
-    @GetMapping
+    @GetMapping("/cart")
     public String showOrderForm(Model model, Principal principal) {
+        List<CartItemDto> cartItemDtos = cartService.findCartByUser(principal);
         model.addAttribute("address", orderService.findDefaultUserAddress(principal));
-        model.addAttribute("cart", cartService.findCartByUser(principal));
+        model.addAttribute("cart", cartItemDtos);
+        model.addAttribute("total", cartService.getTotalPrice(cartItemDtos));
+        model.addAttribute("orderForm", new OrderForm());
+        model.addAttribute("type", "cart");
         return "order/orderForm";
     }
 
-    @GetMapping("/buyOne")
-    public String showOnlyOrderForm(Model model, Principal principal
+    @GetMapping("/product")
+    public String showDirectOrderForm(Model model, Principal principal
             , @RequestParam Long productBookId
             , @RequestParam int quantity) {
+        List<CartItemDto> cartItemDtos = orderService.findProduct(productBookId, quantity);
         model.addAttribute("address", orderService.findDefaultUserAddress(principal));
-        model.addAttribute("cart", orderService.findProduct(productBookId, quantity));
+        model.addAttribute("cart", cartItemDtos);
+        model.addAttribute("total", cartService.getTotalPrice(cartItemDtos));
+        model.addAttribute("orderForm", new OrderForm());
+        model.addAttribute("type", "product");
+        model.addAttribute("productBookId", productBookId).addAttribute("quantity", quantity);
         return "order/orderForm";
+    }
+
+    @PostMapping("/product")
+    public String createOrderByProduct(
+            @Valid OrderForm orderForm
+            , Principal principal
+            , @RequestParam Long productBookId
+            , @RequestParam int quantity) throws OverStockException {
+        orderService.addOrderByProduct(orderForm, principal, productBookId, quantity);
+        return "redirect:/";
+    }
+
+    @PostMapping("/cart")
+    public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws OverStockException, NoItemException {
+        orderService.addOrderByCartItems(orderForm, principal);
+        return "redirect:/";
     }
 }

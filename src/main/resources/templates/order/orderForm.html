@@ -12,6 +12,12 @@
     <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/renewHack.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/settle_dawn.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/yesCom.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/newStyle.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/httpsorder.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/myCss.css}" type="text/css">
 </head>
 <body>
 
@@ -56,7 +62,151 @@
 <!-- End Header -->
 <!-- Main -->
 <div id="main" class="shell">
+    <div id="wrapperContent">
+        <form id="order" method="post" th:action="@{/order/cart}" th:object="${orderForm}">
+            <div>
+                <h3>
+                    <span class="tbl_t pdchk">상품확인</span>
+                </h3>
+                <table class="tbl_l">
+                    <colgroup>
+                        <col width="70">
+                        <col width>
+                        <col width="90">
+                        <col width="70">
+                        <col width="90">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th colspan="2">
+                            <em class="name">상품명</em>
+                        </th>
+                        <th>
+                            <em class="fpri">정가</em>
+                        </th>
+                        <th>
+                            <em class="numb">수량</em>
+                        </th>
+                        <th>
+                            <em class="tota">합계</em>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${cart}">
+                        <td class="goods_img le">
+                            <a th:href="@{/shop/product(itemId=${item.itemId})}" target="_blank" class="pd_a">
+                        <span class="img_bdr">
+                            <em class="ico"></em>
+                            <img th:src="@{/images/{fileName}(fileName = ${item.fileName})}" alt class="pdimg"/>
+                        </span>
+                            </a>
+                        </td>
+                        <td class="le">
+                            <a th:href="@{/shop/product(itemId=${item.itemId})}" class="pd_a"
+                               th:text="${item.title}"></a>
+                        </td>
+                        <td th:text="${#numbers.formatInteger(item.price,0,'COMMA') + '원'}"></td>
+                        <td th:text="${item.amount}"></td>
+                        <td th:text="${#numbers.formatInteger(item.price * item.amount,0,'COMMA') + '원'}"></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <td colspan="5" class="tot">
+                        상품 총 금액 :
+                        <strong class="cost"
+                                th:text="${#numbers.formatInteger(total.totalPrice,0,'COMMA') + '원'}"></strong>
+                        <span class="dvi"> | </span>
+                        포인트 총 적립액 :
+                        <strong class="cost"
+                                th:text="${#numbers.formatInteger(total.totalPoint,3,'COMMA') + '원'}"></strong>
+                    </td>
+                    </tfoot>
+                </table>
+            </div>
+            <div th:if="${#fields.hasErrors()}">
+                <span class="validationError">
+                    올바른 정보를 입력해주세요.
+                </span>
+            </div>
 
+            <label>
+                수취자명:
+                <input type="text" th:field="*{deliveryName}"/>
+            </label>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('deliveryName')}"
+                  th:errors="*{deliveryName}">이름 오류</span>
+            <br/>
+
+            <label>
+                휴대폰 번호:
+                <input type="text" th:field="*{phone}"/>
+            </label>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('phone')}"
+                  th:errors="*{phone}">휴대폰 번호 오류</span>
+            <br/>
+
+            <label>
+                우편번호:
+                <input type="text" th:field="*{deliveryZipCode}"/>
+            </label>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('deliveryZipCode')}"
+                  th:errors="*{deliveryZipCode}">우편번호 오류</span>
+            <br/>
+
+            <label>
+                상세주소:
+                <input type="text" th:field="*{deliveryAddress}"/>
+            </label>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('deliveryAddress')}"
+                  th:errors="*{deliveryAddress}">상세주소 오류</span>
+            <br/>
+
+            <label>
+                신용카드 번호:
+                <input type="text" th:field="*{ccNumber}"/>
+            </label>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('ccNumber')}"
+                  th:errors="*{ccNumber}">신용카드 오류</span>
+            <br/>
+
+            <label>
+                유효기간:
+                <input type="text" th:field="*{ccExpiration}"/>
+            </label>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('ccExpiration')}"
+                  th:errors="*{ccExpiration}">유효기간 오류</span>
+            <br/>
+
+            <label>
+                CVV:
+                <input type="text" th:field="*{ccCvv}"/>
+            </label>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('ccCvv')}"
+                  th:errors="*{ccCvv}">CVV 오류</span>
+            <br/>
+
+
+            <button th:if="${type == 'cart'}" type="submit" class="btnC w_80 btn_blue">
+                            <span class="bWrap">
+                                <em class="txt">주문하기</em>
+                            </span>
+            </button>
+            <button th:if="${type == 'product'}" type="submit" th:formaction="@{/order/product(productBookId = ${productBookId}, quantity = ${quantity})}" class="btnC w_80 btn_blue">
+                            <span class="bWrap">
+                                <em class="txt">주문하기</em>
+                            </span>
+            </button>
+
+        </form>
+    </div>
 </div>
 <!-- End Main-->
 </body>

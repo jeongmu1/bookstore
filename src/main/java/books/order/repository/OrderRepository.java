@@ -19,4 +19,6 @@ public interface OrderRepository extends CrudRepository<ProductOrder, Long> {
     Integer countByUserAndDeliveryStateId(User user, int deliveryStateId);
 
     Set<ProductOrder> findAllByUser(User user);
+
+
 }

@@ -77,10 +77,6 @@ public class ProductOrder {
     @Column(name = "update_time", nullable = false)
     private Timestamp updateTime;
 
-    @Size(max = 45)
-    @Column(name = "rprsn_book", nullable = false, length = 45)
-    private String rprsnBook;
-
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "delivery_state_id", nullable = false)

@@ -8,7 +8,9 @@ import books.order.repository.DeliveryStateRepository;
 import books.order.repository.OrderRepository;
 import books.product.common.CartItemDto;
 import books.product.domain.ProductBook;
+import books.product.domain.ProductImage;
 import books.product.repository.ProductBookRepository;
+import books.product.repository.ProductImageRepository;
 import books.product.service.CartService;
 import books.user.domain.User;
 import books.user.repository.UserRepository;
@@ -30,28 +32,30 @@ public class CartServiceImpl implements CartService {
     private final DeliveryStateRepository deliveryStateRepo;
     private final ProductBookRepository productBookRepo;
     private final PointProps pointProps;
+    private final ProductImageRepository productImageRepo;
 
-    public CartServiceImpl(UserRepository userRepo, OrderRepository orderRepo, CartRepository cartRepo, DeliveryStateRepository deliveryStateRepo, ProductBookRepository productBookRepo, PointProps pointProps) {
+    public CartServiceImpl(UserRepository userRepo, OrderRepository orderRepo, CartRepository cartRepo, DeliveryStateRepository deliveryStateRepo, ProductBookRepository productBookRepo, PointProps pointProps, ProductImageRepository productImageRepo) {
         this.userRepo = userRepo;
         this.orderRepo = orderRepo;
         this.cartRepo = cartRepo;
         this.deliveryStateRepo = deliveryStateRepo;
         this.productBookRepo = productBookRepo;
         this.pointProps = pointProps;
+        this.productImageRepo = productImageRepo;
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<CartItemDto> findCartByUser(@NotNull Principal principal) {
         return cartRepo
-                .findAllByProductOrder(getOrderEntity(userRepo
-                        .findByUsername(principal.getName())))
+                .findAllByProductOrder(getOrderEntity(principal))
                 .stream()
                 .map(this::itemEntityToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public void addProductInCart(Principal principal, int amount, long itemId) {
         ProductOrderProduct product = findItem(principal, itemId);
         if (product != null) {
@@ -61,7 +65,7 @@ public class CartServiceImpl implements CartService {
         }
         cartRepo.save(
                 getCartItemEntity(
-                        userRepo.findByUsername(principal.getName())
+                        principal
                         , productBookRepo.findProductBookById(itemId)
                         , amount
                 ));
@@ -69,6 +73,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional
     public Map<String, Object> getTotalPrice(@NotNull List<CartItemDto> cart) {
         AtomicInteger totalPrice = new AtomicInteger();
         AtomicInteger totalPoint = new AtomicInteger();
@@ -86,12 +91,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional
     public void modifyProductCount(@NotNull Principal principal, @NotNull String amounts) {
         List<Integer> intAmounts = Arrays.stream(amounts.split(",")).map(Integer::valueOf).collect(Collectors.toList());
 
         List<CartItemDto> cart = cartRepo
-                .findAllByProductOrder(getOrderEntity(userRepo
-                        .findByUsername(principal.getName())))
+                .findAllByProductOrder(getOrderEntity(principal))
                 .stream()
                 .map(this::itemEntityToDtoForChangeCount)
                 .collect(Collectors.toList());
@@ -104,6 +109,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(Principal principal, long itemId) {
         ProductOrderProduct item = findItem(principal, itemId);
         if (item != null) {
@@ -118,14 +124,13 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public void deleteAll(@NotNull Principal principal) {
         cartRepo.deleteAllByProductOrder(
-                getOrderEntity(userRepo.findByUsername(principal.getName()))
+                getOrderEntity(principal)
         );
     }
 
     private @Nullable ProductOrderProduct findItem(@NotNull Principal principal, long itemId) {
         List<ProductOrderProduct> cart = cartRepo
-                .findAllByProductOrder(getOrderEntity(userRepo
-                        .findByUsername(principal.getName())));
+                .findAllByProductOrder(getOrderEntity(principal));
 
         for (ProductOrderProduct product : cart) {
             if (product.getProductBook().getId() == itemId) {
@@ -136,15 +141,16 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
-    private @NotNull ProductOrderProduct getCartItemEntity(User user, ProductBook book, int amount) {
+    private @NotNull ProductOrderProduct getCartItemEntity(Principal principal, ProductBook book, int amount) {
         ProductOrderProduct cartItem = new ProductOrderProduct();
-        cartItem.setProductOrder(getOrderEntity(user));
+        cartItem.setProductOrder(getOrderEntity(principal));
         cartItem.setProductBook(book);
         cartItem.setProductCount(amount);
         return cartItem;
     }
 
-    private ProductOrder getOrderEntity(User user) {
+    private ProductOrder getOrderEntity(Principal principal) {
+        User user = userRepo.findByUsername(principal.getName());
         Optional<ProductOrder> optionalProductOrder = orderRepo.findProductOrderByUserAndEnabled(user, false);
         return optionalProductOrder.orElseGet(() -> getOrderNewEntityForCart(user));
     }
@@ -165,7 +171,7 @@ public class CartServiceImpl implements CartService {
                 .itemId(book.getId())
                 .title(book.getTitle())
                 .price(book.getPrice())
-                .fileName(book.getProductImages().iterator().next().getFileName())
+                .fileName(productImageRepo.findAllByProductBook(book).iterator().next().getFileName())
                 .amount(cart.getProductCount())
                 .createTime(cart.getCreateTime())
                 .point(book.getPrice() / pointProps.getSavingRate())
