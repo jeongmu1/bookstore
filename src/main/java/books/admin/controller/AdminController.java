@@ -1,11 +1,13 @@
 package books.admin.controller;
 
+import books.admin.common.ProductBookForm;
 import books.admin.service.AdminService;
 import books.product.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -27,17 +29,17 @@ public class AdminController {
     @GetMapping(value = "/product")
     public String showProductForm(Model model) {
         model.addAttribute("categories", adminService.findAllCategories())
-                .addAttribute("publishers", adminService.findAllPublishers());
+                .addAttribute("publishers", adminService.findAllPublishers())
+                .addAttribute("productBookForm", new ProductBookForm());
 
         return "productForm";
     }
 
     // 수정 필요
     @PostMapping(value = "/product")
-    public String addProduct(@Valid ProductBook productBook,
-                             @RequestParam Map<String, Object> params) {
-
-        return null;
+    public String addProduct(ProductBookForm productBookForm, HttpServletRequest request) {
+        adminService.addProduct(productBookForm, request);
+        return "redirect:/";
     }
 
 }

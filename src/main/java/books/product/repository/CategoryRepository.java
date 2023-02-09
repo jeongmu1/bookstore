@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Set;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    public Set<Category> findAllByOrderById();
+    Set<Category> findAllByOrderById();
+    Category findCategoryById(Long id);
 }
