@@ -6,6 +6,10 @@ import books.product.domain.ProductReview;
 
 public class ProductBookConverter {
 
+    private ProductBookConverter() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static ProductBookDto convertToDto(ProductBook book) {
         return ProductBookDto.builder()
                 .id(book.getId())

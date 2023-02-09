@@ -4,23 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feature: 주문 시 포인트 적립 구현">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/common/ProductBookDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/common/ProductBookDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ProductDetailTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProductDetailTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SearchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UserTest.java" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경">
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,13 +254,6 @@
       <workItem from="1675041165810" duration="8012000" />
       <workItem from="1675057418711" duration="19225000" />
       <workItem from="1675813543509" duration="29072000" />
-    </task>
-    <task id="LOCAL-00033" summary="패키지 명 변경 (book -&gt; product)">
-      <created>1673613574027</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613574027</updated>
     </task>
     <task id="LOCAL-00034" summary="ProductOrderProductRepository method 반환형 Optional Set -&gt; Set 으로 변경">
       <created>1673613658512</created>
@@ -613,7 +591,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675843141383</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경">
+      <created>1675919532389</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1675919532389</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +629,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: 사용하지 않는 메소드 제거&#10;&#10;findPublisherByProductBooks(ProductBook book) 메소드 제거" />
     <MESSAGE value="fix: 장바구니 품목 조회 시 제품 정보도 즉시 조회 하도록 변경&#10;&#10;ProductOrderProduct 엔티티 조회 시 ProductBook 도 함께 조회하도록 fetch 방식 LAZY 에서 EAGER 로 변경" />
     <MESSAGE value="fix: 인터페이스 메소드 public 에서 default 로 변경" />
     <MESSAGE value="fix: java.util 패키지 전부 불러오도록 변경" />
@@ -669,26 +653,14 @@
     <MESSAGE value="feature: 주문 기능 구현, view 예외 처리 구현 예정&#10;&#10;주문 기능 구현&#10;예외 종류 : 재고소진, 카트에 아이템 없음" />
     <MESSAGE value="feature: 바로주문 링크 추가" />
     <MESSAGE value="feature: 주문 시 포인트 적립 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature: 주문 시 포인트 적립 구현" />
+    <MESSAGE value="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="jdk.internal.reflect.DelegatingMethodAccessorImpl" memberName="delegate" />
+        <PinnedItemInfo parentTag="books.product.domain.ProductBook" memberName="productReviews" />
       </pinned-members>
     </pin-to-top-manager>
   </component>
