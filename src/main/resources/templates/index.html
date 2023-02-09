@@ -78,7 +78,7 @@
                     <div class="product">
                         <a th:href="@{/shop/product?itemId={id}(id = ${display.id})}" class="info">
                             <span class="holder">
-                                <img th:src="@{/images/{filename}(filename = ${display.productImage.fileName})}" alt="">
+                                <img th:src="@{/images/{filename}(filename = ${display.imageFileName})}" alt="">
                                 <span class="book-name" th:text="${display.title}"></span>
                                 <span class="author" th:text="${display.author}"></span>
                                 <span class="description" th:text="${display.description}"></span>

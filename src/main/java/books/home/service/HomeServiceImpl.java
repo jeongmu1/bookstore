@@ -1,6 +1,7 @@
 package books.home.service;
 
 import books.common.PageSizeProps;
+import books.common.ProductBookConverter;
 import books.home.common.ProductBookDto;
 import books.product.domain.Category;
 import books.product.domain.ProductBook;
@@ -24,10 +25,7 @@ public class HomeServiceImpl implements HomeService {
 
     private final PageSizeProps pageSizeProps;
 
-    public HomeServiceImpl(ProductBookRepository productBookRepo
-            , CategoryRepository categoryRepo
-            , ProductImageRepository productImageRepo
-            , PageSizeProps pageSizeProps) {
+    public HomeServiceImpl(ProductBookRepository productBookRepo, CategoryRepository categoryRepo, ProductImageRepository productImageRepo, PageSizeProps pageSizeProps) {
         this.productBookRepo = productBookRepo;
         this.categoryRepo = categoryRepo;
         this.productImageRepo = productImageRepo;
@@ -45,20 +43,14 @@ public class HomeServiceImpl implements HomeService {
         return productBookRepo
                 .findProductBooksByDisplay(true, PageRequest.of(0, pageSizeProps.getMainProducts()))
                 .stream()
-                .map(book -> new ProductBookDto(book, findProductImageByBook(book)))
-                .collect(Collectors.toList());
+                .map(book -> {
+                    book.setProductImages(productImageRepo.findAllByProductBook(book));
+                    return ProductBookConverter.convertToDto(book);
+                }).collect(Collectors.toList());
+
     }
 
     public List<ProductBook> queryTest() {
         return productBookRepo.findProductBooksByDisplay(true, PageRequest.of(0, pageSizeProps.getMainProducts()));
-    }
-
-    private ProductImage findProductImageByBook(ProductBook book) {
-        return productImageRepo
-                .findAllByProductBook(book)
-                .stream()
-                .filter(ProductImage::isEnabled)
-                .findFirst()
-                .orElse(null);
     }
 }

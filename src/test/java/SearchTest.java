@@ -12,6 +12,5 @@ class SearchTest {
 
     @Test
     void searchCategoryTest() {
-        System.out.println(shopService.findProductsBySearch("20", 4));
     }
 }

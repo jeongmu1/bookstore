@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface ShopService {
 
-    ProductBook findProductDetails(Long productId);
+    ProductBookDto findProductDetails(Long productId);
 
     Set<Category> findCategoriesByBook(ProductBook book);
 

@@ -5,32 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feature: 주문 시 포인트 적립 구현">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/FailToUploadException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/common/BookProps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/productForm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/AdminTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/d/1dbd0d34cea856e81c842ab1bd9f9948edc6cc39" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/4/24b9b9078a65b258af3e649f8914a3d6fec6ee6e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/e/2ec5856550ce3930921523efb7930b3a928c5582" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/5/45a42faff2035e5f4868d24504361f480ea3676c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/f/9fe84ebb15faf917b7def6236dba604453cc61e0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/6/b65b0fae92424389672da01163c086655f089ecc" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/ProductBookForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/ProductBookForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/common/ProductBookDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/common/ProductBookDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/PublisherRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/PublisherRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ProductDetailTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProductDetailTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SearchTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UserTest.java" afterDir="false" />
     </list>
@@ -141,38 +129,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last.edited.regexp": "010-0000-0001",
-    "last_opened_file_path": "/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates/admin",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "모듈",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "495180092bd0712a4c50027fe52ccb8a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last.edited.regexp&quot;: &quot;010-0000-0001&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates/admin&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;495180092bd0712a4c50027fe52ccb8a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/templates/admin" />
@@ -684,6 +672,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="feature: 주문 시 포인트 적립 구현" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="jdk.internal.reflect.DelegatingMethodAccessorImpl" memberName="delegate" />

@@ -58,7 +58,7 @@
         <div class="gd_imgArea" style="float:left;">
             <span class="gd_img">
                 <em class="imgBdr">
-                    <img th:src="@{/images/{image}(image = ${image.fileName})}" width="175" height="250">
+                    <img th:src="@{/images/{image}(image = ${book.imageFileName})}" width="175" height="250">
                 </em>
             </span>
         </div>
@@ -113,17 +113,17 @@
             <!-- 판매상태 영역 시작 -->
             <div class="gd_actionCont">
                 <p class="gd_saleState">
-                    <em class="txC_black" th:if="${book.enabled}">판매중</em>
-                    <em class="txC_black" th:if="${!book.enabled}">재고 없음</em>
+                    <em class="txC_black" th:if="${!book.outOfStock}">판매중</em>
+                    <em class="txC_black" th:if="${book.outOfStock}">재고 없음</em>
                 </p>
             </div>
             <br>
             <span class="gd_ratingArea">
                 <span id="spanGdRating" class="gd_rating">
-                    <em class="yes_b" th:text="${rate}"></em>
+                    <em class="yes_b" th:text="${book.rate}"></em>
                 </span>
                 <span class="gd_reviewCount">
-                    회원리뷰(<em class="txC_blue" th:text="${sizeOfReviews}"></em>)건
+                    회원리뷰(<em class="txC_blue" th:text="${book.sizeOfReviews}"></em>)건
                 </span>
             </span>
             <!-- 제목 영역 끝 -->
@@ -154,7 +154,7 @@
                                 <ul class="gd_infoLi">
                                     <li>
                                         <em class="yes_m"
-                                            th:text="${#numbers.formatInteger(savingRate,3,'COMMA') + '원'}">
+                                            th:text="${#numbers.formatInteger(book.price/10,3,'COMMA') + '원'}">
                                             (10% 적립)</em>
                                     </li>
                                 </ul>
@@ -179,7 +179,7 @@
             <!-- 판매 정보 끝 -->
         </div>
         <div class="infoSetCont_wrap reviewRow_cont tp_tab yesComLoadingArea">
-            <div class="reviewInfoGrp lnkExtend" th:each="review : ${reviews}">
+            <div class="reviewInfoGrp lnkExtend" th:each="review : ${book.reviews}">
                 <div class="reviewInfoTop">
                     <div class="review_etc">
                         <span class="review_rating">

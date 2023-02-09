@@ -10,10 +10,6 @@ a
 1src/main/java/books/product/domain/Publisher.java,f/6/f67960f5feadba02ef0d942801a9475fa145bc7e
 T
 $src/test/java/TestConfiguration.java,c/d/cd39f7c96fac283c53e9949055575bbe6be494c2
-e
-5src/main/java/books/product/domain/ProductReview.java,1/b/1bd603d528dc73708769b18312f6bcfce1a6b579
-Z
-*src/main/java/books/common/PointProps.java,8/f/8f062484abe88d02bffe71dc08bb16143ffd0f2e
 c
 3src/main/java/books/order/domain/DeliveryState.java,4/8/48169c21d1db423538a65060ccf8c9e5d92cf4f3
 w
@@ -46,12 +42,6 @@ o
 ,src/main/java/books/user/common/UserDto.java,9/7/97a777b3a9e40d9ae41ffcec0bb228b83f0bf5ed
 l
 <src/main/java/books/user/service/UserDetailsServiceImpl.java,0/f/0ff33fa765b4a2c251625000c4e4021992adb2fb
-e
-5src/main/java/books/home/service/HomeServiceImpl.java,3/2/32090c93f2acd983ca6e35644e4f25401fd11567
-c
-3src/main/java/books/home/common/ProductBookDto.java,e/d/edc78934ef79a09b288f61e46a94ec066253de01
-g
-7src/main/java/books/home/controller/HomeController.java,c/e/ce04b46b0a4f77891c495a671dad9fa901190d86
 a
 1src/main/java/books/user/service/UserService.java,2/3/235eb8dd973b666d1e7530ade4ae9c440fb188c1
 g
@@ -78,5 +68,3 @@ p
 @src/main/java/books/user/repository/UserAuthorityRepository.java,4/2/42415bb8c35e91ab38c51b4d04028fd67733e29a
 n
 >src/main/java/books/user/repository/UserAddressRepository.java,1/5/15b1acaea6e81e6aab82ffff1f1591ae776b3de7
-s
-Csrc/main/java/books/product/repository/ProductReviewRepository.java,b/2/b234300af402a88915f6831442f224fac2d17017

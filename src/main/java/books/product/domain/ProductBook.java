@@ -8,9 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "product_book")
@@ -58,7 +56,7 @@ public class ProductBook {
 
     @OneToMany(mappedBy = "productBook")
     @ToString.Exclude
-    private Set<ProductReview> productReviews = new LinkedHashSet<>();
+    private List<ProductReview> productReviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "productBook")
     @ToString.Exclude
