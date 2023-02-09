@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void addProduct(ProductBookForm bookForm, HttpServletRequest request) throws FailToUploadException {
+    public void addProduct(ProductBookForm bookForm) throws FailToUploadException {
         ProductBook book = convertProductBookFormToProductBook(bookForm);
         book.setPublisher(publisherRepo.findPublisherById(bookForm.getPublisher()));
         book = productBookRepo.save(book);

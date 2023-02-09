@@ -2,14 +2,11 @@ package books.admin.controller;
 
 import books.admin.common.ProductBookForm;
 import books.admin.service.AdminService;
-import books.product.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -37,8 +34,8 @@ public class AdminController {
 
     // 수정 필요
     @PostMapping(value = "/product")
-    public String addProduct(ProductBookForm productBookForm, HttpServletRequest request) {
-        adminService.addProduct(productBookForm, request);
+    public String addProduct(@Valid ProductBookForm productBookForm) {
+        adminService.addProduct(productBookForm);
         return "redirect:/";
     }
 
