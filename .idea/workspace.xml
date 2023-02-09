@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경">
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: Utility Class 를 외부에서 생성할 수 없도록 변경">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/ProductBookForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/ProductBookForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/EntityConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,13 +264,6 @@
       <workItem from="1675041165810" duration="8012000" />
       <workItem from="1675057418711" duration="19225000" />
       <workItem from="1675813543509" duration="29072000" />
-    </task>
-    <task id="LOCAL-00034" summary="ProductOrderProductRepository method 반환형 Optional Set -&gt; Set 으로 변경">
-      <created>1673613658512</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613658512</updated>
     </task>
     <task id="LOCAL-00035" summary="패키지 이름 변경 (book -&gt; product)">
       <created>1673613692859</created>
@@ -598,7 +601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675919532389</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="fix: Utility Class 를 외부에서 생성할 수 없도록 변경">
+      <created>1675919999727</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1675919999727</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +639,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: 장바구니 품목 조회 시 제품 정보도 즉시 조회 하도록 변경&#10;&#10;ProductOrderProduct 엔티티 조회 시 ProductBook 도 함께 조회하도록 fetch 방식 LAZY 에서 EAGER 로 변경" />
     <MESSAGE value="fix: 인터페이스 메소드 public 에서 default 로 변경" />
     <MESSAGE value="fix: java.util 패키지 전부 불러오도록 변경" />
     <MESSAGE value="fix: 장바구니 물품 삭제 시 NullPointerException 발생 버그 수정" />
@@ -654,7 +663,8 @@
     <MESSAGE value="feature: 바로주문 링크 추가" />
     <MESSAGE value="feature: 주문 시 포인트 적립 구현" />
     <MESSAGE value="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경" />
+    <MESSAGE value="fix: Utility Class 를 외부에서 생성할 수 없도록 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Utility Class 를 외부에서 생성할 수 없도록 변경" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

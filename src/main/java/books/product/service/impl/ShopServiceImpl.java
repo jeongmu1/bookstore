@@ -1,6 +1,6 @@
 package books.product.service.impl;
 
-import books.common.ProductBookConverter;
+import books.common.EntityConverter;
 import books.home.common.ProductBookDto;
 import books.product.domain.*;
 import books.product.repository.*;
@@ -44,7 +44,7 @@ public class ShopServiceImpl implements ShopService {
         book.setProductCategories(productCategoryRepo.findAllByProductBook(book));
         book.setProductImages(productImageRepo.findAllByProductBook(book));
         book.setProductReviews(productReviewRepo.findAllByProductBook(book));
-        return ProductBookConverter.convertToDto(book);
+        return EntityConverter.convertProductBook(book);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ShopServiceImpl implements ShopService {
                 return productCategoryRepo
                         .findProductCategoriesByCategoryId(Long.parseLong(param))
                         .stream()
-                        .map(category -> ProductBookConverter.convertToDto(category.getProductBook()))
+                        .map(category -> EntityConverter.convertProductBook(category.getProductBook()))
                         .collect(Collectors.toList());
             case 5:
                 return productBooksToDto(productBookRepo.findProductBooksByTitleContainingOrAuthorContainingOrPublisherNameContaining(param, param, param));
@@ -104,7 +104,7 @@ public class ShopServiceImpl implements ShopService {
     private List<ProductBookDto> productBooksToDto(List<ProductBook> productBooks) {
         return productBooks
                 .stream()
-                .map(ProductBookConverter::convertToDto)
+                .map(EntityConverter::convertProductBook)
                 .collect(Collectors.toList());
     }
 }

@@ -4,13 +4,13 @@ import books.home.common.ProductBookDto;
 import books.product.domain.ProductBook;
 import books.product.domain.ProductReview;
 
-public class ProductBookConverter {
+public class EntityConverter {
 
-    private ProductBookConverter() {
+    private EntityConverter() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static ProductBookDto convertToDto(ProductBook book) {
+    public static ProductBookDto convertProductBook(ProductBook book) {
         return ProductBookDto.builder()
                 .id(book.getId())
                 .title(book.getTitle())

@@ -37,6 +37,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepo;
     private final CartRepository cartRepo;
     private final PointHistoryDetailRepository pointHistoryDetailRepo;
+    private final UserPointHistoryRepository userPointHistoryRepo;
 
     public OrderServiceImpl(UserAddressRepository userAddressRepo, UserRepository userRepo, PointProps pointProps, ProductBookRepository productBookRepo, DeliveryStateRepository deliveryStateRepo, OrderRepository orderRepo, CartRepository cartRepo, PointHistoryDetailRepository pointHistoryDetailRepo, UserPointHistoryRepository userPointHistoryRepo) {
         this.userAddressRepo = userAddressRepo;
@@ -49,8 +50,6 @@ public class OrderServiceImpl implements OrderService {
         this.pointHistoryDetailRepo = pointHistoryDetailRepo;
         this.userPointHistoryRepo = userPointHistoryRepo;
     }
-
-    private final UserPointHistoryRepository userPointHistoryRepo;
 
     @Override
     @Transactional(readOnly = true)
@@ -68,45 +67,6 @@ public class OrderServiceImpl implements OrderService {
                 .singletonList(
                         productBookEntityToDto(productBookRepo.findProductBookById(productBookId), quantity
                         ));
-    }
-
-    @Override
-    @Transactional
-    public void addOrderByCartItems(OrderForm orderForm, Principal principal)
-            throws OverStockException, NoItemException {
-        ProductOrder order = getProductOrder(principal);
-
-        if (cartRepo.findAllByProductOrder(order).isEmpty()) throw new NoItemException("No items in cart");
-        for (ProductOrderProduct product : order.getProductOrderProducts()) accept(product);
-
-        order = convertFormToProductOrder(orderForm, getProductOrder(principal));
-        orderRepo.save(order);
-
-        addPointHistory(principal, order);
-    }
-
-    @Override
-    @Transactional
-    public void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity)
-            throws OverStockException {
-        ProductOrderProduct item = new ProductOrderProduct();
-        ProductBook book = productBookRepo.findProductBookById(productBookId);
-        book.setStock(book.getStock() - quantity);
-        if (book.getStock() < 1) book.setEnabled(false);
-
-        productBookRepo.save(book);
-
-        if (quantity > book.getStock()) throw new OverStockException("Out of Stock!");
-        ProductOrder order = convertFormToProductOrder(orderForm);
-        order.setUser(userRepo.findByUsername(principal.getName()));
-        orderRepo.save(order);
-
-        item.setProductBook(book);
-        item.setProductCount(quantity);
-        item.setProductOrder(order);
-        order.setProductOrderProducts(Collections.singletonList(item));
-
-        addPointHistory(principal, order);
     }
 
     private UserAddress getEmptyUserAddressEntity() {
@@ -129,18 +89,44 @@ public class OrderServiceImpl implements OrderService {
                 .build();
     }
 
+    @Override
+    @Transactional
+    public void addOrderByCartItems(OrderForm orderForm, Principal principal)
+            throws OverStockException, NoItemException {
+        ProductOrder order = getProductOrder(principal);
+
+        if (cartRepo.findAllByProductOrder(order).isEmpty()) throw new NoItemException("No items in cart");
+        for (var pop : order.getProductOrderProducts()) acceptProductOrderProduct(pop);
+
+        order = setProductOrder(orderForm, getProductOrder(principal));
+        orderRepo.save(order);
+
+        addPointHistory(principal, order);
+    }
+
+    @Override
+    @Transactional
+    public void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity)
+            throws OverStockException {
+        ProductOrderProduct pop = new ProductOrderProduct();
+        ProductBook book = productBookRepo.findProductBookById(productBookId);
+        pop.setProductCount(quantity);
+        pop.setProductBook(book);
+        acceptProductOrderProduct(pop);
+
+        ProductOrder order = setProductOrder(orderForm, new ProductOrder());
+        order.setUser(userRepo.findByUsername(principal.getName()));
+        orderRepo.save(order);
+        order.setEnabled(true);
+        pop.setProductOrder(order);
+        order.setProductOrderProducts(Collections.singletonList(pop));
+
+        addPointHistory(principal, order);
+    }
+
     private ProductOrder getProductOrder(Principal principal) {
         return orderRepo.findProductOrderByUserAndEnabled(userRepo.findByUsername(principal.getName()), false)
                 .orElseThrow();
-    }
-
-    private ProductOrder convertFormToProductOrder(OrderForm form) {
-        ProductOrder order = new ProductOrder();
-        return setProductOrder(form, order);
-    }
-
-    private ProductOrder convertFormToProductOrder(OrderForm form, ProductOrder order) {
-        return setProductOrder(form, order);
     }
 
     @NotNull
@@ -179,11 +165,11 @@ public class OrderServiceImpl implements OrderService {
         user.setPoint(totalPoint);
     }
 
-    private void accept(ProductOrderProduct productOrderProduct) throws OverStockException {
-        ProductBook book = productOrderProduct.getProductBook();
-        if (productOrderProduct.getProductCount() > book.getStock()) throw new OverStockException("Out of Stock!");
-        book.setStock(book.getStock() - productOrderProduct.getProductCount());
-        if (book.getStock() < 1) book.setEnabled(false);
+    private void acceptProductOrderProduct(ProductOrderProduct pop) throws OverStockException {
+        ProductBook book = pop.getProductBook();
+        if (pop.getProductCount() > book.getStock())
+            throw new OverStockException("Out of Stock");
+        book.setStock(book.getStock() - pop.getProductCount());
         productBookRepo.save(book);
     }
 }

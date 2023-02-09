@@ -1,11 +1,10 @@
 package books.home.service;
 
+import books.common.EntityConverter;
 import books.common.PageSizeProps;
-import books.common.ProductBookConverter;
 import books.home.common.ProductBookDto;
 import books.product.domain.Category;
 import books.product.domain.ProductBook;
-import books.product.domain.ProductImage;
 import books.product.repository.CategoryRepository;
 import books.product.repository.ProductBookRepository;
 import books.product.repository.ProductImageRepository;
@@ -45,7 +44,7 @@ public class HomeServiceImpl implements HomeService {
                 .stream()
                 .map(book -> {
                     book.setProductImages(productImageRepo.findAllByProductBook(book));
-                    return ProductBookConverter.convertToDto(book);
+                    return EntityConverter.convertProductBook(book);
                 }).collect(Collectors.toList());
 
     }

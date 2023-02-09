@@ -29,7 +29,7 @@ public class OrderController {
     }
 
     @GetMapping("/cart")
-    public String showOrderForm(Model model, Principal principal) {
+    public String showCartOrderForm(Model model, Principal principal) {
         List<CartItemDto> cartItemDtos = cartService.findCartByUser(principal);
         model.addAttribute("address", orderService.findDefaultUserAddress(principal));
         model.addAttribute("cart", cartItemDtos);
@@ -40,7 +40,7 @@ public class OrderController {
     }
 
     @GetMapping("/product")
-    public String showDirectOrderForm(Model model, Principal principal
+    public String showProductOrderForm(Model model, Principal principal
             , @RequestParam int quantity
             , @RequestParam Long productBookId) {
         List<CartItemDto> cartItemDtos = orderService.findProduct(productBookId, quantity);

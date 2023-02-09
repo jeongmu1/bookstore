@@ -62,8 +62,6 @@ i
 9src/main/java/books/order/domain/ProductOrderProduct.java,9/7/97429c46daebeb9a81dfdc78acda28eff95f977e
 i
 9src/main/java/books/user/repository/UserCCRepository.java,9/8/986f1df7a73236e2e60e78df5d42204f480e66f2
-g
-7src/main/java/books/user/repository/UserRepository.java,4/e/4ee287e361670968763d61031d965ba8b90384c3
 p
 @src/main/java/books/user/repository/UserAuthorityRepository.java,4/2/42415bb8c35e91ab38c51b4d04028fd67733e29a
 n
