@@ -1,5 +1,6 @@
 package books.product.service.impl;
 
+import books.common.EntityConverter;
 import books.home.common.ProductBookDto;
 import books.product.domain.*;
 import books.product.repository.*;
@@ -38,13 +39,12 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional(readOnly = true)
-    public ProductBook findProductDetails(Long productId) {
+    public ProductBookDto findProductDetails(Long productId) {
         ProductBook book = productBookRepo.findProductBookById(productId);
         book.setProductCategories(productCategoryRepo.findAllByProductBook(book));
         book.setProductImages(productImageRepo.findAllByProductBook(book));
         book.setProductReviews(productReviewRepo.findAllByProductBook(book));
-
-        return book;
+        return EntityConverter.convertProductBook(book);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ShopServiceImpl implements ShopService {
                 return productCategoryRepo
                         .findProductCategoriesByCategoryId(Long.parseLong(param))
                         .stream()
-                        .map(category -> productBookToDto(category.getProductBook()))
+                        .map(category -> EntityConverter.convertProductBook(category.getProductBook()))
                         .collect(Collectors.toList());
             case 5:
                 return productBooksToDto(productBookRepo.findProductBooksByTitleContainingOrAuthorContainingOrPublisherNameContaining(param, param, param));
@@ -101,26 +101,10 @@ public class ShopServiceImpl implements ShopService {
         }
     }
 
-    private ProductImage findProductImageByBook(ProductBook book) {
-        return productImageRepo
-                .findAllByProductBook(book)
-                .stream()
-                .filter(ProductImage::isEnabled)
-                .findFirst()
-                .orElse(null);
-    }
-
     private List<ProductBookDto> productBooksToDto(List<ProductBook> productBooks) {
         return productBooks
                 .stream()
-                .map(this::productBookToDto)
+                .map(EntityConverter::convertProductBook)
                 .collect(Collectors.toList());
-    }
-
-    private ProductBookDto productBookToDto(ProductBook productBook) {
-        ProductBookDto productBookDto = new ProductBookDto(productBook, findProductImageByBook(productBook));
-        productBookDto.setRate(findProductReviewRate(productBook));
-        productBookDto.setSizeOfReviews(productBook.getProductReviews().size());
-        return productBookDto;
     }
 }

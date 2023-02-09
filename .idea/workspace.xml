@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: java.util 패키지 전부 불러오도록 변경">
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: Utility Class 를 외부에서 생성할 수 없도록 변경">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/CartServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/ProductBookForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/ProductBookForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/ProductBookConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/EntityConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/service/HomeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +28,9 @@
         <option value="com.haulmont.jpb.JpaRepository" />
         <option value="com.haulmont.jpb.JpaEntity" />
         <option value="HTML File" />
-        <option value="Interface" />
-        <option value="CSS File" />
         <option value="com.haulmont.jpb.NewClass" />
+        <option value="CSS File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -128,7 +136,8 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates&quot;,
+    &quot;last.edited.regexp&quot;: &quot;010-0000-0001&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates/admin&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -149,16 +158,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/admin" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/order" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/shop" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/css" />
-      <recent name="$PROJECT_DIR$/src/main/resources/templates/js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/shop" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/account" />
       <recent name="$PROJECT_DIR$/src/main/resources/static/sysimage/renew/detail" />
       <recent name="$PROJECT_DIR$/src/main/resources/static/sysimage/font" />
       <recent name="$PROJECT_DIR$/src/main/resources/static/css/images" />
-      <recent name="$PROJECT_DIR$/src/main/resources/templates/shop" />
-      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BookApplication">
@@ -172,11 +183,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductDetailTest.getAvgScore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderTest.orderProductTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ProductDetailTest" />
-      <option name="METHOD_NAME" value="getAvgScore" />
+      <option name="MAIN_CLASS_NAME" value="OrderTest" />
+      <option name="METHOD_NAME" value="orderProductTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -192,11 +203,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTest.findPointHistoriesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SearchTest.searchCategoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserTest" />
-      <option name="METHOD_NAME" value="findPointHistoriesTest" />
+      <option name="MAIN_CLASS_NAME" value="SearchTest" />
+      <option name="METHOD_NAME" value="searchCategoryTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -218,10 +229,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.BookApplication" />
+        <item itemvalue="JUnit.OrderTest.orderProductTest" />
+        <item itemvalue="JUnit.SearchTest.searchCategoryTest" />
         <item itemvalue="JUnit.HomeServiceTest.queryTest" />
         <item itemvalue="JUnit.ProductDetailTest.getDetails" />
-        <item itemvalue="JUnit.ProductDetailTest.getAvgScore" />
-        <item itemvalue="JUnit.UserTest.findPointHistoriesTest" />
       </list>
     </recent_temporary>
   </component>
@@ -247,196 +258,12 @@
       <workItem from="1674002310312" duration="2969000" />
       <workItem from="1674005346667" duration="72802000" />
       <workItem from="1674132125473" duration="110000" />
-      <workItem from="1674608127610" duration="1416000" />
-    </task>
-    <task id="LOCAL-00008" summary="fileupload dependency 추가">
-      <created>1673340754801</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1673340754801</updated>
-    </task>
-    <task id="LOCAL-00009" summary="getMapping 메소드에 데이터 전달 추가">
-      <created>1673340805671</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1673340805671</updated>
-    </task>
-    <task id="LOCAL-00010" summary="loadUserByUsername 메소드의 Transactional 어노테이션 제거">
-      <created>1673340846988</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1673340846988</updated>
-    </task>
-    <task id="LOCAL-00011" summary="commit">
-      <created>1673340914919</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1673340914919</updated>
-    </task>
-    <task id="LOCAL-00012" summary="User Entity 에 적립금, 신용카드(여러 개 저장가능) 추가&#10;배송상태 추가예정">
-      <created>1673408937539</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1673408937539</updated>
-    </task>
-    <task id="LOCAL-00013" summary="loadUserByUsername 메소드 내부 함수형 표현으로 변경">
-      <created>1673433390068</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1673433390068</updated>
-    </task>
-    <task id="LOCAL-00014" summary="회원가입 메소드를 RegistrationController 내부에서 처리하는 것이 아닌 UserService 에서 처리하도록 변경">
-      <created>1673441354808</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1673441354808</updated>
-    </task>
-    <task id="LOCAL-00015" summary="User 상세화면 구현 중">
-      <created>1673441378860</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1673441378860</updated>
-    </task>
-    <task id="LOCAL-00016" summary="사용자 상세화면 컨트롤러 메소드 구현 중">
-      <created>1673527937286</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1673527937286</updated>
-    </task>
-    <task id="LOCAL-00017" summary="사용자 상세화면 view 구현 필요">
-      <created>1673527966282</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1673527966282</updated>
-    </task>
-    <task id="LOCAL-00018" summary="람다식 -&gt; 메소드 참조로 변경">
-      <created>1673528011379</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528011379</updated>
-    </task>
-    <task id="LOCAL-00019" summary="email 제거, name 추가">
-      <created>1673528064851</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528064851</updated>
-    </task>
-    <task id="LOCAL-00020" summary="yaml 에 정의되어 있는 구성요소를 받아오는 클래스 생성">
-      <created>1673528114699</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528114699</updated>
-    </task>
-    <task id="LOCAL-00021" summary="email 제거, name 생성">
-      <created>1673528138780</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528138780</updated>
-    </task>
-    <task id="LOCAL-00022" summary="email 제거, name 생성">
-      <created>1673528212491</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528212491</updated>
-    </task>
-    <task id="LOCAL-00023" summary="주문번호 column 생성">
-      <created>1673528230769</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528230769</updated>
-    </task>
-    <task id="LOCAL-00024" summary="commit">
-      <created>1673528262793</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528262793</updated>
-    </task>
-    <task id="LOCAL-00025" summary="commit">
-      <created>1673528293084</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528293084</updated>
-    </task>
-    <task id="LOCAL-00026" summary="JUnit4 에서 5로 변경, UserService 테스트 클래스 작성">
-      <created>1673528327493</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528327493</updated>
-    </task>
-    <task id="LOCAL-00027" summary="한 페이지에 출력하는 정보 양 정하는 property 설정">
-      <created>1673528382948</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528382948</updated>
-    </task>
-    <task id="LOCAL-00028" summary="주문번호로 DB 조회하는 메소드 추가">
-      <created>1673528407491</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528407491</updated>
-    </task>
-    <task id="LOCAL-00029" summary="포인트 사용 또는 적립 표현하는 column 추가">
-      <created>1673528445982</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1673528445982</updated>
-    </task>
-    <task id="LOCAL-00030" summary="java 11로 변경">
-      <created>1673613341961</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613341961</updated>
-    </task>
-    <task id="LOCAL-00031" summary="제품 상세페이지 생성">
-      <created>1673613454218</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613454218</updated>
-    </task>
-    <task id="LOCAL-00032" summary="제품 상세페이지 생성">
-      <created>1673613469723</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613469723</updated>
-    </task>
-    <task id="LOCAL-00033" summary="패키지 명 변경 (book -&gt; product)">
-      <created>1673613574027</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613574027</updated>
-    </task>
-    <task id="LOCAL-00034" summary="ProductOrderProductRepository method 반환형 Optional Set -&gt; Set 으로 변경">
-      <created>1673613658512</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613658512</updated>
+      <workItem from="1674608127610" duration="49302000" />
+      <workItem from="1674712051680" duration="31020000" />
+      <workItem from="1674815683814" duration="6178000" />
+      <workItem from="1675041165810" duration="8012000" />
+      <workItem from="1675057418711" duration="19225000" />
+      <workItem from="1675813543509" duration="29072000" />
     </task>
     <task id="LOCAL-00035" summary="패키지 이름 변경 (book -&gt; product)">
       <created>1673613692859</created>
@@ -592,7 +419,196 @@
       <option name="project" value="LOCAL" />
       <updated>1674131778563</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="fix: 장바구니 물품 삭제 시 NullPointerException 발생 버그 수정">
+      <created>1674609662145</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1674609662145</updated>
+    </task>
+    <task id="LOCAL-00058" summary="feature: 화면 상단 장바구니 정보 추가, 검색 추가">
+      <created>1674646512544</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1674646512544</updated>
+    </task>
+    <task id="LOCAL-00059" summary="feature: 화면 상단 장바구니 정보 추가, 검색 추가">
+      <created>1674646525835</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1674646525835</updated>
+    </task>
+    <task id="LOCAL-00060" summary="feature: 사용하지 않는 참조 제거, 검색기능 구현&#10;&#10;홈 컨트롤러에 검색 요청이 들어왔을 경우 검색창으로 redirect 되도록 구현">
+      <created>1674646696960</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1674646696960</updated>
+    </task>
+    <task id="LOCAL-00061" summary="feature: ProductBookDto 클래스명 및 메소드명 변경">
+      <created>1674646889098</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1674646889098</updated>
+    </task>
+    <task id="LOCAL-00062" summary="feature: 검색 기능 구현">
+      <created>1674646987952</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1674646987952</updated>
+    </task>
+    <task id="LOCAL-00063" summary="fix: register.html 경로 이동">
+      <created>1674647018894</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1674647018894</updated>
+    </task>
+    <task id="LOCAL-00064" summary="fix: service 메소드명 변경&#10;&#10;get(**) 에서 find(**) 형식으로 변경">
+      <created>1674647070700</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1674647070700</updated>
+    </task>
+    <task id="LOCAL-00065" summary="feature: 유저 페이지 메인 구현, 포인트 내역 구현&#10;&#10;유저 페이지 메인에 상품후기, 적립금, 주문 상품 수량 등 간단한 정보 표현하도록 구현, 포인트 내역 페이지 구현">
+      <created>1674725399332</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725399332</updated>
+    </task>
+    <task id="LOCAL-00066" summary="feature: 유저 페이지 메인 구현, 포인트 내역 구현&#10;&#10;유저 페이지 메인에 상품후기, 적립금, 주문 상품 수량 등 간단한 정보 표현하도록 구현, 포인트 내역 페이지 구현">
+      <created>1674725433278</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725433278</updated>
+    </task>
+    <task id="LOCAL-00067" summary="feature: 유저 페이지 메인 구현, 포인트 내역 구현&#10;&#10;유저 페이지 메인에 상품후기, 적립금, 주문 상품 수량 등 간단한 정보 표현하도록 구현, 포인트 내역 페이지 구현">
+      <created>1674725445437</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725445437</updated>
+    </task>
+    <task id="LOCAL-00068" summary="feature: 유저 페이지 메인 구현, 포인트 내역 구현&#10;&#10;유저 페이지 메인에 상품후기, 적립금, 주문 상품 수량 등 간단한 정보 표현하도록 구현, 포인트 내역 페이지 구현">
+      <created>1674725542139</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725542139</updated>
+    </task>
+    <task id="LOCAL-00069" summary="fix: UserRepository findUser 메소드 반환형 Optional User 에서 User 형으로 변경">
+      <created>1674725647221</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725647221</updated>
+    </task>
+    <task id="LOCAL-00070" summary="fix: 로그인 시 회원가입 페이지로 들어가지 못 하도록 변경, 로그인, 회원가입 시 유저 정보 표현하지 않도록 변경">
+      <created>1674725711191</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725711191</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Style: 코드 포맷 변경">
+      <created>1674725755408</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725755408</updated>
+    </task>
+    <task id="LOCAL-00072" summary="delete: 유저 DB 접근 메소드 필요 시 구현 예정">
+      <created>1674725815433</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725815433</updated>
+    </task>
+    <task id="LOCAL-00073" summary="fix: redirect 경로 상수로 변경">
+      <created>1674795268799</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1674795268799</updated>
+    </task>
+    <task id="LOCAL-00074" summary="feature: 주문 폼 컨트롤러, 서비스 구현&#10;&#10;단일 주문, 장바구니 주문 기능 컨트롤러, 서비스 구현하였고 view 구현 예정">
+      <created>1674799313308</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1674799313308</updated>
+    </task>
+    <task id="LOCAL-00075" summary="fix: 필드를 설정하지 않았을 때 NullPointerException 이 발생하지 않도록 변경">
+      <created>1674799421854</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1674799421854</updated>
+    </task>
+    <task id="LOCAL-00076" summary="fix: user_address 테이블에 phone 컬럼 추가">
+      <created>1674799457577</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1674799457577</updated>
+    </task>
+    <task id="LOCAL-00077" summary="fix: user 엔티티 인자 없는 생성자 제거">
+      <created>1675836641899</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1675836641900</updated>
+    </task>
+    <task id="LOCAL-00078" summary="fix: userPointHistory id 생성 전략 버그 수정">
+      <created>1675836693489</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1675836693489</updated>
+    </task>
+    <task id="LOCAL-00079" summary="feature: 주문 기능 구현, view 예외 처리 구현 예정&#10;&#10;주문 기능 구현&#10;예외 종류 : 재고소진, 카트에 아이템 없음">
+      <created>1675836817120</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1675836817120</updated>
+    </task>
+    <task id="LOCAL-00080" summary="feature: 바로주문 링크 추가">
+      <created>1675843094872</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1675843094872</updated>
+    </task>
+    <task id="LOCAL-00081" summary="feature: 주문 시 포인트 적립 구현">
+      <created>1675843141383</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1675843141383</updated>
+    </task>
+    <task id="LOCAL-00082" summary="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경">
+      <created>1675919532389</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1675919532389</updated>
+    </task>
+    <task id="LOCAL-00083" summary="fix: Utility Class 를 외부에서 생성할 수 없도록 변경">
+      <created>1675919999727</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1675919999727</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,39 +639,47 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="제품 상세페이지 생성" />
-    <MESSAGE value="패키지 명 변경 (book -&gt; product)" />
-    <MESSAGE value="ProductOrderProductRepository method 반환형 Optional Set -&gt; Set 으로 변경" />
-    <MESSAGE value="패키지 이름 변경 (book -&gt; product)" />
-    <MESSAGE value="주문 테이블에 제일 먼저 표시되는 책 column 생성" />
-    <MESSAGE value="유저 상세 메인페이지 controller 구현" />
-    <MESSAGE value="filed final 로 변경" />
-    <MESSAGE value="Java 11 로 변경" />
-    <MESSAGE value="제품 상세페이지 구현" />
-    <MESSAGE value="제품 상세페이지 제품 설명 추가" />
-    <MESSAGE value="모든 컨트롤러 show 메소드에 user 정보 불러오도록 aop 적용" />
-    <MESSAGE value="commit" />
-    <MESSAGE value="메인페이지 전시할 제품 추가 및 전시 구현" />
-    <MESSAGE value="logging properties 추가, sql 미출력" />
-    <MESSAGE value="관리자 페이지 상품추가 기능 구현 예정" />
-    <MESSAGE value="feat: 장바구니 기능 구현&#10;&#10;장바구니 담기 기능, 수량 변경 기능, 항목 삭제, 전체 삭제 구현" />
-    <MESSAGE value="fix: thymeleaf 태그 변경" />
-    <MESSAGE value="design: 장바구니 페이지 ui 추가" />
-    <MESSAGE value="feature: 기본 템플릿 검색 ui 추가" />
-    <MESSAGE value="chore: commit" />
-    <MESSAGE value="feature: show 메소드에 유저 정보 표시 구현&#10;&#10;spring aop 로 모든 controller 클래스의 show 메소드에 유저 정보 model 에 전달하도록 구현" />
-    <MESSAGE value="fix: 사용하지 않는 메소드 제거&#10;&#10;findPublisherByProductBooks(ProductBook book) 메소드 제거" />
-    <MESSAGE value="fix: 장바구니 품목 조회 시 제품 정보도 즉시 조회 하도록 변경&#10;&#10;ProductOrderProduct 엔티티 조회 시 ProductBook 도 함께 조회하도록 fetch 방식 LAZY 에서 EAGER 로 변경" />
     <MESSAGE value="fix: 인터페이스 메소드 public 에서 default 로 변경" />
     <MESSAGE value="fix: java.util 패키지 전부 불러오도록 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: java.util 패키지 전부 불러오도록 변경" />
+    <MESSAGE value="fix: 장바구니 물품 삭제 시 NullPointerException 발생 버그 수정" />
+    <MESSAGE value="feature: 화면 상단 장바구니 정보 추가, 검색 추가" />
+    <MESSAGE value="feature: 사용하지 않는 참조 제거, 검색기능 구현&#10;&#10;홈 컨트롤러에 검색 요청이 들어왔을 경우 검색창으로 redirect 되도록 구현" />
+    <MESSAGE value="feature: ProductBookDto 클래스명 및 메소드명 변경" />
+    <MESSAGE value="feature: 검색 기능 구현" />
+    <MESSAGE value="fix: register.html 경로 이동" />
+    <MESSAGE value="fix: service 메소드명 변경&#10;&#10;get(**) 에서 find(**) 형식으로 변경" />
+    <MESSAGE value="feature: 유저 페이지 메인 구현, 포인트 내역 구현&#10;&#10;유저 페이지 메인에 상품후기, 적립금, 주문 상품 수량 등 간단한 정보 표현하도록 구현, 포인트 내역 페이지 구현" />
+    <MESSAGE value="fix: UserRepository findUser 메소드 반환형 Optional User 에서 User 형으로 변경" />
+    <MESSAGE value="fix: 로그인 시 회원가입 페이지로 들어가지 못 하도록 변경, 로그인, 회원가입 시 유저 정보 표현하지 않도록 변경" />
+    <MESSAGE value="Style: 코드 포맷 변경" />
+    <MESSAGE value="delete: 유저 DB 접근 메소드 필요 시 구현 예정" />
+    <MESSAGE value="fix: redirect 경로 상수로 변경" />
+    <MESSAGE value="feature: 주문 폼 컨트롤러, 서비스 구현&#10;&#10;단일 주문, 장바구니 주문 기능 컨트롤러, 서비스 구현하였고 view 구현 예정" />
+    <MESSAGE value="fix: 필드를 설정하지 않았을 때 NullPointerException 이 발생하지 않도록 변경" />
+    <MESSAGE value="fix: user_address 테이블에 phone 컬럼 추가" />
+    <MESSAGE value="fix: user 엔티티 인자 없는 생성자 제거" />
+    <MESSAGE value="fix: userPointHistory id 생성 전략 버그 수정" />
+    <MESSAGE value="feature: 주문 기능 구현, view 예외 처리 구현 예정&#10;&#10;주문 기능 구현&#10;예외 종류 : 재고소진, 카트에 아이템 없음" />
+    <MESSAGE value="feature: 바로주문 링크 추가" />
+    <MESSAGE value="feature: 주문 시 포인트 적립 구현" />
+    <MESSAGE value="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경" />
+    <MESSAGE value="fix: Utility Class 를 외부에서 생성할 수 없도록 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Utility Class 를 외부에서 생성할 수 없도록 변경" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="jdk.internal.reflect.DelegatingMethodAccessorImpl" memberName="delegate" />
+        <PinnedItemInfo parentTag="books.product.domain.ProductBook" memberName="productReviews" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DNBookStore$BookApplication.ic" NAME="BookApplication 커버리지 결과" MODIFIED="1674105546697" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/DNBookStore$BookApplication.ic" NAME="BookApplication 커버리지 결과" MODIFIED="1674627797069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>books.*</FILTER>
     </SUITE>
   </component>

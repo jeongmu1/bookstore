@@ -1,4 +1,4 @@
-import books.product.service.ShopService;
+import books.admin.service.AdminService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,11 +6,12 @@ import org.springframework.test.context.ContextConfiguration;
 
 @SpringBootTest
 @ContextConfiguration(classes = TestConfiguration.class)
-class SearchTest {
+class AdminTest {
     @Autowired
-    ShopService shopService;
+    private AdminService adminService;
 
     @Test
-    void searchCategoryTest() {
+    void addBookTest() {
+
     }
 }

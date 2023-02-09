@@ -16,28 +16,17 @@ import java.security.Principal;
 @RequestMapping("/shop")
 public class ShopController {
     private final ShopService shopService;
-    private final PointProps pointProps;
     private final HomeService homeService;
 
     public ShopController(ShopService shopService
-            , PointProps pointProps
             , HomeService homeService) {
         this.shopService = shopService;
-        this.pointProps = pointProps;
         this.homeService = homeService;
     }
 
     @GetMapping("/product")
     public String showProductDetail(Model model, Principal principal, @RequestParam long itemId) {
-        ProductBook book = shopService.findProductDetails(itemId);
-        model.addAttribute("book", book);
-        model.addAttribute("categories", shopService.findCategoriesByBook(book));
-        model.addAttribute("image", book.getProductImages().iterator().next());
-        model.addAttribute("reviews", shopService.findUserInProductReviews(book.getProductReviews()));
-        model.addAttribute("publisher", book.getPublisher().getName());
-        model.addAttribute("rate", shopService.findProductReviewRate(book));
-        model.addAttribute("sizeOfReviews", book.getProductReviews().size());
-        model.addAttribute("savingRate", (book.getPrice() / pointProps.getSavingRate()));
+        model.addAttribute("book", shopService.findProductDetails(itemId));
         return "shop/productDetail";
     }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>DN Book Store</title>
@@ -37,14 +37,17 @@
 <!-- Main -->
 <div id="main" class="shell">
 
-    <form method="post" th:action="@{/admin/product}">
+    <form method="post" th:object="${productBookForm}" th:action="@{/admin/product}" enctype="multipart/form-data">
         <div>
             <label for=title>제목: </label>
             <input type="text" id="title" name="title" placeholder="책 제목">
         </div>
         <div>
             <label for="publisher">출판사: </label>
-            <input type="text" id="publisher" name="publisher" placeholder="출판사">
+            <select id="publisher" th:field="*{publisher}">
+                <option th:each="publisher : ${publishers}" th:value="${publisher.id}"
+                        th:utext="${publisher.name}"></option>
+            </select>
         </div>
         <div>
             <label for="author">작가: </label>
@@ -55,15 +58,23 @@
             <input type="text" id="price" name="price" placeholder="책 가격">
         </div>
         <div>
+            <label for="stock">재고: </label>
+            <input type="text" id="stock" name="stock" placeholder="재고수량">
+        </div>
+        <div>
+            <label for="description">설명: </label>
+            <input type="text" id="description" name="description" placeholder="제품 설명">
+        </div>
+        <div>
             <h5>카테고리 설정</h5>
             <div th:each="category : ${categories}" class="form-check-boxes">
-                <input type="checkbox" th:field="*{categories}" th:value="${category.category}">
+                <input th:field="*{categories}" th:value="${category.id}" type="checkbox">
                 <label th:text="${category.category}">example</label>
             </div>
         </div>
         <br>
         <div class="clearfix">
-            <input type="file" name="pic">
+            <input type="file" name="bookImage">
         </div>
 
         <div>

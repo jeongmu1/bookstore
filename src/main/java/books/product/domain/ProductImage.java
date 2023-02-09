@@ -21,7 +21,7 @@ public class ProductImage {
     @JoinColumn(name = "product_book_id", nullable = false)
     private ProductBook productBook;
 
-    @Size(max = 45)
+    @Size(max = 100)
     @NotNull
     @Column(name = "file_name", nullable = false, length = 45)
     private String fileName;

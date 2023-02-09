@@ -9,7 +9,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
           type="text/css"/>
-
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
 </head>
 <body>
 
@@ -54,50 +56,8 @@
 <!-- End Header -->
 <!-- Main -->
 <div id="main" class="shell">
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <ul class="categories">
-            <li>
-                <h4>Categories</h4>
-                <ul>
-                    <li th:each="category : ${categories}">
-                        <a th:href="@{/shop/search(param=${category.id},type=4)}" th:text="${category.category}"></a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- end sidebar -->
-    <!-- content -->
-    <div id="content">
-        <!-- products -->
-        <div class="products">
-            <h3>best sellers</h3>
-            <ul>
-                <li th:each="display : ${displays}">
-                    <div class="product">
-                        <a th:href="@{/shop/product?itemId={id}(id = ${display.id})}" class="info">
-                            <span class="holder">
-                                <img th:src="@{/images/{filename}(filename = ${display.imageFileName})}" alt="">
-                                <span class="book-name" th:text="${display.title}"></span>
-                                <span class="author" th:text="${display.author}"></span>
-                                <span class="description" th:text="${display.description}"></span>
-                            </span>
-                            <span class="buy-btn">구매가
-                                <span class="price"
-                                      th:text="${#numbers.formatInteger(display.price,3,'COMMA') + '₩'}"></span>
-                            </span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <!-- end products -->
-        </div>
-        <div class="cl">&nbsp;</div>
-    </div>
-    <!-- End Content -->
-    <div class="cl">&nbsp;</div>
+
 </div>
-<!-- End Main -->
+<!-- End Main-->
 </body>
 </html>
