@@ -1,5 +1,6 @@
 package books.user.service;
 
+import books.common.DeliveryState;
 import books.common.PageSizeProps;
 import books.product.repository.ProductReviewRepository;
 import books.user.common.PointHistoryDto;
@@ -97,9 +98,9 @@ public class UserServiceImpl implements UserService {
                 .point(user.getPoint())
                 .reviews(productReviewRepository.countProductReviewsByUser(user))
                 .cart(countProductOrderProduct(user))
-                .payedOrders(orderRepo.countByUserAndDeliveryStateId(user, 2))
-                .shippingOrders(orderRepo.countByUserAndDeliveryStateId(user, 4))
-                .completedOrders(orderRepo.countByUserAndDeliveryStateId(user, 8))
+                .payedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.PREPARING.toString()))
+                .shippingOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.DELIVERING.toString()))
+                .completedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.CONFIRMED.toString()))
                 .build();
     }
 

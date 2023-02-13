@@ -45,6 +45,10 @@ public class ProductOrderProduct {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
+    @NotNull
+    @Column(name = "delivery_state", nullable = false)
+    private String deliveryState;
+
     @PrePersist
     public void prePersist() {
         this.createTime = new Timestamp(System.currentTimeMillis());

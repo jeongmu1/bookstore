@@ -1,6 +1,5 @@
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
-import books.order.repository.DeliveryStateRepository;
 import books.order.repository.OrderRepository;
 import books.product.repository.ProductBookRepository;
 import books.user.repository.UserRepository;
@@ -17,15 +16,12 @@ class OrderTest {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private DeliveryStateRepository deliveryStateRepository;
-    @Autowired
     private ProductBookRepository productBookRepository;
 
     @Test
     void orderProductTest() {
         ProductOrder order = new ProductOrder();
         order.setUser(userRepository.findByUsername("admin"));
-        order.setDeliveryState(deliveryStateRepository.findDeliveryStateById(1));
         orderRepository.save(order);
 
         ProductOrderProduct item = new ProductOrderProduct();

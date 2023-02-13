@@ -1,14 +1,13 @@
 package books.product.service.impl;
 
+import books.common.DeliveryState;
 import books.common.PointProps;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
-import books.order.repository.DeliveryStateRepository;
 import books.order.repository.OrderRepository;
 import books.product.common.CartItemDto;
 import books.product.domain.ProductBook;
-import books.product.domain.ProductImage;
 import books.product.repository.ProductBookRepository;
 import books.product.repository.ProductImageRepository;
 import books.product.service.CartService;
@@ -29,16 +28,14 @@ public class CartServiceImpl implements CartService {
     private final UserRepository userRepo;
     private final OrderRepository orderRepo;
     private final CartRepository cartRepo;
-    private final DeliveryStateRepository deliveryStateRepo;
     private final ProductBookRepository productBookRepo;
     private final PointProps pointProps;
     private final ProductImageRepository productImageRepo;
 
-    public CartServiceImpl(UserRepository userRepo, OrderRepository orderRepo, CartRepository cartRepo, DeliveryStateRepository deliveryStateRepo, ProductBookRepository productBookRepo, PointProps pointProps, ProductImageRepository productImageRepo) {
+    public CartServiceImpl(UserRepository userRepo, OrderRepository orderRepo, CartRepository cartRepo, ProductBookRepository productBookRepo, PointProps pointProps, ProductImageRepository productImageRepo) {
         this.userRepo = userRepo;
         this.orderRepo = orderRepo;
         this.cartRepo = cartRepo;
-        this.deliveryStateRepo = deliveryStateRepo;
         this.productBookRepo = productBookRepo;
         this.pointProps = pointProps;
         this.productImageRepo = productImageRepo;
@@ -60,6 +57,7 @@ public class CartServiceImpl implements CartService {
         ProductOrderProduct product = findItem(principal, itemId);
         if (product != null) {
             product.setProductCount(product.getProductCount() + amount);
+            product.setDeliveryState(DeliveryState.PREPARING.toString());
             cartRepo.save(product);
             return;
         }
@@ -146,6 +144,7 @@ public class CartServiceImpl implements CartService {
         cartItem.setProductOrder(getOrderEntity(principal));
         cartItem.setProductBook(book);
         cartItem.setProductCount(amount);
+        cartItem.setDeliveryState(DeliveryState.BEFORE.toString());
         return cartItem;
     }
 
@@ -159,7 +158,7 @@ public class CartServiceImpl implements CartService {
         ProductOrder order = new ProductOrder();
         order.setUser(user);
         order.setOrderUuid(UUID.randomUUID().toString());
-        order.setDeliveryState(deliveryStateRepo.findDeliveryStateById(1));
+        order.setDeliveryState(DeliveryState.BEFORE.toString());
         orderRepo.save(order);
         return order;
     }
