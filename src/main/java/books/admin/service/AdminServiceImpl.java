@@ -1,19 +1,31 @@
 package books.admin.service;
 
 import books.admin.common.FailToUploadException;
+import books.admin.common.OrderInfoDto;
 import books.admin.common.ProductBookForm;
 import books.common.BookProps;
+import books.common.DeliveryState;
+import books.common.DeliveryStateConverter;
+import books.order.domain.ProductOrder;
+import books.order.domain.ProductOrderProduct;
+import books.order.repository.CartRepository;
+import books.order.repository.OrderRepository;
 import books.product.domain.*;
 import books.product.repository.*;
+import books.user.repository.UserRepository;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -23,14 +35,20 @@ public class AdminServiceImpl implements AdminService {
     private final BookProps bookProps;
     private final ProductImageRepository productImageRepo;
     private final ProductCategoryRepository productCategoryRepo;
+    private final OrderRepository orderRepo;
+    private final UserRepository userRepository;
+    private final CartRepository cartRepo;
 
-    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo) {
+    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, OrderRepository orderRepo, UserRepository userRepository, CartRepository cartRepo) {
         this.categoryRepo = categoryRepo;
         this.publisherRepo = publisherRepo;
         this.productBookRepo = productBookRepo;
         this.bookProps = bookProps;
         this.productImageRepo = productImageRepo;
         this.productCategoryRepo = productCategoryRepo;
+        this.orderRepo = orderRepo;
+        this.userRepository = userRepository;
+        this.cartRepo = cartRepo;
     }
 
     @Override
@@ -66,11 +84,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Category> findAllCategories() {
         return categoryRepo.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Publisher> findAllPublishers() {
         return publisherRepo.findAll();
     }
@@ -96,4 +116,79 @@ public class AdminServiceImpl implements AdminService {
         return image;
     }
 
+    @Override
+    public List<String> findAllDeliveryStates() {
+        return Arrays
+                .stream(DeliveryState.values())
+                .filter(deliveryState -> deliveryState != DeliveryState.BEFORE)
+                .map(DeliveryStateConverter::deliveryStateToString)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<OrderInfoDto> findOrderInfoByConditions(Set<String> deliveryStates, String searchCriteria, String keyword) {
+        Specification<ProductOrderProduct> spec = Specification.where(null);
+        if (deliveryStates != null && !deliveryStates.isEmpty()) {
+            spec = Objects.requireNonNull(spec).and(hasDeliveryStates(deliveryStates));
+        } else {
+            spec = Objects.requireNonNull(spec).and(getEmptyDeliveryState());
+        }
+
+        if (searchCriteria != null && !searchCriteria.isEmpty() && keyword != null && !keyword.isEmpty()) {
+            if (searchCriteria.equals("orderUuid")) {
+                spec = Objects.requireNonNull(spec).and(hasOrderUuid(keyword));
+            } else if (searchCriteria.equals("username")) {
+                spec = Objects.requireNonNull(spec).and(hasUserUsername(keyword));
+            }
+        }
+
+        return cartRepo.findAll(spec, Sort.by(Sort.Direction.DESC, "updateTime"))
+                .stream()
+                .map(this::convertProductOrderProductToDto)
+                .collect(Collectors.toList());
+    }
+
+    private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop) {
+        ProductOrder order = pop.getProductOrder();
+        return OrderInfoDto.builder()
+                .updateTime(new SimpleDateFormat("yyyy-MM-dd").format(order.getUpdateTime()))
+                .orderUuid(order.getOrderUuid())
+                .productName(pop.getProductBook().getTitle())
+                .quantity(pop.getProductCount())
+                .userName(order.getUser().getName())
+                .deliveryState(DeliveryStateConverter.deliveryStateToString(DeliveryState.valueOf(pop.getDeliveryState())))
+                .productOrderProductId(pop.getId())
+                .build();
+    }
+
+    private Specification<ProductOrderProduct> hasDeliveryStates(Set<String> deliveryStates) {
+        return (root, criteriaQuery, criteriaBuilder)
+                -> root
+                .get("deliveryState")
+                .in(deliveryStates
+                        .stream()
+                        .map(deliveryState -> Objects.requireNonNull(DeliveryStateConverter.stringToDeliveryState(deliveryState)).toString())
+                        .collect(Collectors.toSet())
+                );
+    }
+
+    private Specification<ProductOrderProduct> getEmptyDeliveryState() {
+        return hasDeliveryStates(
+                Arrays.stream(DeliveryState.values())
+                        .filter(deliveryState -> deliveryState != DeliveryState.BEFORE)
+                        .map(DeliveryStateConverter::deliveryStateToString)
+                        .collect(Collectors.toSet())
+        );
+    }
+
+    private Specification<ProductOrderProduct> hasOrderUuid(String orderUuid) {
+        return (root, criteriaQuery, criteriaBuilder)
+                -> criteriaBuilder.like(root.get("productOrder").get("orderUuid"), "%" + orderUuid + "%");
+    }
+
+    private Specification<ProductOrderProduct> hasUserUsername(String username) {
+        return ((root, criteriaQuery, criteriaBuilder)
+                -> criteriaBuilder.like(root.get("productOrder").get("user").get("username"), "%" + username + "%"));
+    }
 }

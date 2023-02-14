@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @SpringBootTest
 @ContextConfiguration(classes = TestConfiguration.class)
 class AdminTest {
@@ -11,7 +14,12 @@ class AdminTest {
     private AdminService adminService;
 
     @Test
-    void addBookTest() {
-
+    void findOrdersTest() {
+        Set<String> deliveryStateIds = new HashSet<>();
+        deliveryStateIds.add("준비중");
+        String searchCondition = "username";
+        String keyword = "admin";
+        adminService.findOrderInfoByConditions(deliveryStateIds, searchCondition, keyword)
+                        .forEach(System.out::println);
     }
 }

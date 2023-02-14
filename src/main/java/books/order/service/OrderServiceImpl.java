@@ -1,5 +1,6 @@
 package books.order.service;
 
+import books.common.DeliveryState;
 import books.common.PointProps;
 import books.order.common.NoItemException;
 import books.order.common.OrderForm;
@@ -7,7 +8,6 @@ import books.order.common.OverStockException;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
-import books.order.repository.DeliveryStateRepository;
 import books.order.repository.OrderRepository;
 import books.product.common.CartItemDto;
 import books.product.domain.ProductBook;
@@ -33,18 +33,16 @@ public class OrderServiceImpl implements OrderService {
     private final UserRepository userRepo;
     private final PointProps pointProps;
     private final ProductBookRepository productBookRepo;
-    private final DeliveryStateRepository deliveryStateRepo;
     private final OrderRepository orderRepo;
     private final CartRepository cartRepo;
     private final PointHistoryDetailRepository pointHistoryDetailRepo;
     private final UserPointHistoryRepository userPointHistoryRepo;
 
-    public OrderServiceImpl(UserAddressRepository userAddressRepo, UserRepository userRepo, PointProps pointProps, ProductBookRepository productBookRepo, DeliveryStateRepository deliveryStateRepo, OrderRepository orderRepo, CartRepository cartRepo, PointHistoryDetailRepository pointHistoryDetailRepo, UserPointHistoryRepository userPointHistoryRepo) {
+    public OrderServiceImpl(UserAddressRepository userAddressRepo, UserRepository userRepo, PointProps pointProps, ProductBookRepository productBookRepo, OrderRepository orderRepo, CartRepository cartRepo, PointHistoryDetailRepository pointHistoryDetailRepo, UserPointHistoryRepository userPointHistoryRepo) {
         this.userAddressRepo = userAddressRepo;
         this.userRepo = userRepo;
         this.pointProps = pointProps;
         this.productBookRepo = productBookRepo;
-        this.deliveryStateRepo = deliveryStateRepo;
         this.orderRepo = orderRepo;
         this.cartRepo = cartRepo;
         this.pointHistoryDetailRepo = pointHistoryDetailRepo;
@@ -131,7 +129,6 @@ public class OrderServiceImpl implements OrderService {
 
     @NotNull
     private ProductOrder setProductOrder(OrderForm form, ProductOrder order) {
-        order.setDeliveryState(deliveryStateRepo.findDeliveryStateById(2));
         order.setCcNumber(form.getCcNumber());
         order.setCcExpiration(form.getCcExpiration());
         order.setCcCvv(form.getCcCvv());
@@ -140,6 +137,7 @@ public class OrderServiceImpl implements OrderService {
         order.setDeliveryAddress(form.getDeliveryAddress());
         order.setDeliveryPhone(form.getPhone());
         order.setEnabled(true);
+        order.setDeliveryState(DeliveryState.PREPARING.toString());
 
         return order;
     }
@@ -170,6 +168,7 @@ public class OrderServiceImpl implements OrderService {
         if (pop.getProductCount() > book.getStock())
             throw new OverStockException("Out of Stock");
         book.setStock(book.getStock() - pop.getProductCount());
+        pop.setDeliveryState(DeliveryState.PREPARING.toString());
         productBookRepo.save(book);
     }
 }

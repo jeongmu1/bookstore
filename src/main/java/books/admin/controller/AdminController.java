@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,7 +32,17 @@ public class AdminController {
                 .addAttribute("publishers", adminService.findAllPublishers())
                 .addAttribute("productBookForm", new ProductBookForm());
 
-        return "productForm";
+        return "admin/productForm";
+    }
+
+    @GetMapping(value = "/orderManager")
+    public String showOrderManagementPage(Model model, Principal principal
+            , @RequestParam(required = false) Set<String> deliveryStates
+            , @RequestParam(required = false) String searchCondition
+            , @RequestParam(required = false) String keyword) {
+        model.addAttribute("deliveryStates", adminService.findAllDeliveryStates());
+        model.addAttribute("orders", adminService.findOrderInfoByConditions(deliveryStates, searchCondition, keyword));
+        return "admin/manageOrders";
     }
 
     // 수정 필요
@@ -38,5 +51,4 @@ public class AdminController {
         adminService.addProduct(productBookForm);
         return "redirect:/";
     }
-
 }

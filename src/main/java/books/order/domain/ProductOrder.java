@@ -78,17 +78,8 @@ public class ProductOrder {
     private Timestamp updateTime;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "delivery_state_id", nullable = false)
-    private DeliveryState deliveryState;
-
-    public DeliveryState getDeliveryState() {
-        return deliveryState;
-    }
-
-    public void setDeliveryState(DeliveryState deliveryState) {
-        this.deliveryState = deliveryState;
-    }
+    @Column(name = "delivery_state", nullable = false)
+    private String deliveryState;
 
     @PrePersist
     public void persist() {
