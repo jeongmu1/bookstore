@@ -20,7 +20,7 @@ public interface AdminService {
 
     List<String> findAllDeliveryStates();
 
-    List<OrderInfoDto> findOrderInfoByConditions(Set<String> deliveryStateId, String searchCriteria, String keyword);
+    List<OrderInfoDto> findOrderInfoByConditions(Set<String> deliveryStates, String searchCriteria, String keyword);
 
 //    void updateDeliveryState(Set<OrderInfoDto> )
 }

@@ -49,10 +49,21 @@ public class ProductOrderProduct {
     @Column(name = "delivery_state", nullable = false)
     private String deliveryState;
 
+    @NotNull
+    @Column(name = "update_time", nullable = false)
+    private Timestamp updateTime;
+
     @PrePersist
     public void prePersist() {
-        this.createTime = new Timestamp(System.currentTimeMillis());
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        this.createTime = currentTime;
+        this.updateTime = currentTime;
         this.enabled = true;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updateTime = new Timestamp(System.currentTimeMillis());
     }
 
     @Override

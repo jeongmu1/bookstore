@@ -16,11 +16,10 @@ class AdminTest {
     @Test
     void findOrdersTest() {
         Set<String> deliveryStateIds = new HashSet<>();
-        deliveryStateIds.add("주문전");
+        deliveryStateIds.add("준비중");
         String searchCondition = "username";
         String keyword = "admin";
         adminService.findOrderInfoByConditions(deliveryStateIds, searchCondition, keyword)
                         .forEach(System.out::println);
-//        System.out.println(adminService.findOrderInfoByConditions(deliveryStateIds, searchCondition, keyword));
     }
 }

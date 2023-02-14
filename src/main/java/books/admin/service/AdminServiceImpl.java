@@ -8,16 +8,18 @@ import books.common.DeliveryState;
 import books.common.DeliveryStateConverter;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
+import books.order.repository.CartRepository;
 import books.order.repository.OrderRepository;
 import books.product.domain.*;
 import books.product.repository.*;
+import books.user.repository.UserRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,8 +36,10 @@ public class AdminServiceImpl implements AdminService {
     private final ProductImageRepository productImageRepo;
     private final ProductCategoryRepository productCategoryRepo;
     private final OrderRepository orderRepo;
+    private final UserRepository userRepository;
+    private final CartRepository cartRepo;
 
-    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, OrderRepository orderRepo) {
+    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, OrderRepository orderRepo, UserRepository userRepository, CartRepository cartRepo) {
         this.categoryRepo = categoryRepo;
         this.publisherRepo = publisherRepo;
         this.productBookRepo = productBookRepo;
@@ -43,6 +47,8 @@ public class AdminServiceImpl implements AdminService {
         this.productImageRepo = productImageRepo;
         this.productCategoryRepo = productCategoryRepo;
         this.orderRepo = orderRepo;
+        this.userRepository = userRepository;
+        this.cartRepo = cartRepo;
     }
 
     @Override
@@ -121,41 +127,30 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrderInfoDto> findOrderInfoByConditions(
-            Set<String> deliveryStates
-            , String searchCriteria
-            , String keyword) {
-
-        Specification<ProductOrder> spec = Specification.where(null);
+    public List<OrderInfoDto> findOrderInfoByConditions(Set<String> deliveryStates, String searchCriteria, String keyword) {
+        Specification<ProductOrderProduct> spec = Specification.where(null);
         if (deliveryStates != null && !deliveryStates.isEmpty()) {
-            spec = Objects.requireNonNull(spec).and(hasDeliveryState(deliveryStates));
+            spec = Objects.requireNonNull(spec).and(hasDeliveryStates(deliveryStates));
         } else {
             spec = Objects.requireNonNull(spec).and(getEmptyDeliveryState());
         }
 
         if (searchCriteria != null && !searchCriteria.isEmpty() && keyword != null && !keyword.isEmpty()) {
-            if (searchCriteria.equals("orderUuid"))
+            if (searchCriteria.equals("orderUuid")) {
                 spec = Objects.requireNonNull(spec).and(hasOrderUuid(keyword));
-            else if (searchCriteria.equals("username")) {
+            } else if (searchCriteria.equals("username")) {
                 spec = Objects.requireNonNull(spec).and(hasUserUsername(keyword));
             }
         }
 
-        return orderRepo.findAll(spec, Sort.by(Sort.Direction.DESC, "updateTime"))
+        return cartRepo.findAll(spec, Sort.by(Sort.Direction.DESC, "updateTime"))
                 .stream()
-                .map(this::convertProductOrderToDtos)
-                .flatMap(List::stream)
+                .map(this::convertProductOrderProductToDto)
                 .collect(Collectors.toList());
     }
 
-    private List<OrderInfoDto> convertProductOrderToDtos(ProductOrder order) {
-        return order.getProductOrderProducts()
-                .stream()
-                .map(pop -> convertProductOrderProductToDto(pop, order))
-                .collect(Collectors.toList());
-    }
-
-    private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop, ProductOrder order) {
+    private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop) {
+        ProductOrder order = pop.getProductOrder();
         return OrderInfoDto.builder()
                 .updateTime(new SimpleDateFormat("yyyy-MM-dd").format(order.getUpdateTime()))
                 .orderUuid(order.getOrderUuid())
@@ -167,19 +162,19 @@ public class AdminServiceImpl implements AdminService {
                 .build();
     }
 
-    private Specification<ProductOrder> hasDeliveryState(Set<String> deliveryStates) {
+    private Specification<ProductOrderProduct> hasDeliveryStates(Set<String> deliveryStates) {
         return (root, criteriaQuery, criteriaBuilder)
                 -> root
                 .get("deliveryState")
                 .in(deliveryStates
                         .stream()
-                        .map(deliveryState -> DeliveryStateConverter.stringToDeliveryState(deliveryState).toString())
+                        .map(deliveryState -> Objects.requireNonNull(DeliveryStateConverter.stringToDeliveryState(deliveryState)).toString())
                         .collect(Collectors.toSet())
                 );
     }
 
-    private Specification<ProductOrder> getEmptyDeliveryState() {
-        return hasDeliveryState(
+    private Specification<ProductOrderProduct> getEmptyDeliveryState() {
+        return hasDeliveryStates(
                 Arrays.stream(DeliveryState.values())
                         .filter(deliveryState -> deliveryState != DeliveryState.BEFORE)
                         .map(DeliveryStateConverter::deliveryStateToString)
@@ -187,15 +182,13 @@ public class AdminServiceImpl implements AdminService {
         );
     }
 
-    private Specification<ProductOrder> hasOrderUuid(String orderUuid) {
-        return ((root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.like(root.get("orderUuid"), "%" + orderUuid + "%"));
-    }
-
-    private Specification<ProductOrder> hasUserUsername(String username) {
+    private Specification<ProductOrderProduct> hasOrderUuid(String orderUuid) {
         return (root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.like(root.get("user").get("username"), "%" + username + "%");
+                -> criteriaBuilder.like(root.get("productOrder").get("orderUuid"), "%" + orderUuid + "%");
     }
 
-
+    private Specification<ProductOrderProduct> hasUserUsername(String username) {
+        return ((root, criteriaQuery, criteriaBuilder)
+                -> criteriaBuilder.like(root.get("productOrder").get("user").get("username"), "%" + username + "%"));
+    }
 }

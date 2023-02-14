@@ -44,8 +44,6 @@ d
 4src/main/java/books/user/common/UserDetailsImpl.java,3/9/3976ed38c048b2901b966222f98dc545891fd592
 g
 7src/main/java/books/user/domain/PointHistoryDetail.java,b/5/b59674e880e28cd4ac77ae18b33d1ede9e08d013
-h
-8src/main/java/books/order/repository/CartRepository.java,b/3/b389f25c8b339ce1b436704fb2621fc200d67653
 d
 4src/main/java/books/product/service/CartService.java,3/4/34d9c03298c65782f5dd686206c14a178b2f2149
 i
