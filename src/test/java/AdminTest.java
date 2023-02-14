@@ -22,4 +22,11 @@ class AdminTest {
         adminService.findOrderInfoByConditions(deliveryStateIds, searchCondition, keyword)
                         .forEach(System.out::println);
     }
+
+    @Test
+    void updateOrdersTest() {
+        Set<Long> popIds = new HashSet<>();
+        popIds.add(39L);
+        adminService.updateDeliveryState(popIds, "배송중");
+    }
 }

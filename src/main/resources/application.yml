@@ -18,7 +18,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     open-in-view: false
-    show-sql: true
+    show-sql: false
 
 bookstore:
   books:
