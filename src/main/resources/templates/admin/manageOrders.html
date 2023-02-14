@@ -12,6 +12,15 @@
     <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+    <script>
+        function selectAll(selectAll) {
+            const checkboxes = document.getElementsByName('ids');
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked;
+            })
+        }
+    </script>
 </head>
 <body>
 
@@ -68,6 +77,8 @@
                             <select th:name="searchCondition">
                                 <option th:value="orderUuid" th:text="주문번호"></option>
                                 <option th:value="username" th:text="사용자"></option>
+                                <option th:value="productName" th:text="상품명"></option>
+                                <option th:value="productId" th:text="상품코드"></option>
                             </select>
                         </label>
                         <label>
@@ -79,7 +90,8 @@
                     <td>주문상태</td>
                     <td>
                         <label>
-                            <input th:each="deliveryState : ${deliveryStates}" type="checkbox" name="deliveryStates" th:value="${deliveryState}" th:text="${deliveryState}">
+                            <input th:each="deliveryState : ${deliveryStates}" type="checkbox" name="deliveryStates"
+                                   th:value="${deliveryState}" th:text="${deliveryState}">
                         </label>
                     </td>
                 </tr>
@@ -95,7 +107,21 @@
     <!-- 테이블 상단 끝 -->
     <!-- 주문 정보 테이블 -->
     <form th:action="@{/admin/orderManager}" method="post">
-
+        <table>
+            <tbody>
+            <tr>
+                <td>배송상태 변경</td>
+                <td>
+                    <button type="submit" class="btnC w_15 btn_lnk" th:each="deliveryState : ${deliveryStates}"
+                            name="deliveryState" th:value="${deliveryState}">
+            <span class="bWrap">
+                <em class="txt" th:text="${deliveryState}"></em>
+            </span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <table width="100%" class="tb_nor tb_cart">
             <colgroup>
                 <col width="40">
@@ -104,13 +130,17 @@
                 <col width="120">
                 <col width="120">
                 <col width="120">
+                <col width="120">
             </colgroup>
             <thead>
             <tr bgcolor="#cfcfcf">
-                <th scope="col" class="txt"></th>
+                <th scope="col" class="txt"><label>
+                    <input type="checkbox" name="orderInfo" onclick="selectAll(this)">
+                </label></th>
                 <th scope="col" class="txt">주문일</th>
                 <th scope="col" class="txt">주문번호</th>
-                <th scope="col" colspan="txt">상품명</th>
+                <th scope="col" class="txt">상품명</th>
+                <th scope="col" class="txt">상품코드</th>
                 <th scope="col" class="txt">주문자</th>
                 <th scope="col" class="txt">배송상태</th>
             </tr>
@@ -118,11 +148,12 @@
             <tbody>
             <tr style="text-align: center" th:each="orderInfo : ${orders}">
                 <td><label>
-                    <input type="checkbox" th:value="${orderInfo.productOrderProductId}">
+                    <input type="checkbox" th:value="${orderInfo.id}" name="ids">
                 </label></td>
                 <td class="goods_date" th:text="${orderInfo.updateTime}"></td>
                 <td class="goods_num" th:text="${orderInfo.orderUuid}"></td>
                 <td class="goods_name" th:text="${orderInfo.productName}"></td>
+                <td class="le" th:text="${orderInfo.productId}"></td>
                 <td class="le" th:text="${orderInfo.userName}"></td>
                 <td class="le" th:text="${orderInfo.deliveryState}"></td>
             </tr>

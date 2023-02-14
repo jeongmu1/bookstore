@@ -136,14 +136,25 @@ public class AdminServiceImpl implements AdminService {
         }
 
         if (searchCriteria != null && !searchCriteria.isEmpty() && keyword != null && !keyword.isEmpty()) {
-            if (searchCriteria.equals("orderUuid")) {
-                spec = Objects.requireNonNull(spec).and(hasOrderUuid(keyword));
-            } else if (searchCriteria.equals("username")) {
-                spec = Objects.requireNonNull(spec).and(hasUserUsername(keyword));
+            switch (searchCriteria) {
+                case "orderUuid":
+                    spec = Objects.requireNonNull(spec).and(hasOrderUuid(keyword));
+                    break;
+                case "username":
+                    spec = Objects.requireNonNull(spec).and(hasUserUsername(keyword));
+                    break;
+                case "productName":
+                    spec = Objects.requireNonNull(spec).and(hasProductName(keyword));
+                    break;
+                case "productId":
+                    spec = Objects.requireNonNull(spec).and(hasProductId(keyword));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
             }
         }
 
-        return cartRepo.findAll(spec, Sort.by(Sort.Direction.DESC, "updateTime"))
+        return cartRepo.findAll(spec, Sort.by(Sort.Direction.DESC, "productOrder.updateTime"))
                 .stream()
                 .map(this::convertProductOrderProductToDto)
                 .collect(Collectors.toList());
@@ -155,10 +166,11 @@ public class AdminServiceImpl implements AdminService {
                 .updateTime(new SimpleDateFormat("yyyy-MM-dd").format(order.getUpdateTime()))
                 .orderUuid(order.getOrderUuid())
                 .productName(pop.getProductBook().getTitle())
+                .productId(pop.getProductBook().getId())
                 .quantity(pop.getProductCount())
-                .userName(order.getUser().getName())
+                .userName(order.getUser().getUsername())
                 .deliveryState(DeliveryStateConverter.deliveryStateToString(DeliveryState.valueOf(pop.getDeliveryState())))
-                .productOrderProductId(pop.getId())
+                .id(pop.getId())
                 .build();
     }
 
@@ -190,5 +202,34 @@ public class AdminServiceImpl implements AdminService {
     private Specification<ProductOrderProduct> hasUserUsername(String username) {
         return ((root, criteriaQuery, criteriaBuilder)
                 -> criteriaBuilder.like(root.get("productOrder").get("user").get("username"), "%" + username + "%"));
+    }
+
+    private Specification<ProductOrderProduct> hasProductName(String productName) {
+        return ((root, criteriaQuery, criteriaBuilder)
+                -> criteriaBuilder.like(root.get("productBook").get("title"), "%" + productName + "%"));
+    }
+
+    private Specification<ProductOrderProduct> hasProductId(String productId) {
+        return ((root, criteriaQuery, criteriaBuilder)
+                -> criteriaBuilder.equal(root.get("productBook").get("id"), productId));
+    }
+
+    @Override
+    @Transactional
+    public void updateDeliveryState(Set<Long> productOrderProductIds, String deliveryState) {
+        productOrderProductIds.forEach(popId -> {
+            ProductOrderProduct pop = cartRepo.findById(popId).orElseThrow();
+            String ds = Objects.requireNonNull(DeliveryStateConverter.stringToDeliveryState(deliveryState)).toString();
+            pop.setDeliveryState(ds);
+
+            ProductOrder order = pop.getProductOrder();
+
+            if ((int) pop.getProductOrder().getProductOrderProducts()
+                    .stream()
+                    .filter(item -> item.getDeliveryState().equals(ds))
+                    .count() == order.getProductOrderProducts().size()) {
+                order.setDeliveryState(ds);
+            }
+        });
     }
 }

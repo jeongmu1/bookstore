@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: deliveryState 테이블 제거">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/OrderInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/OrderInfoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrderProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrderProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/yesUI.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/yesUI.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/manageOrders.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/manageOrders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AdminTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AdminTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,11 +182,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HomeServiceTest.queryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AdminTest.updateOrdersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="HomeServiceTest" />
-      <option name="METHOD_NAME" value="queryTest" />
+      <option name="MAIN_CLASS_NAME" value="AdminTest" />
+      <option name="METHOD_NAME" value="updateOrdersTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -225,10 +228,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.BookApplication" />
+        <item itemvalue="JUnit.AdminTest.updateOrdersTest" />
         <item itemvalue="JUnit.AdminTest.findOrdersTest" />
         <item itemvalue="JUnit.OrderTest.orderProductTest" />
         <item itemvalue="JUnit.SearchTest.searchCategoryTest" />
-        <item itemvalue="JUnit.HomeServiceTest.queryTest" />
       </list>
     </recent_temporary>
   </component>
@@ -261,14 +264,7 @@
       <workItem from="1675057418711" duration="19225000" />
       <workItem from="1675813543509" duration="29072000" />
       <workItem from="1675990472739" duration="14642000" />
-      <workItem from="1676250063239" duration="33491000" />
-    </task>
-    <task id="LOCAL-00038" summary="filed final 로 변경">
-      <created>1673613823262</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613823262</updated>
+      <workItem from="1676250063239" duration="43898000" />
     </task>
     <task id="LOCAL-00039" summary="Java 11 로 변경">
       <created>1673613836450</created>
@@ -606,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676291372978</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경">
+      <created>1676345262963</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1676345262963</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -637,7 +640,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feature: 화면 상단 장바구니 정보 추가, 검색 추가" />
     <MESSAGE value="feature: 사용하지 않는 참조 제거, 검색기능 구현&#10;&#10;홈 컨트롤러에 검색 요청이 들어왔을 경우 검색창으로 redirect 되도록 구현" />
     <MESSAGE value="feature: ProductBookDto 클래스명 및 메소드명 변경" />
     <MESSAGE value="feature: 검색 기능 구현" />
@@ -662,7 +664,8 @@
     <MESSAGE value="fix: 올바른 인자가 아닐 시 예외 발생시키도록 변경" />
     <MESSAGE value="fix: 유틸리티 객체 이름 변경" />
     <MESSAGE value="fix: deliveryState 테이블 제거" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: deliveryState 테이블 제거" />
+    <MESSAGE value="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

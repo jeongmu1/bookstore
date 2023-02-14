@@ -22,5 +22,7 @@ public interface AdminService {
 
     List<OrderInfoDto> findOrderInfoByConditions(Set<String> deliveryStates, String searchCriteria, String keyword);
 
+    void updateDeliveryState(Set<Long> productOrderProductIds, String deliveryState);
+
 //    void updateDeliveryState(Set<OrderInfoDto> )
 }

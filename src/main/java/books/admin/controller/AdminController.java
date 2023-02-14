@@ -45,6 +45,12 @@ public class AdminController {
         return "admin/manageOrders";
     }
 
+    @PostMapping(value = "/orderManager")
+    public String updateDeliveryState(@RequestParam Set<Long> ids, @RequestParam String deliveryState) {
+        adminService.updateDeliveryState(ids, deliveryState);
+        return "redirect:/admin/orderManager";
+    }
+
     // 수정 필요
     @PostMapping(value = "/product")
     public String addProduct(@Valid ProductBookForm productBookForm) {
