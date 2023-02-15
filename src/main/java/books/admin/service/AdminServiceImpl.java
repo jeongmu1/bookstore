@@ -3,15 +3,17 @@ package books.admin.service;
 import books.admin.common.FailToUploadException;
 import books.admin.common.OrderInfoDto;
 import books.admin.common.ProductBookForm;
+import books.admin.common.UserInfoDto;
 import books.common.BookProps;
 import books.common.DeliveryState;
 import books.common.DeliveryStateConverter;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
-import books.order.repository.OrderRepository;
 import books.product.domain.*;
 import books.product.repository.*;
+import books.user.domain.Authority;
+import books.user.domain.User;
 import books.user.repository.UserRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -35,19 +37,18 @@ public class AdminServiceImpl implements AdminService {
     private final BookProps bookProps;
     private final ProductImageRepository productImageRepo;
     private final ProductCategoryRepository productCategoryRepo;
-    private final OrderRepository orderRepo;
-    private final UserRepository userRepository;
+    private final UserRepository userRepo;
     private final CartRepository cartRepo;
+    private final String dateFormat = "yyyy-MM-dd";
 
-    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, OrderRepository orderRepo, UserRepository userRepository, CartRepository cartRepo) {
+    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, UserRepository userRepo, CartRepository cartRepo) {
         this.categoryRepo = categoryRepo;
         this.publisherRepo = publisherRepo;
         this.productBookRepo = productBookRepo;
         this.bookProps = bookProps;
         this.productImageRepo = productImageRepo;
         this.productCategoryRepo = productCategoryRepo;
-        this.orderRepo = orderRepo;
-        this.userRepository = userRepository;
+        this.userRepo = userRepo;
         this.cartRepo = cartRepo;
     }
 
@@ -129,13 +130,13 @@ public class AdminServiceImpl implements AdminService {
     @Transactional(readOnly = true)
     public List<OrderInfoDto> findOrderInfoByConditions(Set<String> deliveryStates, String searchCriteria, String keyword) {
         Specification<ProductOrderProduct> spec = Specification.where(null);
-        if (deliveryStates != null && !deliveryStates.isEmpty()) {
+        if (!(deliveryStates == null || deliveryStates.isEmpty())) {
             spec = Objects.requireNonNull(spec).and(hasDeliveryStates(deliveryStates));
         } else {
             spec = Objects.requireNonNull(spec).and(getEmptyDeliveryState());
         }
 
-        if (searchCriteria != null && !searchCriteria.isEmpty() && keyword != null && !keyword.isEmpty()) {
+        if (!(searchCriteria == null || searchCriteria.isEmpty() || keyword == null || keyword.isEmpty())) {
             switch (searchCriteria) {
                 case "orderUuid":
                     spec = Objects.requireNonNull(spec).and(hasOrderUuid(keyword));
@@ -163,7 +164,7 @@ public class AdminServiceImpl implements AdminService {
     private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop) {
         ProductOrder order = pop.getProductOrder();
         return OrderInfoDto.builder()
-                .updateTime(new SimpleDateFormat("yyyy-MM-dd").format(order.getUpdateTime()))
+                .updateTime(new SimpleDateFormat(dateFormat).format(order.getUpdateTime()))
                 .orderUuid(order.getOrderUuid())
                 .productName(pop.getProductBook().getTitle())
                 .productId(pop.getProductBook().getId())
@@ -232,4 +233,75 @@ public class AdminServiceImpl implements AdminService {
             }
         });
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserInfoDto> findUserInfoByConditions(
+            String authority,
+            String enabled,
+            String searchCriteria,
+            String keyword) {
+
+        Specification<User> spec = Specification.where(null);
+        if (!(authority == null || authority.isEmpty())) {
+            spec = Objects.requireNonNull(spec).and((root, criteriaQuery, criteriaBuilder)
+                    -> criteriaBuilder.equal(root.join("authorities").get("authority"), authority));
+        }
+
+        if (enabled != null && !enabled.equals("entire")) {
+            spec = Objects.requireNonNull(spec)
+                    .and((root, criteriaQuery, criteriaBuilder)
+                            -> criteriaBuilder.equal(root.get("enabled"), Boolean.valueOf(enabled)));
+        }
+
+        if (!(searchCriteria == null || searchCriteria.isEmpty() || keyword == null || keyword.isEmpty())) {
+            switch (searchCriteria) {
+                case "id":
+                    spec = Objects.requireNonNull(spec)
+                            .and((root, criteriaQuery, criteriaBuilder)
+                                    -> criteriaBuilder.equal(root.get(searchCriteria), keyword));
+                    break;
+                case "username":
+                case "name":
+                case "phone":
+                    spec = Objects.requireNonNull(spec)
+                            .and((root, criteriaQuery, criteriaBuilder)
+                                    -> criteriaBuilder.like(root.get(searchCriteria), "%" + keyword + "%"));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+
+        return userRepo.findAll(spec)
+                .stream()
+                .map(this::convertUserToDto)
+                .collect(Collectors.toList());
+    }
+
+    private UserInfoDto convertUserToDto(User user) {
+        return UserInfoDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .createTime(new SimpleDateFormat(dateFormat).format(user.getCreateTime()))
+                .phone(user.getPhone())
+                .username(user.getUsername())
+                .enabled(user.isEnabled())
+                .authority(getAuthorityByUser(user))
+                .build();
+    }
+
+    private String getAuthorityByUser(User user) {
+        Set<String> authorities = user.getAuthorities()
+                .stream()
+                .map(Authority::getAuthority)
+                .filter(authority -> authority.equals("ROLE_ADMIN"))
+                .collect(Collectors.toSet());
+
+        if (!authorities.isEmpty()) {
+            return "관리자";
+        }
+        return "사용자";
+    }
+
 }

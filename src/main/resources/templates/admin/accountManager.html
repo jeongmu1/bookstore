@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
+    <!-- Navigation -->
+
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a th:href="@{/account}" id="user" th:text="${member}">Guest</a> .</p>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <!-- 테이블 상단 -->
+    <div>
+        <form th:action="@{/admin/accountManager}" method="get">
+            <table>
+                <tbody>
+                <tr>
+                    <td>검색</td>
+                    <td>
+                        <label>
+                            <select th:name="searchCriteria">
+                                <option th:value="id" th:text="번호"></option>
+                                <option th:value="username" th:text="아이디"></option>
+                                <option th:value="name" th:text="성명"></option>
+                                <option th:value="phone" th:text="전화"></option>
+                            </select>
+                        </label>
+                        <label>
+                            <input type="text" name="keyword" th:value="${keyword}">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>승인여부</td>
+                    <td>
+                        <div>
+                            <input type="radio" id="entire" value="entire" name="enabled" checked>
+                            <label for="entire">전체</label>
+                            <input type="radio" id="true" value="true" name="enabled">
+                            <label for="entire">승인</label>
+                            <input type="radio" id="false" value="false" name="enabled">
+                            <label for="entire">미승인</label>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit">
+        </form>
+    </div>
+    <!-- 테이블 상단 끝 -->
+    <!-- 사용자 정보 테이블 -->
+    <form th:action="@{/admin/accountManager}" method="post">
+        <table width="100%" class="tb_nor tb_cart">
+            <colgroup>
+                <col width="50">
+                <col width="30">
+                <col width="100">
+                <col width="100">
+                <col width="100">
+                <col width="100">
+                <col width="100">
+                <col width="100">
+            </colgroup>
+            <thead>
+            <tr bgcolor="#cfcfcf">
+                <th scope="col" class="txt">번호</th>
+                <th scope="col" class="txt">승인</th>
+                <th scope="col" class="txt">아이디</th>
+                <th scope="col" class="txt">성명</th>
+                <th scope="col" class="txt">전화</th>
+                <th scope="col" class="txt">가입일</th>
+                <th scope="col" class="txt">권한</th>
+                <th scope="col" class="txt">관리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="text-align: center" th:each="userInfo : ${userInfos}" name="ids">
+                <td class="le" th:text="${userInfo.id}"></td>
+                <td class="le" th:text="${userInfo.enabled}"></td>
+                <td class="le" th:text="${userInfo.username}"></td>
+                <td class="le" th:text="${userInfo.name}"></td>
+                <td class="le" th:text="${userInfo.phone}"></td>
+                <td class="le" th:text="${userInfo.createTime}"></td>
+                <td class="le" th:text="${userInfo.authority}"></td>
+                <td>
+                    <button>수정</button>
+                    <button>탈퇴</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+</div>
+<!-- End Main-->
+</body>
+</html>

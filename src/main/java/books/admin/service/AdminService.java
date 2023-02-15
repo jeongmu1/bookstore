@@ -2,6 +2,7 @@ package books.admin.service;
 
 import books.admin.common.OrderInfoDto;
 import books.admin.common.ProductBookForm;
+import books.admin.common.UserInfoDto;
 import books.common.DeliveryState;
 import books.product.domain.Category;
 import books.product.domain.Publisher;
@@ -24,5 +25,5 @@ public interface AdminService {
 
     void updateDeliveryState(Set<Long> productOrderProductIds, String deliveryState);
 
-//    void updateDeliveryState(Set<OrderInfoDto> )
+    List<UserInfoDto> findUserInfoByConditions(String authority, String enabled, String searchCriteria, String keyword);
 }

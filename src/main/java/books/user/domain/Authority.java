@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-@Table(name = "authorities")
+@Table(name = "authority")
 @Getter
 @Setter
 @ToString

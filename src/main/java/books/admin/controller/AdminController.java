@@ -42,7 +42,7 @@ public class AdminController {
             , @RequestParam(required = false) String keyword) {
         model.addAttribute("deliveryStates", adminService.findAllDeliveryStates());
         model.addAttribute("orders", adminService.findOrderInfoByConditions(deliveryStates, searchCondition, keyword));
-        return "admin/manageOrders";
+        return "admin/orderManager";
     }
 
     @PostMapping(value = "/orderManager")
@@ -57,4 +57,16 @@ public class AdminController {
         adminService.addProduct(productBookForm);
         return "redirect:/";
     }
+
+    @GetMapping(value = "/accountManager")
+    public String showAccountManagerPage(Model model, Principal principal,
+                                         @RequestParam(required = false) String authority,
+                                         @RequestParam(required = false) String enabled,
+                                         @RequestParam(required = false) String searchCriteria,
+                                         @RequestParam(required = false) String keyword) {
+        model.addAttribute("userInfos", adminService.findUserInfoByConditions(authority, enabled, searchCriteria, keyword));
+        return "admin/accountManager";
+    }
+
+
 }

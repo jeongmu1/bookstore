@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경">
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feature: 배송상태 변경 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/UserInfoDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/auth/common/UserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/eventResolver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/orderManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/OrderInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/OrderInfoDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/Authority.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/yesUI.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/yesUI.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/manageOrders.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/manageOrders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/manageOrders.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/accountManager.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/AdminTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AdminTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +36,7 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -156,6 +162,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="books.admin.service" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/templates/admin" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/order" />
@@ -164,11 +173,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources/templates/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static/js" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/admin" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/shop" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/account" />
       <recent name="$PROJECT_DIR$/src/main/resources/static/sysimage/renew/detail" />
-      <recent name="$PROJECT_DIR$/src/main/resources/static/sysimage/font" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BookApplication">
@@ -177,6 +186,16 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AdminTest" />
       <option name="METHOD_NAME" value="findOrdersTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminTest.findUserInfoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DNBookStore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AdminTest" />
+      <option name="METHOD_NAME" value="findUserInfoTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -202,16 +221,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SearchTest.searchCategoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DNBookStore" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SearchTest" />
-      <option name="METHOD_NAME" value="searchCategoryTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="books.BookApplication" />
@@ -228,10 +237,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.BookApplication" />
+        <item itemvalue="JUnit.AdminTest.findUserInfoTest" />
         <item itemvalue="JUnit.AdminTest.updateOrdersTest" />
         <item itemvalue="JUnit.AdminTest.findOrdersTest" />
         <item itemvalue="JUnit.OrderTest.orderProductTest" />
-        <item itemvalue="JUnit.SearchTest.searchCategoryTest" />
       </list>
     </recent_temporary>
   </component>
@@ -264,14 +273,7 @@
       <workItem from="1675057418711" duration="19225000" />
       <workItem from="1675813543509" duration="29072000" />
       <workItem from="1675990472739" duration="14642000" />
-      <workItem from="1676250063239" duration="43898000" />
-    </task>
-    <task id="LOCAL-00039" summary="Java 11 로 변경">
-      <created>1673613836450</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1673613836450</updated>
+      <workItem from="1676250063239" duration="75509000" />
     </task>
     <task id="LOCAL-00040" summary="제품 상세페이지 구현">
       <created>1673869297427</created>
@@ -609,7 +611,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676345262963</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="feature: 배송상태 변경 추가">
+      <created>1676358900224</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1676358900224</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,7 +649,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feature: 사용하지 않는 참조 제거, 검색기능 구현&#10;&#10;홈 컨트롤러에 검색 요청이 들어왔을 경우 검색창으로 redirect 되도록 구현" />
     <MESSAGE value="feature: ProductBookDto 클래스명 및 메소드명 변경" />
     <MESSAGE value="feature: 검색 기능 구현" />
     <MESSAGE value="fix: register.html 경로 이동" />
@@ -665,7 +673,8 @@
     <MESSAGE value="fix: 유틸리티 객체 이름 변경" />
     <MESSAGE value="fix: deliveryState 테이블 제거" />
     <MESSAGE value="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경" />
+    <MESSAGE value="feature: 배송상태 변경 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature: 배송상태 변경 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
