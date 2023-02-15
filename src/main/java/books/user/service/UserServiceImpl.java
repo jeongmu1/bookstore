@@ -12,6 +12,7 @@ import books.user.common.RegistrationForm;
 import books.user.repository.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
@@ -23,32 +24,19 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepo;
     private final UserAuthorityRepository authorityRepo;
-    private final UserAddressRepository userAddressRepo;
-    private final UserCCRepository userCCRepo;
     private final CartRepository cartRepo;
     private final OrderRepository orderRepo;
     private final PasswordEncoder encoder;
     private final UserPointHistoryRepository userPointHistoryRepo;
-    private final PageSizeProps pageSizeProps;
     private final ProductReviewRepository productReviewRepository;
 
-    public UserServiceImpl(UserRepository userRepo
-            , UserAuthorityRepository authorityRepo
-            , UserAddressRepository userAddressRepo
-            , UserCCRepository userCCRepo, CartRepository cartRepo
-            , OrderRepository orderRepo, PasswordEncoder encoder
-            , UserPointHistoryRepository userPointHistoryRepo
-            , PageSizeProps pageSizeProps,
-                           ProductReviewRepository productReviewRepository) {
+    public UserServiceImpl(UserRepository userRepo, UserAuthorityRepository authorityRepo, CartRepository cartRepo, OrderRepository orderRepo, PasswordEncoder encoder, UserPointHistoryRepository userPointHistoryRepo, ProductReviewRepository productReviewRepository) {
         this.userRepo = userRepo;
         this.authorityRepo = authorityRepo;
-        this.userAddressRepo = userAddressRepo;
-        this.userCCRepo = userCCRepo;
         this.cartRepo = cartRepo;
         this.orderRepo = orderRepo;
         this.encoder = encoder;
         this.userPointHistoryRepo = userPointHistoryRepo;
-        this.pageSizeProps = pageSizeProps;
         this.productReviewRepository = productReviewRepository;
     }
 
@@ -63,11 +51,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void processRegistration(RegistrationForm form) {
-        addUserAuthority(userRepo.findByUsername(form.getUsername()));
+        Authority auth = new Authority();
+        auth.setUser(userRepo.save(form.toUser(encoder)));
+        auth.setAuthority("ROLE_USER");
+        authorityRepo.save(auth);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PointHistoryDto> findUserPointHistory(Principal principal) {
         return userPointHistoryRepo
                 .findAllByUser(userRepo.findByUsername(principal.getName()))
@@ -81,13 +74,6 @@ public class UserServiceImpl implements UserService {
                         .using(pointHistory.getPointHistoryDetail().isUsing())
                         .build()
                 ).collect(Collectors.toList());
-    }
-
-    private void addUserAuthority(User user) {
-        Authority auth = new Authority();
-        auth.setUser(user);
-        auth.setAuthority("ROLE_USER");
-        authorityRepo.save(auth);
     }
 
     private UserDto principalToDto(Principal principal) {
