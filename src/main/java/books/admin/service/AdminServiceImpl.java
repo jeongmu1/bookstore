@@ -1,9 +1,6 @@
 package books.admin.service;
 
-import books.admin.common.FailToUploadException;
-import books.admin.common.OrderInfoDto;
-import books.admin.common.ProductBookForm;
-import books.admin.common.UserInfoDto;
+import books.admin.common.*;
 import books.common.BookProps;
 import books.common.DeliveryState;
 import books.common.DeliveryStateConverter;
@@ -14,20 +11,22 @@ import books.product.domain.*;
 import books.product.repository.*;
 import books.user.domain.Authority;
 import books.user.domain.User;
-import books.user.repository.UserRepository;
+import books.user.repository.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static books.auth.common.UserRole.*;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -39,9 +38,16 @@ public class AdminServiceImpl implements AdminService {
     private final ProductCategoryRepository productCategoryRepo;
     private final UserRepository userRepo;
     private final CartRepository cartRepo;
-    private final String dateFormat = "yyyy-MM-dd";
+    private final UserAuthorityRepository userAuthorityRepo;
+    private final UserPointHistoryRepository userPointHistoryRepo;
+    private final UserAddressRepository userAddressRepo;
+    private final UserCCRepository userCCRepo;
+    private final ProductReviewRepository productReviewRepo;
+    private final PasswordEncoder passwordEncoder;
+    private final UserAuthorityRepository authorityRepo;
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, UserRepository userRepo, CartRepository cartRepo) {
+    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, UserRepository userRepo, CartRepository cartRepo, UserAuthorityRepository userAuthorityRepo, UserPointHistoryRepository userPointHistoryRepo, UserAddressRepository userAddressRepo, UserCCRepository userCCRepo, ProductReviewRepository productReviewRepo, PasswordEncoder passwordEncoder, UserAuthorityRepository authorityRepo) {
         this.categoryRepo = categoryRepo;
         this.publisherRepo = publisherRepo;
         this.productBookRepo = productBookRepo;
@@ -50,6 +56,13 @@ public class AdminServiceImpl implements AdminService {
         this.productCategoryRepo = productCategoryRepo;
         this.userRepo = userRepo;
         this.cartRepo = cartRepo;
+        this.userAuthorityRepo = userAuthorityRepo;
+        this.userPointHistoryRepo = userPointHistoryRepo;
+        this.userAddressRepo = userAddressRepo;
+        this.userCCRepo = userCCRepo;
+        this.productReviewRepo = productReviewRepo;
+        this.passwordEncoder = passwordEncoder;
+        this.authorityRepo = authorityRepo;
     }
 
     @Override
@@ -164,7 +177,7 @@ public class AdminServiceImpl implements AdminService {
     private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop) {
         ProductOrder order = pop.getProductOrder();
         return OrderInfoDto.builder()
-                .updateTime(new SimpleDateFormat(dateFormat).format(order.getUpdateTime()))
+                .updateTime(new SimpleDateFormat(DATE_FORMAT).format(order.getUpdateTime()))
                 .orderUuid(order.getOrderUuid())
                 .productName(pop.getProductBook().getTitle())
                 .productId(pop.getProductBook().getId())
@@ -257,16 +270,12 @@ public class AdminServiceImpl implements AdminService {
         if (!(searchCriteria == null || searchCriteria.isEmpty() || keyword == null || keyword.isEmpty())) {
             switch (searchCriteria) {
                 case "id":
-                    spec = Objects.requireNonNull(spec)
-                            .and((root, criteriaQuery, criteriaBuilder)
-                                    -> criteriaBuilder.equal(root.get(searchCriteria), keyword));
-                    break;
                 case "username":
                 case "name":
                 case "phone":
                     spec = Objects.requireNonNull(spec)
                             .and((root, criteriaQuery, criteriaBuilder)
-                                    -> criteriaBuilder.like(root.get(searchCriteria), "%" + keyword + "%"));
+                                    -> criteriaBuilder.equal(root.get(searchCriteria), "%" + keyword + "%"));
                     break;
                 default:
                     throw new IllegalArgumentException();
@@ -279,11 +288,17 @@ public class AdminServiceImpl implements AdminService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public UserInfoDto findUserById(Long id) {
+        return convertUserToDto(userRepo.findById(id).orElseThrow());
+    }
+
     private UserInfoDto convertUserToDto(User user) {
         return UserInfoDto.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .createTime(new SimpleDateFormat(dateFormat).format(user.getCreateTime()))
+                .createTime(new SimpleDateFormat(DATE_FORMAT).format(user.getCreateTime()))
                 .phone(user.getPhone())
                 .username(user.getUsername())
                 .enabled(user.isEnabled())
@@ -295,13 +310,68 @@ public class AdminServiceImpl implements AdminService {
         Set<String> authorities = user.getAuthorities()
                 .stream()
                 .map(Authority::getAuthority)
-                .filter(authority -> authority.equals("ROLE_ADMIN"))
+                .filter(authority -> authority.equals(ROLE_ADMIN.toString()))
                 .collect(Collectors.toSet());
 
         if (!authorities.isEmpty()) {
-            return "관리자";
+            return ROLE_ADMIN.toString();
         }
-        return "사용자";
+        return ROLE_USER.toString();
     }
 
+    @Override
+    @Transactional
+    public void deleteUserById(Long userId) {
+        User user = userRepo.findById(userId).orElseThrow();
+        user.getProductOrders().forEach(order -> order.setUser(null));
+        userPointHistoryRepo.deleteByUser(user);
+        userAuthorityRepo.deleteByUser(user);
+        userCCRepo.deleteByUser(user);
+        userAddressRepo.deleteByUser(user);
+        productReviewRepo.deleteByUser(user);
+        userRepo.delete(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(UserUpdateForm updateForm) {
+        User user = userRepo.findById(updateForm.getId()).orElseThrow();
+        user.setEnabled(updateForm.getEnabled());
+        user.setPassword(passwordEncoder.encode(updateForm.getPassword()));
+        user.setName(updateForm.getName());
+        user.setPhone(updateForm.getPhone());
+        updateAuthorities(user, updateForm.getAuthority()); // 권한 설정
+
+        // 기존 비밀번호화 일치하는지 확인 후 변경
+        if (!updateForm.getPassword().isEmpty()) {
+            user.setPassword(updateForm.getPassword());
+        }
+    }
+
+    private void updateAuthorities(User user, String authority) {
+        switch (authority) {
+            case "ROLE_USER":
+                user.getAuthorities()
+                        .stream()
+                        .filter(auth -> !auth.getAuthority().equals(ROLE_USER.toString()))
+                        .forEach(authorityRepo::delete);
+                break;
+            case "ROLE_ADMIN":
+                Authority auth = new Authority();
+                auth.setUser(user);
+                auth.setAuthority(ROLE_ADMIN.toString());
+                authorityRepo.save(auth);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+    }
+
+    @Override
+    public UserUpdateForm initializeUserUpdateForm(Long userId) {
+        UserUpdateForm updateForm = new UserUpdateForm();
+        updateForm.setId(userId);
+        return updateForm;
+    }
 }

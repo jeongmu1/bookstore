@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface UserAddressRepository extends JpaRepository<UserAddress, Long> {
     Optional<UserAddress> findUserAddressByUserAndDefaultFlag(User user, boolean isDefault);
+    void deleteByUser(User user);
 }

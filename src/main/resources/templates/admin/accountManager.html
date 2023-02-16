@@ -76,47 +76,50 @@
     </div>
     <!-- 테이블 상단 끝 -->
     <!-- 사용자 정보 테이블 -->
-    <form th:action="@{/admin/accountManager}" method="post">
-        <table width="100%" class="tb_nor tb_cart">
-            <colgroup>
-                <col width="50">
-                <col width="30">
-                <col width="100">
-                <col width="100">
-                <col width="100">
-                <col width="100">
-                <col width="100">
-                <col width="100">
-            </colgroup>
-            <thead>
-            <tr bgcolor="#cfcfcf">
-                <th scope="col" class="txt">번호</th>
-                <th scope="col" class="txt">승인</th>
-                <th scope="col" class="txt">아이디</th>
-                <th scope="col" class="txt">성명</th>
-                <th scope="col" class="txt">전화</th>
-                <th scope="col" class="txt">가입일</th>
-                <th scope="col" class="txt">권한</th>
-                <th scope="col" class="txt">관리</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr style="text-align: center" th:each="userInfo : ${userInfos}" name="ids">
-                <td class="le" th:text="${userInfo.id}"></td>
-                <td class="le" th:text="${userInfo.enabled}"></td>
-                <td class="le" th:text="${userInfo.username}"></td>
-                <td class="le" th:text="${userInfo.name}"></td>
-                <td class="le" th:text="${userInfo.phone}"></td>
-                <td class="le" th:text="${userInfo.createTime}"></td>
-                <td class="le" th:text="${userInfo.authority}"></td>
-                <td>
+    <table width="100%" class="tb_nor tb_cart">
+        <colgroup>
+            <col width="50">
+            <col width="30">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+        </colgroup>
+        <thead>
+        <tr bgcolor="#cfcfcf">
+            <th scope="col" class="txt">번호</th>
+            <th scope="col" class="txt">승인</th>
+            <th scope="col" class="txt">아이디</th>
+            <th scope="col" class="txt">성명</th>
+            <th scope="col" class="txt">전화</th>
+            <th scope="col" class="txt">가입일</th>
+            <th scope="col" class="txt">권한</th>
+            <th scope="col" class="txt">관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align: center" th:each="userInfo : ${userInfos}" name="ids">
+            <td class="le" th:text="${userInfo.id}"></td>
+            <td class="le" th:text="${userInfo.enabled}"></td>
+            <td class="le" th:text="${userInfo.username}"></td>
+            <td class="le" th:text="${userInfo.name}"></td>
+            <td class="le" th:text="${userInfo.phone}"></td>
+            <td class="le" th:text="${userInfo.createTime}"></td>
+            <td class="le" th:text="${userInfo.authority}"></td>
+            <td>
+
+                <a th:href="@{/admin/accountManager/updateUser(id=${userInfo.id})}">
                     <button>수정</button>
+                </a>
+                <a th:href="@{/admin/accountManager/withdraw(id=${userInfo.id})}">
                     <button>탈퇴</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 <!-- End Main-->

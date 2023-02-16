@@ -3,6 +3,7 @@ package books.admin.service;
 import books.admin.common.OrderInfoDto;
 import books.admin.common.ProductBookForm;
 import books.admin.common.UserInfoDto;
+import books.admin.common.UserUpdateForm;
 import books.common.DeliveryState;
 import books.product.domain.Category;
 import books.product.domain.Publisher;
@@ -26,4 +27,12 @@ public interface AdminService {
     void updateDeliveryState(Set<Long> productOrderProductIds, String deliveryState);
 
     List<UserInfoDto> findUserInfoByConditions(String authority, String enabled, String searchCriteria, String keyword);
+
+    UserInfoDto findUserById(Long id);
+
+    void deleteUserById(Long userId);
+
+    void updateUser(UserUpdateForm updateForm);
+
+    UserUpdateForm initializeUserUpdateForm(Long userId);
 }
