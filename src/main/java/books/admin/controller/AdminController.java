@@ -1,6 +1,8 @@
 package books.admin.controller;
 
 import books.admin.common.ProductBookForm;
+import books.admin.common.UserInfoDto;
+import books.admin.common.UserUpdateForm;
 import books.admin.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +44,7 @@ public class AdminController {
             , @RequestParam(required = false) String keyword) {
         model.addAttribute("deliveryStates", adminService.findAllDeliveryStates());
         model.addAttribute("orders", adminService.findOrderInfoByConditions(deliveryStates, searchCondition, keyword));
-        return "admin/manageOrders";
+        return "admin/orderManager";
     }
 
     @PostMapping(value = "/orderManager")
@@ -56,5 +58,35 @@ public class AdminController {
     public String addProduct(@Valid ProductBookForm productBookForm) {
         adminService.addProduct(productBookForm);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/accountManager")
+    public String showAccountManagerPage(Model model, Principal principal,
+                                         @RequestParam(required = false) String authority,
+                                         @RequestParam(required = false) String enabled,
+                                         @RequestParam(required = false) String searchCriteria,
+                                         @RequestParam(required = false) String keyword) {
+        model.addAttribute("userInfos", adminService.findUserInfoByConditions(authority, enabled, searchCriteria, keyword));
+        return "admin/accountManager";
+    }
+
+    @GetMapping(value = "/accountManager/withdraw")
+    public String withdrawUser(@RequestParam Long id) {
+        adminService.deleteUserById(id);
+        return "redirect:/admin/accountManager";
+    }
+
+    @GetMapping(value = "/accountManager/updateUser")
+    public String showUserUpdateForm(Model model, Principal principal,
+                                     @RequestParam Long id) {
+        model.addAttribute("updateForm", adminService.initializeUserUpdateForm(id));
+        model.addAttribute("userInfo", adminService.findUserById(id));
+        return "admin/updateUser";
+    }
+
+    @PostMapping(value = "/accountManager/updateUser")
+    public String updateUser(UserUpdateForm updateForm) {
+        adminService.updateUser(updateForm);
+        return "redirect:/admin/accountManager";
     }
 }

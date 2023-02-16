@@ -8,5 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface UserCCRepository extends CrudRepository<UserCreditCard, Long> {
-    public Optional<Set<UserCreditCard>> findAllByUser(User user);
+    Optional<Set<UserCreditCard>> findAllByUser(User user);
+
+    void deleteByUser(User user);
 }

@@ -9,4 +9,8 @@ import java.util.Optional;
 
 public interface UserAuthorityRepository extends CrudRepository<Authority, Long> {
     Optional<List<Authority>> findByUser(User user);
+
+    void deleteByUser(User user);
+
+    void deleteByUserAndAuthority(User user, String authority);
 }

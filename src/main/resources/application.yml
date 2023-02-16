@@ -6,6 +6,12 @@ logging:
     path: /var/logs/TacoCloud.log
   level:
     root: info
+#    org:
+#      hibernate:
+#        SQL: debug
+#        type:
+#          descriptor:
+#            sql: trace
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/book_store?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=true

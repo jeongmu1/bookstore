@@ -2,8 +2,6 @@
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-e
-5src/main/java/books/user/common/RegistrationForm.java,1/3/13cd4ea0a348eec31cecc453ad2745f788680ddc
 w
 G.idea/sonarlint/issuestore/4/9/496a238a6afa168dbaf6efd37bb459331589579c,6/e/6e9644ddf83ab52f39902ecdbfdf4118285ac40c
 a
@@ -32,26 +30,12 @@ X
 (src/main/java/books/BookApplication.java,2/e/2eba86eec34386fb1c961da888087c2cfa9450d8
 c
 3src/main/java/books/product/common/CartItemDto.java,8/f/8f938ad6a20e1aea732509680cbb004924e9e252
-o
-?src/main/java/books/user/controller/RegistrationController.java,c/1/c1ec4b625de21e22dee362e8e84997f40043f074
-\
-,src/main/java/books/user/common/UserDto.java,9/7/97a777b3a9e40d9ae41ffcec0bb228b83f0bf5ed
-l
-<src/main/java/books/user/service/UserDetailsServiceImpl.java,0/f/0ff33fa765b4a2c251625000c4e4021992adb2fb
-a
-1src/main/java/books/user/service/UserService.java,2/3/235eb8dd973b666d1e7530ade4ae9c440fb188c1
 d
 4src/main/java/books/user/common/UserDetailsImpl.java,3/9/3976ed38c048b2901b966222f98dc545891fd592
 g
 7src/main/java/books/user/domain/PointHistoryDetail.java,b/5/b59674e880e28cd4ac77ae18b33d1ede9e08d013
 d
 4src/main/java/books/product/service/CartService.java,3/4/34d9c03298c65782f5dd686206c14a178b2f2149
-i
-9src/main/java/books/user/repository/UserCCRepository.java,9/8/986f1df7a73236e2e60e78df5d42204f480e66f2
-p
-@src/main/java/books/user/repository/UserAuthorityRepository.java,4/2/42415bb8c35e91ab38c51b4d04028fd67733e29a
-n
->src/main/java/books/user/repository/UserAddressRepository.java,1/5/15b1acaea6e81e6aab82ffff1f1591ae776b3de7
 r
 Bsrc/main/java/books/product/repository/ProductImageRepository.java,b/1/b1ebab64a34f5c1492a3360e0f2dccb74cba7fe1
 u
@@ -62,14 +46,8 @@ e
 5src/main/java/books/user/domain/UserPointHistory.java,4/5/45a42faff2035e5f4868d24504361f480ea3676c
 h
 8src/main/java/books/order/common/OverStockException.java,f/6/f6f5348c9aef941e5a9aa677b4d607ce1ed0eea0
-^
-.src/main/java/books/common/SecurityConfig.java,e/3/e3e634e31065d79425c482f647e54f0fe82da90c
-`
-0src/main/java/books/common/ControllerAspect.java,e/5/e5a6d5b1d6858c111469956740a2387114abd0b0
 j
 :src/main/java/books/product/controller/CartController.java,2/1/21d3774d69de2f8c996fe205bce02ed08e4faf34
-u
-Esrc/main/java/books/user/repository/PointHistoryDetailRepository.java,3/3/331841cb19ea1fafcb164fab597495457fd33c61
 ]
 -src/main/java/books/common/PageSizeProps.java,9/5/951e6c3fd2095860f7d6892be43ac42b2e71ec4b
 `
@@ -86,8 +64,6 @@ d
 4src/main/java/books/product/domain/ProductImage.java,2/e/2ec5856550ce3930921523efb7930b3a928c5582
 o
 ?src/main/java/books/product/repository/PublisherRepository.java,f/4/f43575cfa108e9531b776bcc46ed12b5a8e55313
-Y
-)src/main/java/books/common/BookProps.java,e/f/ef9b74304ea83a0ab3b71335d1929949af07c940
 k
 ;src/main/java/books/admin/common/FailToUploadException.java,f/a/fac83bb214e4849c93ebc5e089afbfd6662b2773
 Z
@@ -102,8 +78,6 @@ T
 $src/test/java/ProductDetailTest.java,2/3/23f6cda1407aaa260bb2ab8f1fca8090897633ea
 e
 5src/main/java/books/product/domain/ProductReview.java,1/b/1bd603d528dc73708769b18312f6bcfce1a6b579
-s
-Csrc/main/java/books/product/repository/ProductReviewRepository.java,b/2/b234300af402a88915f6831442f224fac2d17017
 M
 src/test/java/SearchTest.java,f/8/f8d7f527e9eb81dbd2f0be2b1228cf0f2c9da578
 j

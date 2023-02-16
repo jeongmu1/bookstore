@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface UserPointHistoryRepository extends CrudRepository<UserPointHistory, Long> {
     List<UserPointHistory> findAllByUser(User user);
-    Optional<List<UserPointHistory>> findAllByUserOrderByCreateTimeDesc(User user);
-    Optional<List<UserPointHistory>> findAllByUserOrderByCreateTimeDesc(User user, Pageable pageable);
+
+    void deleteByUser(User user);
 }

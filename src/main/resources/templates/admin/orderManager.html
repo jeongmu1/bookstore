@@ -12,15 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
-    <script>
-        function selectAll(selectAll) {
-            const checkboxes = document.getElementsByName('ids');
-
-            checkboxes.forEach((checkbox) => {
-                checkbox.checked = selectAll.checked;
-            })
-        }
-    </script>
+    <script th:src="@{/js/eventResolver.js}"></script>
 </head>
 <body>
 
