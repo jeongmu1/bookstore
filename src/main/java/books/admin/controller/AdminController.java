@@ -89,4 +89,13 @@ public class AdminController {
         adminService.updateUser(updateForm);
         return "redirect:/admin/accountManager";
     }
+
+    @GetMapping(value = "/productManager")
+    public String showProductManagerPage(Model model, Principal principal,
+                                         @RequestParam(required = false) String searchCriteria,
+                                         @RequestParam(required = false) String keyword,
+                                         @RequestParam(required = false) Boolean enabled) {
+        model.addAttribute("books", adminService.findProductBookByConditions(searchCriteria, keyword, enabled));
+        return "admin/productManager";
+    }
 }

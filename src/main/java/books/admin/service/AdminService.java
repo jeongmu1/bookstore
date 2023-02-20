@@ -4,12 +4,11 @@ import books.admin.common.OrderInfoDto;
 import books.admin.common.ProductBookForm;
 import books.admin.common.UserInfoDto;
 import books.admin.common.UserUpdateForm;
-import books.common.DeliveryState;
+import books.admin.common.ProductBookDto;
 import books.product.domain.Category;
 import books.product.domain.Publisher;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public interface AdminService {
@@ -35,4 +34,8 @@ public interface AdminService {
     void updateUser(UserUpdateForm updateForm);
 
     UserUpdateForm initializeUserUpdateForm(Long userId);
+
+    List<ProductBookDto> findProductBookByConditions(String searchCriteria,
+                                                     String keyword,
+                                                     Boolean enabled);
 }

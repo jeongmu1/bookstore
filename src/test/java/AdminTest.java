@@ -41,4 +41,14 @@ class AdminTest {
         adminService.findUserInfoByConditions(authority, enabled, criteria, keyword)
                 .forEach(System.out::println);
     }
+
+    @Test
+    void findProductBookTest() {
+        String criteria = "title";
+        String keyword = "자바";
+        Boolean enabled = true;
+
+        adminService.findProductBookByConditions(criteria, keyword, enabled)
+                .forEach(System.out::println);
+    }
 }

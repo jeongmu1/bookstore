@@ -4,6 +4,7 @@ import books.admin.common.*;
 import books.common.BookProps;
 import books.common.DeliveryState;
 import books.common.DeliveryStateConverter;
+import books.admin.common.ProductBookDto;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
@@ -14,6 +15,7 @@ import books.user.domain.User;
 import books.user.repository.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static books.auth.common.UserRole.*;
@@ -270,6 +273,10 @@ public class AdminServiceImpl implements AdminService {
         if (!(searchCriteria == null || searchCriteria.isEmpty() || keyword == null || keyword.isEmpty())) {
             switch (searchCriteria) {
                 case "id":
+                    spec = Objects.requireNonNull(spec)
+                            .and(((root, criteriaQuery, criteriaBuilder)
+                                    -> criteriaBuilder.equal(root.get(searchCriteria), keyword)));
+                    break;
                 case "username":
                 case "name":
                 case "phone":
@@ -337,14 +344,13 @@ public class AdminServiceImpl implements AdminService {
     public void updateUser(UserUpdateForm updateForm) {
         User user = userRepo.findById(updateForm.getId()).orElseThrow();
         user.setEnabled(updateForm.getEnabled());
-        user.setPassword(passwordEncoder.encode(updateForm.getPassword()));
         user.setName(updateForm.getName());
         user.setPhone(updateForm.getPhone());
         updateAuthorities(user, updateForm.getAuthority()); // 권한 설정
 
         // 기존 비밀번호화 일치하는지 확인 후 변경
         if (!updateForm.getPassword().isEmpty()) {
-            user.setPassword(updateForm.getPassword());
+            user.setPassword(passwordEncoder.encode(updateForm.getPassword()));
         }
     }
 
@@ -373,5 +379,62 @@ public class AdminServiceImpl implements AdminService {
         UserUpdateForm updateForm = new UserUpdateForm();
         updateForm.setId(userId);
         return updateForm;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductBookDto> findProductBookByConditions(String searchCriteria, String keyword, Boolean enabled) {
+
+        Specification<ProductBook> spec = Specification.where(null);
+        if (spec == null) throw new AssertionError();
+        if (!(searchCriteria == null || searchCriteria.isEmpty()) && !(keyword == null || keyword.isEmpty())) {
+            switch (searchCriteria) {
+                // equal
+                case "id":
+                    spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
+                            criteriaBuilder.equal(root.get(searchCriteria), keyword));
+                    break;
+                // like
+                case "title":
+                case "author":
+                    spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
+                            criteriaBuilder.like(root.get(searchCriteria), "%" + keyword + "%"));
+                    break;
+                // join
+                case "publisher":
+                    spec = spec.and(((root, criteriaQuery, criteriaBuilder) ->
+                            criteriaBuilder.like(root.get("publisher").get("name"), keyword)));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+
+        if (enabled != null) {
+            spec = Objects.requireNonNull(spec).and((root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("enabled"), enabled));
+        }
+        return productBookRepo.findAll(spec)
+                .stream()
+                .map(this::convertProductBookToDto)
+                .collect(Collectors.toList());
+    }
+
+    private ProductBookDto convertProductBookToDto(ProductBook book) {
+        ProductBookDto dto = new ProductBookDto();
+        dto.setId(book.getId());
+        dto.setTitle(book.getTitle());
+        dto.setAuthor(book.getAuthor());
+        dto.setPublisher(book.getPublisher().getName());
+        dto.setPrice(book.getPrice());
+        dto.setEnabled(book.isEnabled());
+        dto.setStock(book.getStock());
+        dto.setPreparingStock(cartRepo.findByProductBook(book)
+                .stream()
+                .filter(pop -> pop.getDeliveryState().equals(DeliveryState.PREPARING.toString()))
+                .mapToInt(ProductOrderProduct::getProductCount)
+                .sum());
+
+        return dto;
     }
 }
