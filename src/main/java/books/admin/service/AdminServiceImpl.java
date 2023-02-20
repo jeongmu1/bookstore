@@ -8,6 +8,7 @@ import books.admin.common.ProductBookDto;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
+import books.order.repository.OrderRepository;
 import books.product.domain.*;
 import books.product.repository.*;
 import books.user.domain.Authority;
@@ -15,7 +16,6 @@ import books.user.domain.User;
 import books.user.repository.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +26,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import static books.auth.common.UserRole.*;
+import static books.common.DeliveryState.*;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -44,13 +45,14 @@ public class AdminServiceImpl implements AdminService {
     private final UserAuthorityRepository userAuthorityRepo;
     private final UserPointHistoryRepository userPointHistoryRepo;
     private final UserAddressRepository userAddressRepo;
+    private final OrderRepository orderRepo;
     private final UserCCRepository userCCRepo;
     private final ProductReviewRepository productReviewRepo;
     private final PasswordEncoder passwordEncoder;
     private final UserAuthorityRepository authorityRepo;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, UserRepository userRepo, CartRepository cartRepo, UserAuthorityRepository userAuthorityRepo, UserPointHistoryRepository userPointHistoryRepo, UserAddressRepository userAddressRepo, UserCCRepository userCCRepo, ProductReviewRepository productReviewRepo, PasswordEncoder passwordEncoder, UserAuthorityRepository authorityRepo) {
+    public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, UserRepository userRepo, CartRepository cartRepo, UserAuthorityRepository userAuthorityRepo, UserPointHistoryRepository userPointHistoryRepo, UserAddressRepository userAddressRepo, OrderRepository orderRepo, UserCCRepository userCCRepo, ProductReviewRepository productReviewRepo, PasswordEncoder passwordEncoder, UserAuthorityRepository authorityRepo) {
         this.categoryRepo = categoryRepo;
         this.publisherRepo = publisherRepo;
         this.productBookRepo = productBookRepo;
@@ -62,6 +64,7 @@ public class AdminServiceImpl implements AdminService {
         this.userAuthorityRepo = userAuthorityRepo;
         this.userPointHistoryRepo = userPointHistoryRepo;
         this.userAddressRepo = userAddressRepo;
+        this.orderRepo = orderRepo;
         this.userCCRepo = userCCRepo;
         this.productReviewRepo = productReviewRepo;
         this.passwordEncoder = passwordEncoder;
@@ -137,7 +140,7 @@ public class AdminServiceImpl implements AdminService {
     public List<String> findAllDeliveryStates() {
         return Arrays
                 .stream(DeliveryState.values())
-                .filter(deliveryState -> deliveryState != DeliveryState.BEFORE)
+                .filter(deliveryState -> deliveryState != BEFORE)
                 .map(DeliveryStateConverter::deliveryStateToString)
                 .collect(Collectors.toList());
     }
@@ -179,13 +182,18 @@ public class AdminServiceImpl implements AdminService {
 
     private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop) {
         ProductOrder order = pop.getProductOrder();
+        String username = "null";
+        if (order.getUser() != null) {
+            username = order.getUser().getUsername();
+        }
+
         return OrderInfoDto.builder()
                 .updateTime(new SimpleDateFormat(DATE_FORMAT).format(order.getUpdateTime()))
                 .orderUuid(order.getOrderUuid())
                 .productName(pop.getProductBook().getTitle())
                 .productId(pop.getProductBook().getId())
                 .quantity(pop.getProductCount())
-                .userName(order.getUser().getUsername())
+                .userName(username)
                 .deliveryState(DeliveryStateConverter.deliveryStateToString(DeliveryState.valueOf(pop.getDeliveryState())))
                 .id(pop.getId())
                 .build();
@@ -205,7 +213,7 @@ public class AdminServiceImpl implements AdminService {
     private Specification<ProductOrderProduct> getEmptyDeliveryState() {
         return hasDeliveryStates(
                 Arrays.stream(DeliveryState.values())
-                        .filter(deliveryState -> deliveryState != DeliveryState.BEFORE)
+                        .filter(deliveryState -> deliveryState != BEFORE)
                         .map(DeliveryStateConverter::deliveryStateToString)
                         .collect(Collectors.toSet())
         );
@@ -236,7 +244,13 @@ public class AdminServiceImpl implements AdminService {
     public void updateDeliveryState(Set<Long> productOrderProductIds, String deliveryState) {
         productOrderProductIds.forEach(popId -> {
             ProductOrderProduct pop = cartRepo.findById(popId).orElseThrow();
-            String ds = Objects.requireNonNull(DeliveryStateConverter.stringToDeliveryState(deliveryState)).toString();
+            DeliveryState enumDeliveryState = DeliveryStateConverter.stringToDeliveryState(deliveryState);
+            String ds = enumDeliveryState.toString();
+
+            if (pop.getDeliveryState().equals(PREPARING.toString())
+                    && !pop.getDeliveryState().equals(ds) && !ds.equals(DELIVERING.toString())) {
+                pop.getProductBook().setStock(pop.getProductBook().getStock() - pop.getProductCount());
+            }
             pop.setDeliveryState(ds);
 
             ProductOrder order = pop.getProductOrder();
@@ -330,7 +344,13 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void deleteUserById(Long userId) {
         User user = userRepo.findById(userId).orElseThrow();
-        user.getProductOrders().forEach(order -> order.setUser(null));
+        user.getProductOrders().forEach(order -> {
+            if (order.getDeliveryState().equals(BEFORE.toString())) {
+                cartRepo.deleteAll(order.getProductOrderProducts());
+                orderRepo.delete(order);
+            }
+            order.setUser(null);
+        });
         userPointHistoryRepo.deleteByUser(user);
         userAuthorityRepo.deleteByUser(user);
         userCCRepo.deleteByUser(user);
@@ -431,7 +451,7 @@ public class AdminServiceImpl implements AdminService {
         dto.setStock(book.getStock());
         dto.setPreparingStock(cartRepo.findByProductBook(book)
                 .stream()
-                .filter(pop -> pop.getDeliveryState().equals(DeliveryState.PREPARING.toString()))
+                .filter(pop -> pop.getDeliveryState().equals(PREPARING.toString()))
                 .mapToInt(ProductOrderProduct::getProductCount)
                 .sum());
 

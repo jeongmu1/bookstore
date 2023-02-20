@@ -2,7 +2,6 @@ package books.order.controller;
 
 import books.order.common.NoItemException;
 import books.order.common.OrderForm;
-import books.order.common.OverStockException;
 import books.order.service.OrderService;
 import books.product.common.CartItemDto;
 import books.product.service.CartService;
@@ -58,13 +57,13 @@ public class OrderController {
             @Valid OrderForm orderForm
             , Principal principal
             , @RequestParam Long productBookId
-            , @RequestParam int quantity) throws OverStockException {
+            , @RequestParam int quantity) {
         orderService.addOrderByProduct(orderForm, principal, productBookId, quantity);
         return "redirect:/";
     }
 
     @PostMapping("/cart")
-    public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws OverStockException, NoItemException {
+    public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws NoItemException {
         orderService.addOrderByCartItems(orderForm, principal);
         return "redirect:/";
     }

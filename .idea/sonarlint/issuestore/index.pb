@@ -82,24 +82,16 @@ K
 src/test/java/UserTest.java,d/a/da17b786f51da7245c1b8003270a586b3dfe3906
 _
 /src/main/java/books/order/common/OrderForm.java,5/a/5a9ee569d90607fe216e49c8c1975bb1d7f59ee7
-c
-3src/main/java/books/order/service/OrderService.java,b/2/b251c13421c3896a496ea1d201123cdce348ee4f
 _
 /src/main/java/books/common/EntityConverter.java,e/0/e058ec132b524e66c570a19e90c8a902e205a1c3
-e
-5src/main/java/books/home/service/HomeServiceImpl.java,3/2/32090c93f2acd983ca6e35644e4f25401fd11567
 d
 4src/main/java/books/user/common/PointHistoryDto.java,c/9/c96a87eaf7a3b53fe65688f8d5a68d7630e74a5e
 e
 5src/main/java/books/admin/common/ProductBookForm.java,9/0/900b9b37cc37ab090ac9c344a4c0bffd1f9ff65a
 i
-9src/main/java/books/order/controller/OrderController.java,e/0/e0c7358cbf04488c5d4166dca97bdf3dd99683c8
-i
 9src/main/java/books/order/repository/OrderRepository.java,f/1/f1798bfe60f7ea05eaa2c3d63c94fd744cda5bae
 L
 src/test/java/OrderTest.java,a/7/a7c2b7e667be4ed8bb7c777f85bfeab077bb7a61
-f
-6src/main/java/books/common/DeliveryStateConverter.java,0/5/05fcf3258f6eca72b93fb4033c92887017566f98
 b
 2src/main/java/books/admin/common/OrderInfoDto.java,f/6/f68e1498614c21dae08c9273550554eb6e111931
 `
@@ -114,8 +106,6 @@ i
 9src/main/java/books/order/domain/ProductOrderProduct.java,9/7/97429c46daebeb9a81dfdc78acda28eff95f977e
 l
 <src/main/java/books/admin/common/OrderManagerSearchForm.java,3/c/3cc0d08687c2dd83da77b9812be9cee1f9ee0c50
-g
-7src/main/java/books/order/service/OrderServiceImpl.java,8/0/8063dc546aa681ca7f47d9a0f698175c62898fbf
 ]
 -src/main/java/books/common/DeliveryState.java,1/6/16ccf7e59331360880fbd4ae7c8b2a8f63cae0e1
 u
