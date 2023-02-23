@@ -88,6 +88,7 @@
                 <col width="60">
                 <col width="60">
                 <col width="60">
+                <col width="60">
                 <col width="50">
             </colgroup>
             <thead>
@@ -101,6 +102,7 @@
                 <th scope="col" class="txt">창고재고</th>
                 <th scope="col" class="txt">주문대기</th>
                 <th scope="col" class="txt">기재고</th>
+                <th scope="col" class="txt">재고수정</th>
                 <th scope="col" class="txt">관리</th>
             </tr>
             </thead>
@@ -115,10 +117,18 @@
                 <td class="le" th:text="${book.stock}"></td>
                 <td class="le" th:text="${book.preparingStock}"></td>
                 <td class="le" th:text="${book.stock - book.preparingStock}"></td>
-                <td></td>
+                <td>
+                    <label>
+                        <input style="text-align: center" type="text" id="stock" name="stock" th:value="${book.stock}">
+                    </label>
+                </td>
+                <td>
+                    <button class="btn_blue w_50" type="submit" th:text="수정"></button>
+                </td>
             </tr>
             </tbody>
         </table>
+        <button class="btn_blue w_80" type="submit" th:text="일괄수정"></button>
     </form>
 </div>
 <!-- End Main-->
