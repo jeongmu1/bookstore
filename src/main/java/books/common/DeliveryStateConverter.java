@@ -23,7 +23,7 @@ public class DeliveryStateConverter {
             case DELIVERY_COMPLETED:
                 return "배송완료";
             default:
-                return null;
+                throw new IllegalArgumentException();
         }
     }
 
@@ -44,7 +44,7 @@ public class DeliveryStateConverter {
             case "배송완료":
                 return DeliveryState.DELIVERY_COMPLETED;
             default:
-                return null;
+                throw new IllegalArgumentException();
         }
     }
 }

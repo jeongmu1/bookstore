@@ -1,7 +1,5 @@
 package books.home.common;
 
-import books.product.domain.ProductBook;
-import books.product.domain.ProductImage;
 import books.product.domain.ProductReview;
 import lombok.Builder;
 import lombok.Data;

@@ -4,7 +4,6 @@ import books.common.DeliveryState;
 import books.common.PointProps;
 import books.order.common.NoItemException;
 import books.order.common.OrderForm;
-import books.order.common.OverStockException;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
@@ -90,11 +89,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public void addOrderByCartItems(OrderForm orderForm, Principal principal)
-            throws OverStockException, NoItemException {
+            throws NoItemException {
         ProductOrder order = getProductOrder(principal);
 
         if (cartRepo.findAllByProductOrder(order).isEmpty()) throw new NoItemException("No items in cart");
-        for (var pop : order.getProductOrderProducts()) acceptProductOrderProduct(pop);
+        order.getProductOrderProducts().forEach(pop -> pop.setDeliveryState(DeliveryState.PREPARING.toString()));
 
         order = setProductOrder(orderForm, getProductOrder(principal));
         orderRepo.save(order);
@@ -104,13 +103,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity)
-            throws OverStockException {
+    public void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity) {
         ProductOrderProduct pop = new ProductOrderProduct();
         ProductBook book = productBookRepo.findProductBookById(productBookId);
         pop.setProductCount(quantity);
         pop.setProductBook(book);
-        acceptProductOrderProduct(pop);
+        pop.setDeliveryState(DeliveryState.PREPARING.toString());
 
         ProductOrder order = setProductOrder(orderForm, new ProductOrder());
         order.setUser(userRepo.findByUsername(principal.getName()));
@@ -118,6 +116,7 @@ public class OrderServiceImpl implements OrderService {
         order.setEnabled(true);
         pop.setProductOrder(order);
         order.setProductOrderProducts(Collections.singletonList(pop));
+        cartRepo.save(pop);
 
         addPointHistory(principal, order);
     }
@@ -161,14 +160,5 @@ public class OrderServiceImpl implements OrderService {
 
         userPointHistoryRepo.save(userPointHistory);
         user.setPoint(totalPoint);
-    }
-
-    private void acceptProductOrderProduct(ProductOrderProduct pop) throws OverStockException {
-        ProductBook book = pop.getProductBook();
-        if (pop.getProductCount() > book.getStock())
-            throw new OverStockException("Out of Stock");
-        book.setStock(book.getStock() - pop.getProductCount());
-        pop.setDeliveryState(DeliveryState.PREPARING.toString());
-        productBookRepo.save(book);
     }
 }

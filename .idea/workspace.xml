@@ -4,26 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: 회원가입 되지않는 버그 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/UserUpdateForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/updateUser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/3/13cd4ea0a348eec31cecc453ad2745f788680ddc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/5/15b1acaea6e81e6aab82ffff1f1591ae776b3de7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/986f1df7a73236e2e60e78df5d42204f480e66f2" beforeDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feature: 관리자 페이지 제품 조회 추가">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/auth/common/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/auth/common/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/domain/ProductOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserAuthorityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserCCRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserCCRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserPointHistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserPointHistoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/accountManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/accountManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/DeliveryStateConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/DeliveryStateConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/common/OverStockException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +185,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AdminTest.findProductBookTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DNBookStore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AdminTest" />
+      <option name="METHOD_NAME" value="findProductBookTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AdminTest.findUserInfoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
@@ -211,16 +210,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AdminTest" />
       <option name="METHOD_NAME" value="updateOrdersTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderTest.orderProductTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DNBookStore" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OrderTest" />
-      <option name="METHOD_NAME" value="orderProductTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -242,10 +231,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.BookApplication" />
+        <item itemvalue="JUnit.AdminTest.findProductBookTest" />
         <item itemvalue="JUnit.AdminTest.findUserInfoTest" />
         <item itemvalue="JUnit.AdminTest.updateOrdersTest" />
         <item itemvalue="JUnit.AdminTest.findOrdersTest" />
-        <item itemvalue="JUnit.OrderTest.orderProductTest" />
       </list>
     </recent_temporary>
   </component>
@@ -278,21 +267,8 @@
       <workItem from="1675057418711" duration="19225000" />
       <workItem from="1675813543509" duration="29072000" />
       <workItem from="1675990472739" duration="14642000" />
-      <workItem from="1676250063239" duration="106792000" />
-    </task>
-    <task id="LOCAL-00042" summary="모든 컨트롤러 show 메소드에 user 정보 불러오도록 aop 적용">
-      <created>1674003572544</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1674003572544</updated>
-    </task>
-    <task id="LOCAL-00043" summary="commit">
-      <created>1674003629509</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1674003629509</updated>
+      <workItem from="1676250063239" duration="123413000" />
+      <workItem from="1676855303381" duration="9829000" />
     </task>
     <task id="LOCAL-00044" summary="메인페이지 전시할 제품 추가 및 전시 구현">
       <created>1674003760324</created>
@@ -623,7 +599,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676461628636</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="fix: 관리자 페이지의 유저 정보 변경 추가">
+      <created>1676551188776</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1676551188776</updated>
+    </task>
+    <task id="LOCAL-00092" summary="feature: 관리자 페이지 제품 조회 추가">
+      <created>1676858240067</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1676858240068</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,9 +644,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: register.html 경로 이동" />
-    <MESSAGE value="fix: service 메소드명 변경&#10;&#10;get(**) 에서 find(**) 형식으로 변경" />
-    <MESSAGE value="feature: 유저 페이지 메인 구현, 포인트 내역 구현&#10;&#10;유저 페이지 메인에 상품후기, 적립금, 주문 상품 수량 등 간단한 정보 표현하도록 구현, 포인트 내역 페이지 구현" />
     <MESSAGE value="fix: UserRepository findUser 메소드 반환형 Optional User 에서 User 형으로 변경" />
     <MESSAGE value="fix: 로그인 시 회원가입 페이지로 들어가지 못 하도록 변경, 로그인, 회원가입 시 유저 정보 표현하지 않도록 변경" />
     <MESSAGE value="Style: 코드 포맷 변경" />
@@ -679,7 +666,10 @@
     <MESSAGE value="feature: 배송상태 변경 추가" />
     <MESSAGE value="feature: 회원조회기능 추가" />
     <MESSAGE value="fix: 회원가입 되지않는 버그 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 회원가입 되지않는 버그 수정" />
+    <MESSAGE value="fix: 관리자 페이지의 유저 정보 변경 추가" />
+    <MESSAGE value="feature: 관리자 페이지 제품 조회 추가" />
+    <MESSAGE value="fix: 주문 재고반영 방법 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 주문 재고반영 방법 변경" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -688,6 +678,16 @@
           <properties class="com.mysql.cj.exceptions.DataReadException" package="com.mysql.cj.exceptions" />
           <option name="timeStamp" value="32" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/AdminTest.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/AdminTest.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
