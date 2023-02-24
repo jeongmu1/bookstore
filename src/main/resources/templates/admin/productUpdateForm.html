@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a th:href="@{/templates/account}" id="user" th:text="${member}">Guest</a> .</p>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+
+    <form method="post" th:object="${productBookForm}" th:action="@{/admin/productManager/update(id=${productBookForm.id})}" enctype="multipart/form-data">
+        <div>
+            <label for=title>제목: </label>
+            <input type="text" id="title" name="title" th:value="${productBookForm.title}" placeholder="책 제목">
+        </div>
+        <div>
+            <label for="publisher">출판사: </label>
+            <select id="publisher" th:field="*{publisher}">
+                <option th:each="publisher : ${publishers}" th:value="${publisher.id}"
+                        th:utext="${publisher.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="author">작가: </label>
+            <input type="text" id="author" name="author" th:value="${productBookForm.author}" placeholder="작가">
+        </div>
+        <div>
+            <label for="price">가격: </label>
+            <input type="text" id="price" name="price" th:value="${productBookForm.price}" placeholder="책 가격">
+        </div>
+        <div>
+            <label for="stock">재고: </label>
+            <input type="text" id="stock" name="stock" th:value="${productBookForm.stock}" placeholder="재고수량">
+        </div>
+        <div>
+            <label for="description">설명: </label>
+            <input type="text" id="description" name="description" th:value="${productBookForm.description}" placeholder="제품 설명">
+        </div>
+        <div>
+            <h5>카테고리 설정</h5>
+            <div th:each="category : ${categories}" class="form-check-boxes">
+                <input th:field="*{categories}" th:value="${category.id}" th:checked="${productBookForm.categories.contains(category.id)}" type="checkbox">
+                <label th:text="${category.category}">example</label>
+            </div>
+        </div>
+        <br>
+        <div class="clearfix">
+            <input type="file" name="bookImage">
+        </div>
+
+        <div>
+            <input type="submit" value="등록">
+        </div>
+    </form>
+</div>
+<!-- End Main-->
+</body>
+</html>

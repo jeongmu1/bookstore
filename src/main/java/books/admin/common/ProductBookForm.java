@@ -12,6 +12,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class ProductBookForm {
+    private Long id;
     @NotBlank
     private String title;
     private Long publisher;
@@ -25,6 +26,5 @@ public class ProductBookForm {
     private int stock;
     @NotEmpty
     private Set<Long> categories;
-    @NotNull
     private MultipartFile bookImage;
 }

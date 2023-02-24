@@ -1,17 +1,16 @@
 package books.admin.controller;
 
-import books.admin.common.ProductBookForm;
-import books.admin.common.UserInfoDto;
-import books.admin.common.UserUpdateForm;
+import books.admin.common.*;
 import books.admin.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.security.Principal;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -95,7 +94,32 @@ public class AdminController {
                                          @RequestParam(required = false) String searchCriteria,
                                          @RequestParam(required = false) String keyword,
                                          @RequestParam(required = false) Boolean enabled) {
-        model.addAttribute("books", adminService.findProductBookByConditions(searchCriteria, keyword, enabled));
+        List<ProductBookDto> books = adminService.findProductBookByConditions(searchCriteria, keyword, enabled);
+        model.addAttribute("books", books);
+        model.addAttribute("bookForm", new BookForm(books));
         return "admin/productManager";
+    }
+
+    @PostMapping(value = "/productManager")
+    public String updateStock(@ModelAttribute("books") BookForm bookForm) {
+        adminService.updateProductStock(bookForm.getBooks());
+        return "redirect:/admin/productManager";
+    }
+
+    @GetMapping(value = "/productManager/update")
+    public String showProductUpdateForm(Model model, Principal principal,
+                                        @RequestParam Long id) {
+        model.addAttribute("categories", adminService.findAllCategories());
+        model.addAttribute("publishers", adminService.findAllPublishers());
+
+        model.addAttribute("productBookForm", adminService.getProductBookFormById(id));
+
+        return "admin/productUpdateForm";
+    }
+
+    @PostMapping(value = "/productManager/update")
+    public String updateProduct(@Valid ProductBookForm productBookForm) {
+        adminService.updateProductBook(productBookForm);
+        return "redirect:/admin/productManager";
     }
 }

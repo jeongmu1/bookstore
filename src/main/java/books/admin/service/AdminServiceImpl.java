@@ -73,7 +73,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void addProduct(ProductBookForm bookForm) throws FailToUploadException {
+    public void addProduct(ProductBookForm bookForm) {
         ProductBook book = convertProductBookFormToProductBook(bookForm);
         book.setPublisher(publisherRepo.findPublisherById(bookForm.getPublisher()));
         book = productBookRepo.save(book);
@@ -87,6 +87,10 @@ public class AdminServiceImpl implements AdminService {
         });
 
         // Image 저장
+        saveMultipartFile(bookForm, book);
+    }
+
+    private void saveMultipartFile(ProductBookForm bookForm, ProductBook book) {
         MultipartFile file = bookForm.getBookImage();
         if (file.isEmpty()) {
             throw new NullPointerException("There is no uploaded image");
@@ -457,4 +461,59 @@ public class AdminServiceImpl implements AdminService {
 
         return dto;
     }
+
+    @Override
+    @Transactional
+    public void updateProductStock(List<ProductBookDto> books) {
+        // 성능 문제로 개선 예정
+        books.forEach(bookDto -> productBookRepo.updateStockById(bookDto.getId(), bookDto.getStock()));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public ProductBookForm getProductBookFormById(Long id) {
+        ProductBookForm bookForm = new ProductBookForm();
+        ProductBook book = productBookRepo.findProductBookById(id);
+
+        bookForm.setId(book.getId());
+        bookForm.setTitle(book.getTitle());
+        bookForm.setPublisher(book.getPublisher().getId());
+        bookForm.setAuthor(book.getAuthor());
+        bookForm.setPrice(book.getPrice());
+        bookForm.setDescription(book.getDescription());
+        bookForm.setStock(book.getStock());
+        bookForm.setCategories(book.getProductCategories()
+                .stream()
+                .map(productCategory ->
+                        productCategory.getCategory().getId())
+                .collect(Collectors.toSet()));
+        return bookForm;
+    }
+
+    @Override
+    @Transactional
+    public void updateProductBook(ProductBookForm bookForm) {
+        ProductBook book = productBookRepo.findById(bookForm.getId()).orElseThrow();
+        book.setTitle(bookForm.getTitle());
+        book.setPublisher(publisherRepo.findPublisherById(bookForm.getPublisher()));
+        book.setAuthor(bookForm.getAuthor());
+        book.setPrice(bookForm.getPrice());
+        book.setDescription(bookForm.getDescription());
+        book.setStock(bookForm.getStock());
+
+        Set<ProductCategory> categories = book.getProductCategories();
+        productCategoryRepo.deleteAll(categories);
+        book.setProductCategories(bookForm.getCategories().stream().map(categoryId -> {
+            ProductCategory productCategory = new ProductCategory();
+            productCategory.setProductBook(book);
+            productCategory.setCategory(categoryRepo.findCategoryById(categoryId));
+            productCategoryRepo.save(productCategory);
+            return productCategory;
+        }).collect(Collectors.toSet()));
+
+        if (!(bookForm.getBookImage() == null || bookForm.getBookImage().isEmpty())) {
+            saveMultipartFile(bookForm, book);
+        }
+    }
+
 }

@@ -38,4 +38,10 @@ public interface AdminService {
     List<ProductBookDto> findProductBookByConditions(String searchCriteria,
                                                      String keyword,
                                                      Boolean enabled);
+
+    void updateProductStock(List<ProductBookDto> books);
+
+    ProductBookForm getProductBookFormById(Long id);
+
+    void updateProductBook(ProductBookForm bookForm);
 }
