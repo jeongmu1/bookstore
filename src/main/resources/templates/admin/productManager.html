@@ -76,7 +76,7 @@
     </div>
     <!-- 테이블 상단 끝 -->
     <!-- 제품 정보 테이블 -->
-    <form method="post" th:action="@{/admin/productManager/update}">
+    <form method="post" th:action="@{/admin/productManager}" th:object="${bookForm}">
         <table width="100%" class="tb_nor tb_cart">
             <colgroup>
                 <col width="30">
@@ -107,8 +107,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr style="text-align: center" th:each="book : ${books}">
-                <td class="le" th:text="${book.id}"></td>
+            <tr style="text-align: center" th:each="book, i : ${books}">
+                <td class="le"><input type="hidden" th:field="*{books[__${i.index}__].id}" th:name="id" th:value="${book.id}"><span th:text="${book.id}"></span></input></td>
                 <td class="le" th:text="${book.enabled}"></td>
                 <td class="le" th:text="${book.title}"></td>
                 <td class="le" th:text="${book.author}"></td>
@@ -119,11 +119,11 @@
                 <td class="le" th:text="${book.stock - book.preparingStock}"></td>
                 <td>
                     <label>
-                        <input style="text-align: center" type="text" id="stock" name="stock" th:value="${book.stock}">
+                        <input style="text-align: center" type="text" th:field="*{books[__${i.index}__].stock}" name="stock" th:value="${book.stock}">
                     </label>
                 </td>
                 <td>
-                    <button class="btn_blue w_50" type="submit" th:text="수정"></button>
+                    <a class="btn_blue w_50" th:href="@{/admin/productManager/update(id=${book.id})}" th:text="수정"></a>
                 </td>
             </tr>
             </tbody>

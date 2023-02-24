@@ -1,10 +1,14 @@
+import books.admin.common.ProductBookDto;
 import books.admin.service.AdminService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.parameters.P;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootTest
@@ -50,5 +54,12 @@ class AdminTest {
 
         adminService.findProductBookByConditions(criteria, keyword, enabled)
                 .forEach(System.out::println);
+    }
+
+    @Test
+    void updateProductStockTest() {
+        List<ProductBookDto> books = adminService.findProductBookByConditions(null, null, null);
+
+        adminService.updateProductStock(books);
     }
 }
