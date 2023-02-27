@@ -225,17 +225,17 @@ public class AdminServiceImpl implements AdminService {
 
     private Specification<ProductOrderProduct> hasOrderUuid(String orderUuid) {
         return (root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.like(root.get("productOrder").get("orderUuid"), "%" + orderUuid + "%");
+                -> criteriaBuilder.like(root.get("productOrder").get("orderUuid"), setLikeKeyword(orderUuid));
     }
 
     private Specification<ProductOrderProduct> hasUserUsername(String username) {
         return ((root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.like(root.get("productOrder").get("user").get("username"), "%" + username + "%"));
+                -> criteriaBuilder.like(root.get("productOrder").get("user").get("username"), setLikeKeyword(username)));
     }
 
     private Specification<ProductOrderProduct> hasProductName(String productName) {
         return ((root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.like(root.get("productBook").get("title"), "%" + productName + "%"));
+                -> criteriaBuilder.like(root.get("productBook").get("title"), setLikeKeyword(productName)));
     }
 
     private Specification<ProductOrderProduct> hasProductId(String productId) {
@@ -300,7 +300,7 @@ public class AdminServiceImpl implements AdminService {
                 case "phone":
                     spec = Objects.requireNonNull(spec)
                             .and((root, criteriaQuery, criteriaBuilder)
-                                    -> criteriaBuilder.equal(root.get(searchCriteria), "%" + keyword + "%"));
+                                    -> criteriaBuilder.equal(root.get(searchCriteria), setLikeKeyword(keyword)));
                     break;
                 default:
                     throw new IllegalArgumentException();
@@ -422,7 +422,7 @@ public class AdminServiceImpl implements AdminService {
                 case "title":
                 case "author":
                     spec = spec.and((root, criteriaQuery, criteriaBuilder) ->
-                            criteriaBuilder.like(root.get(searchCriteria), "%" + keyword + "%"));
+                            criteriaBuilder.like(root.get(searchCriteria), setLikeKeyword(keyword)));
                     break;
                 // join
                 case "publisher":
@@ -463,7 +463,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Transactional
     public void updateProductStock(List<ProductBookDto> books) {
         // 성능 문제로 개선 예정
         books.forEach(bookDto -> productBookRepo.updateStockById(bookDto.getId(), bookDto.getStock()));
@@ -516,4 +515,30 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductReview> findProductReviewByConditions(String searchCriteria, String keyword) {
+        Specification<ProductReview> spec = Specification.where(null);
+        if (!(searchCriteria == null || keyword == null) && !(searchCriteria.isBlank() || keyword.isBlank())) {
+            switch (searchCriteria) {
+                case "title":
+                    spec = Objects.requireNonNull(spec)
+                            .and((root, criteriaQuery, criteriaBuilder) ->
+                                    criteriaBuilder.like(root.get("productBook").get("title"), setLikeKeyword(keyword)));
+                    break;
+                case "username":
+                    spec = Objects.requireNonNull(spec)
+                            .and(((root, criteriaQuery, criteriaBuilder) ->
+                                    criteriaBuilder.like(root.get("user").get("username"), setLikeKeyword(keyword))));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+        return productReviewRepo.findAll(spec);
+    }
+
+    private String setLikeKeyword(String keyword) {
+        return "%" + keyword + "%";
+    }
 }

@@ -6,6 +6,7 @@ import books.admin.common.UserInfoDto;
 import books.admin.common.UserUpdateForm;
 import books.admin.common.ProductBookDto;
 import books.product.domain.Category;
+import books.product.domain.ProductReview;
 import books.product.domain.Publisher;
 
 import java.util.List;
@@ -44,4 +45,6 @@ public interface AdminService {
     ProductBookForm getProductBookFormById(Long id);
 
     void updateProductBook(ProductBookForm bookForm);
+
+    List<ProductReview> findProductReviewByConditions(String searchCriteria, String keyword);
 }

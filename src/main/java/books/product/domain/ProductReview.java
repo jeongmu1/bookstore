@@ -45,9 +45,20 @@ public class ProductReview {
     @Column(name = "create_time", nullable = false, updatable = false)
     private Timestamp createTime;
 
+    @NotNull
+    @Column(name = "update_time", nullable = false)
+    private Timestamp updateTime;
+
     @PrePersist
     public void persistTime() {
-        this.createTime = new Timestamp(System.currentTimeMillis());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        this.createTime = timestamp;
+        this.updateTime = timestamp;
+    }
+
+    @PreUpdate
+    public void updateTime() {
+        this.updateTime = new Timestamp(System.currentTimeMillis());
     }
 
     @Override
