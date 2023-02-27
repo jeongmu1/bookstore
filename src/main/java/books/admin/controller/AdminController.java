@@ -7,10 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.lang.reflect.Array;
 import java.security.Principal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -84,7 +82,7 @@ public class AdminController {
     }
 
     @PostMapping(value = "/accountManager/updateUser")
-    public String updateUser(UserUpdateForm updateForm) {
+    public String updateUser(UserUpdateFormForAdmin updateForm) {
         adminService.updateUser(updateForm);
         return "redirect:/admin/accountManager";
     }

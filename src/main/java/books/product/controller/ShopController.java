@@ -1,8 +1,6 @@
 package books.product.controller;
 
-import books.common.PointProps;
 import books.home.service.HomeService;
-import books.product.domain.ProductBook;
 import books.product.service.ShopService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

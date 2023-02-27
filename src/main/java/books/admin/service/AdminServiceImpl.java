@@ -5,12 +5,14 @@ import books.common.BookProps;
 import books.common.DeliveryState;
 import books.common.DeliveryStateConverter;
 import books.admin.common.ProductBookDto;
+import books.common.EntityConverter;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
 import books.order.repository.OrderRepository;
 import books.product.domain.*;
 import books.product.repository.*;
+import books.user.common.UserUpdateForm;
 import books.user.domain.Authority;
 import books.user.domain.User;
 import books.user.repository.*;
@@ -24,9 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import static books.auth.common.UserRole.*;
@@ -50,7 +50,6 @@ public class AdminServiceImpl implements AdminService {
     private final ProductReviewRepository productReviewRepo;
     private final PasswordEncoder passwordEncoder;
     private final UserAuthorityRepository authorityRepo;
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, UserRepository userRepo, CartRepository cartRepo, UserAuthorityRepository userAuthorityRepo, UserPointHistoryRepository userPointHistoryRepo, UserAddressRepository userAddressRepo, OrderRepository orderRepo, UserCCRepository userCCRepo, ProductReviewRepository productReviewRepo, PasswordEncoder passwordEncoder, UserAuthorityRepository authorityRepo) {
         this.categoryRepo = categoryRepo;
@@ -180,27 +179,8 @@ public class AdminServiceImpl implements AdminService {
 
         return cartRepo.findAll(spec, Sort.by(Sort.Direction.DESC, "productOrder.updateTime"))
                 .stream()
-                .map(this::convertProductOrderProductToDto)
+                .map(EntityConverter::convertProductOrderProduct)
                 .collect(Collectors.toList());
-    }
-
-    private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop) {
-        ProductOrder order = pop.getProductOrder();
-        String username = "null";
-        if (order.getUser() != null) {
-            username = order.getUser().getUsername();
-        }
-
-        return OrderInfoDto.builder()
-                .updateTime(new SimpleDateFormat(DATE_FORMAT).format(order.getUpdateTime()))
-                .orderUuid(order.getOrderUuid())
-                .productName(pop.getProductBook().getTitle())
-                .productId(pop.getProductBook().getId())
-                .quantity(pop.getProductCount())
-                .userName(username)
-                .deliveryState(DeliveryStateConverter.deliveryStateToString(DeliveryState.valueOf(pop.getDeliveryState())))
-                .id(pop.getId())
-                .build();
     }
 
     private Specification<ProductOrderProduct> hasDeliveryStates(Set<String> deliveryStates) {
@@ -309,39 +289,14 @@ public class AdminServiceImpl implements AdminService {
 
         return userRepo.findAll(spec)
                 .stream()
-                .map(this::convertUserToDto)
+                .map(EntityConverter::convertUser)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserInfoDto findUserById(Long id) {
-        return convertUserToDto(userRepo.findById(id).orElseThrow());
-    }
-
-    private UserInfoDto convertUserToDto(User user) {
-        return UserInfoDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .createTime(new SimpleDateFormat(DATE_FORMAT).format(user.getCreateTime()))
-                .phone(user.getPhone())
-                .username(user.getUsername())
-                .enabled(user.isEnabled())
-                .authority(getAuthorityByUser(user))
-                .build();
-    }
-
-    private String getAuthorityByUser(User user) {
-        Set<String> authorities = user.getAuthorities()
-                .stream()
-                .map(Authority::getAuthority)
-                .filter(authority -> authority.equals(ROLE_ADMIN.toString()))
-                .collect(Collectors.toSet());
-
-        if (!authorities.isEmpty()) {
-            return ROLE_ADMIN.toString();
-        }
-        return ROLE_USER.toString();
+        return EntityConverter.convertUser(userRepo.findById(id).orElseThrow());
     }
 
     @Override
@@ -365,7 +320,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void updateUser(UserUpdateForm updateForm) {
+    public void updateUser(UserUpdateFormForAdmin updateForm) {
         User user = userRepo.findById(updateForm.getId()).orElseThrow();
         user.setEnabled(updateForm.getEnabled());
         user.setName(updateForm.getName());
@@ -399,8 +354,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public UserUpdateForm initializeUserUpdateForm(Long userId) {
-        UserUpdateForm updateForm = new UserUpdateForm();
+    public UserUpdateFormForAdmin initializeUserUpdateForm(Long userId) {
+        UserUpdateFormForAdmin updateForm = new UserUpdateFormForAdmin();
         updateForm.setId(userId);
         return updateForm;
     }

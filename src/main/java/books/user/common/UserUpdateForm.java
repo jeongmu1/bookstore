@@ -1,4 +1,4 @@
-package books.admin.common;
+package books.user.common;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserUpdateForm {
-    private Long id;
-    private Boolean enabled;
-    private String password;
     private String name;
+    private String password;
     private String phone;
-    private String authority;
 }
