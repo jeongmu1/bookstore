@@ -130,4 +130,10 @@ public class AdminController {
         model.addAttribute("reviews", adminService.findProductReviewByConditions(searchCriteria, keyword));
         return "admin/reviewManager";
     }
+
+    @PostMapping(value = "/reviewManager/delete")
+    public String deleteReview(@RequestParam Long id) {
+        adminService.deleteProductReviewById(id);
+        return "redirect:/admin/reviewManager";
+    }
 }

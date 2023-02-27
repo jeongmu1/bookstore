@@ -119,7 +119,7 @@
             <td class="le" th:text="${review.createTime}"></td>
             <td class="le" th:text="${review.updateTime}"></td>
             <td>
-                <button type="button">관리</button>
+                <a th:href="@{/admin/reviewManager/delete(id=${review.id})}" th:text="삭제"></a>
             </td>
         </tr>
         </tbody>

@@ -541,4 +541,9 @@ public class AdminServiceImpl implements AdminService {
     private String setLikeKeyword(String keyword) {
         return "%" + keyword + "%";
     }
+
+    @Override
+    public void deleteProductReviewById(Long id) {
+        productReviewRepo.deleteById(id);
+    }
 }

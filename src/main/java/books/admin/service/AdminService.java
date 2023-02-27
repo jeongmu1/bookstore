@@ -47,4 +47,6 @@ public interface AdminService {
     void updateProductBook(ProductBookForm bookForm);
 
     List<ProductReview> findProductReviewByConditions(String searchCriteria, String keyword);
+
+    void deleteProductReviewById(Long id);
 }

@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feature: 제품 정보 수정기능 구현">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/reviewManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/b/1bd603d528dc73708769b18312f6bcfce1a6b579" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/2/b234300af402a88915f6831442f224fac2d17017" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feature: 리뷰 조회기능 구현">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/f/9fe84ebb15faf917b7def6236dba604453cc61e0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/domain/ProductReview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/productManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/productManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/AdminTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AdminTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/reviewManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/reviewManager.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,14 +270,7 @@
       <workItem from="1676855303381" duration="18292000" />
       <workItem from="1677115346220" duration="22812000" />
       <workItem from="1677157441519" duration="15938000" />
-      <workItem from="1677458838759" duration="2709000" />
-    </task>
-    <task id="LOCAL-00047" summary="feat: 장바구니 기능 구현&#10;&#10;장바구니 담기 기능, 수량 변경 기능, 항목 삭제, 전체 삭제 구현">
-      <created>1674131139508</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131139508</updated>
+      <workItem from="1677458838759" duration="5840000" />
     </task>
     <task id="LOCAL-00048" summary="fix: thymeleaf 태그 변경">
       <created>1674131207985</created>
@@ -622,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677205624265</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="feature: 리뷰 조회기능 구현">
+      <created>1677462299886</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1677462299887</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Style: 코드 포맷 변경" />
     <MESSAGE value="delete: 유저 DB 접근 메소드 필요 시 구현 예정" />
     <MESSAGE value="fix: redirect 경로 상수로 변경" />
     <MESSAGE value="feature: 주문 폼 컨트롤러, 서비스 구현&#10;&#10;단일 주문, 장바구니 주문 기능 컨트롤러, 서비스 구현하였고 view 구현 예정" />
@@ -678,7 +670,8 @@
     <MESSAGE value="fix: 주문 재고반영 방법 변경" />
     <MESSAGE value="fix: gitignore 수정" />
     <MESSAGE value="feature: 제품 정보 수정기능 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature: 제품 정보 수정기능 구현" />
+    <MESSAGE value="feature: 리뷰 조회기능 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature: 리뷰 조회기능 구현" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
