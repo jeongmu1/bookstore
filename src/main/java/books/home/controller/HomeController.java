@@ -2,7 +2,6 @@ package books.home.controller;
 
 import books.home.service.HomeService;
 import books.product.common.SearchForm;
-import books.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,7 @@ public class HomeController {
 
     private final HomeService homeService;
 
-    public HomeController(HomeService homeService, UserService userService) {
+    public HomeController(HomeService homeService) {
         this.homeService = homeService;
     }
 

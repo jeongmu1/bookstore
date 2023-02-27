@@ -1,5 +1,6 @@
 package books.user.service;
 
+import books.admin.common.UserInfoDto;
 import books.user.common.PointHistoryDto;
 import books.user.common.RegistrationForm;
 import books.user.common.UserDto;
@@ -16,4 +17,6 @@ public interface UserService {
     User loadUserByUsername(String username);
 
     List<PointHistoryDto> findUserPointHistory(Principal principal);
+
+    UserInfoDto findUserInfoDto(String username);
 }

@@ -1,6 +1,5 @@
 package books.user.common;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
