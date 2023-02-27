@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+    <script th:src="@{/js/eventResolver.js}"></script>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a th:href="@{/account}" id="user" th:text="${member}">Guest</a> .</p>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <!-- 테이블 상단 -->
+    <div>
+        <form th:action="@{/admin/reviewManager}" method="get">
+            <table>
+                <tbody>
+                <tr>
+                    <td>주문검색</td>
+                    <td>
+                        <label>
+                            <select th:name="searchCriteria">
+                                <option th:value="title" th:text="도서명"></option>
+                                <option th:value="username" th:text="아이디"></option>
+                            </select>
+                        </label>
+                        <label>
+                            <input type="text" name="keyword" th:value="${keyword}">
+                        </label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit">
+        </form>
+    </div>
+    <!-- 테이블 상단 끝 -->
+    <!-- 주문 정보 테이블 -->
+    <table width="100%" class="tb_nor tb_cart">
+        <colgroup>
+            <col width="40">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+        </colgroup>
+        <thead>
+        <tr bgcolor="#cfcfcf">
+            <th scope="col" class="txt"><label>
+                <input type="checkbox" name="orderInfo" onclick="selectAll(this)">
+            </label></th>
+            <th scope="col" class="txt">도서명</th>
+            <th scope="col" class="txt">점수</th>
+            <th scope="col" class="txt">아이디</th>
+            <th scope="col" class="txt">내용</th>
+            <th scope="col" class="txt">등록일</th>
+            <th scope="col" class="txt">수정일</th>
+            <th scope="col" class="txt">관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align: center" th:each="review : ${reviews}">
+            <td><label>
+                <input type="checkbox" th:value="${review.id}" name="ids">
+            </label></td>
+            <td class="le" th:text="${review.productBook.title}"></td>
+            <td class="le" th:text="${review.productScore}"></td>
+            <td class="le" th:text="${review.user.username}"></td>
+            <td class="le" th:text="${review.comment}"></td>
+            <td class="le" th:text="${review.createTime}"></td>
+            <td class="le" th:text="${review.updateTime}"></td>
+            <td>
+                <a th:href="@{/admin/reviewManager/delete(id=${review.id})}" th:text="삭제"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- End Main-->
+</body>
+</html>

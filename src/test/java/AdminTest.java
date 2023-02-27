@@ -1,5 +1,7 @@
 import books.admin.common.ProductBookDto;
 import books.admin.service.AdminService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -61,5 +63,10 @@ class AdminTest {
         List<ProductBookDto> books = adminService.findProductBookByConditions(null, null, null);
 
         adminService.updateProductStock(books);
+    }
+
+    @Test
+    void findProductReviewTest() {
+        adminService.findProductReviewByConditions(null, null).forEach(System.out::println);
     }
 }

@@ -108,7 +108,8 @@
             </thead>
             <tbody>
             <tr style="text-align: center" th:each="book, i : ${books}">
-                <td class="le"><input type="hidden" th:field="*{books[__${i.index}__].id}" th:name="id" th:value="${book.id}"><span th:text="${book.id}"></span></input></td>
+                <td class="le"><input type="hidden" th:field="*{books[__${i.index}__].id}" th:name="id"
+                                      th:value="${book.id}"><span th:text="${book.id}"></span></td>
                 <td class="le" th:text="${book.enabled}"></td>
                 <td class="le" th:text="${book.title}"></td>
                 <td class="le" th:text="${book.author}"></td>
@@ -119,7 +120,8 @@
                 <td class="le" th:text="${book.stock - book.preparingStock}"></td>
                 <td>
                     <label>
-                        <input style="text-align: center" type="text" th:field="*{books[__${i.index}__].stock}" name="stock" th:value="${book.stock}">
+                        <input style="text-align: center" type="text" th:field="*{books[__${i.index}__].stock}"
+                               name="stock" th:value="${book.stock}">
                     </label>
                 </td>
                 <td>
