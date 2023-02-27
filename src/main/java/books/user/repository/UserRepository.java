@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     User findByUsername(String username);
 
     User findUserByProductReviews(ProductReview productReview);
+
+    void deleteByUsername(String username);
 }

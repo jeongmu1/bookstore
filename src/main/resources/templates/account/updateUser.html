@@ -57,29 +57,9 @@
 <!-- Main -->
 <div id="main" class="shell">
     <!-- 사용자 정보 수정 폼 -->
-    <form method="post" th:action="@{/admin/accountManager/updateUser}" th:object="${updateForm}">
+    <form method="post" th:action="@{/account/update}" th:object="${updateForm}">
         <table>
             <tbody>
-            <tr>
-                <td>회원번호</td>
-                <td>
-                    <input type="hidden" name="id" th:field="*{id}" th:value="${userInfo.id}">
-                    <span th:text="${userInfo.id}"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>승인</td>
-                <td>
-                    <label>
-                        <input type="radio" name="enabled" th:value="1" th:checked="${userInfo.enabled}">
-                        승인
-                    </label>
-                    <label>
-                        <input type="radio" name="enabled" th:value="0" th:checked="${!userInfo.enabled}">
-                        미승인
-                    </label>
-                </td>
-            </tr>
             <tr>
                 <td>아이디</td>
                 <td th:text="${userInfo.username}"></td>
@@ -108,19 +88,9 @@
                     </label>
                 </td>
             </tr>
-            <tr>
-                <td>권한</td>
-                <td>
-                    <label>
-                        <input type="radio" name="authority" th:value="ROLE_USER" th:checked="${userInfo.authority == 'ROLE_USER'}">사용자
-                    </label>
-                    <label>
-                        <input type="radio" name="authority" th:value="ROLE_ADMIN" th:checked="${userInfo.authority == 'ROLE_ADMIN'}">관리자
-                    </label>
-                </td>
-            </tr>
             </tbody>
         </table>
+        <a th:href="@{/account/delete}">탈퇴</a>
         <input type="submit">
     </form>
     <!-- 사용자 정보 수정 폼 끝 -->

@@ -12,6 +12,7 @@ import books.order.repository.CartRepository;
 import books.order.repository.OrderRepository;
 import books.product.domain.*;
 import books.product.repository.*;
+import books.user.common.UserUpdateForm;
 import books.user.domain.Authority;
 import books.user.domain.User;
 import books.user.repository.*;
@@ -49,7 +50,6 @@ public class AdminServiceImpl implements AdminService {
     private final ProductReviewRepository productReviewRepo;
     private final PasswordEncoder passwordEncoder;
     private final UserAuthorityRepository authorityRepo;
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     public AdminServiceImpl(CategoryRepository categoryRepo, PublisherRepository publisherRepo, ProductBookRepository productBookRepo, BookProps bookProps, ProductImageRepository productImageRepo, ProductCategoryRepository productCategoryRepo, UserRepository userRepo, CartRepository cartRepo, UserAuthorityRepository userAuthorityRepo, UserPointHistoryRepository userPointHistoryRepo, UserAddressRepository userAddressRepo, OrderRepository orderRepo, UserCCRepository userCCRepo, ProductReviewRepository productReviewRepo, PasswordEncoder passwordEncoder, UserAuthorityRepository authorityRepo) {
         this.categoryRepo = categoryRepo;
@@ -320,7 +320,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void updateUser(UserUpdateForm updateForm) {
+    public void updateUser(UserUpdateFormForAdmin updateForm) {
         User user = userRepo.findById(updateForm.getId()).orElseThrow();
         user.setEnabled(updateForm.getEnabled());
         user.setName(updateForm.getName());
@@ -354,8 +354,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public UserUpdateForm initializeUserUpdateForm(Long userId) {
-        UserUpdateForm updateForm = new UserUpdateForm();
+    public UserUpdateFormForAdmin initializeUserUpdateForm(Long userId) {
+        UserUpdateFormForAdmin updateForm = new UserUpdateFormForAdmin();
         updateForm.setId(userId);
         return updateForm;
     }

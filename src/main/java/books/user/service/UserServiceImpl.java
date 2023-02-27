@@ -1,10 +1,13 @@
 package books.user.service;
 
+import books.admin.common.UserInfoDto;
+import books.admin.service.AdminService;
 import books.common.DeliveryState;
-import books.common.PageSizeProps;
+import books.common.EntityConverter;
 import books.product.repository.ProductReviewRepository;
 import books.user.common.PointHistoryDto;
 import books.user.common.UserDto;
+import books.user.common.UserUpdateForm;
 import books.user.domain.*;
 import books.order.repository.CartRepository;
 import books.order.repository.OrderRepository;
@@ -29,8 +32,10 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder encoder;
     private final UserPointHistoryRepository userPointHistoryRepo;
     private final ProductReviewRepository productReviewRepository;
+    private final AdminService adminService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepo, UserAuthorityRepository authorityRepo, CartRepository cartRepo, OrderRepository orderRepo, PasswordEncoder encoder, UserPointHistoryRepository userPointHistoryRepo, ProductReviewRepository productReviewRepository) {
+    public UserServiceImpl(UserRepository userRepo, UserAuthorityRepository authorityRepo, CartRepository cartRepo, OrderRepository orderRepo, PasswordEncoder encoder, UserPointHistoryRepository userPointHistoryRepo, ProductReviewRepository productReviewRepository, AdminService adminService, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.authorityRepo = authorityRepo;
         this.cartRepo = cartRepo;
@@ -38,6 +43,8 @@ public class UserServiceImpl implements UserService {
         this.encoder = encoder;
         this.userPointHistoryRepo = userPointHistoryRepo;
         this.productReviewRepository = productReviewRepository;
+        this.adminService = adminService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -95,5 +102,44 @@ public class UserServiceImpl implements UserService {
                 .findProductOrderByUserAndEnabled(user, false)
                 .map(cartRepo::countProductOrderProductsByProductOrder)
                 .orElse(0);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserInfoDto findUserInfoDto(String username) {
+        return EntityConverter.convertUser(userRepo.findByUsername(username));
+    }
+
+    @Override
+    public UserUpdateForm initializeUserUpdateFormByUsername(String username) {
+        User user = userRepo.findByUsername(username);
+        UserUpdateForm form = new UserUpdateForm();
+        form.setName(user.getName());
+        form.setPhone(user.getPhone());
+        return form;
+    }
+
+    @Override
+    @Transactional
+    public void updateUserByForm(String username, UserUpdateForm updateForm) {
+        User user = userRepo.findByUsername(username);
+
+        if (!updateForm.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(updateForm.getPassword()));
+        }
+
+        if (!updateForm.getName().equals(user.getName())) {
+            user.setName(updateForm.getName());
+        }
+
+        if (!updateForm.getPhone().equals(user.getPhone())) {
+            user.setPhone(updateForm.getPhone());
+        }
+
+    }
+
+    @Override
+    public void deleteUserByUsername(String username) {
+        adminService.deleteUserById(userRepo.findByUsername(username).getId());
     }
 }

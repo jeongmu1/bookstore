@@ -82,7 +82,7 @@ public class AdminController {
     }
 
     @PostMapping(value = "/accountManager/updateUser")
-    public String updateUser(UserUpdateForm updateForm) {
+    public String updateUser(UserUpdateFormForAdmin updateForm) {
         adminService.updateUser(updateForm);
         return "redirect:/admin/accountManager";
     }

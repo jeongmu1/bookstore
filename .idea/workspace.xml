@@ -4,24 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="design: Entity to DTO 메소드 EntityConverter 유틸리티 클래스로 이동">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/3/235eb8dd973b666d1e7530ade4ae9c440fb188c1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/c/7c13e623899c382019c62b881b9c947b36e313fd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/7/97a777b3a9e40d9ae41ffcec0bb228b83f0bf5ed" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/0/e058ec132b524e66c570a19e90c8a902e205a1c3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/8/f889c2386c7644237c0054e1d8551e30eef82b11" beforeDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: 사용하지 않는 import 제거">
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/user/common/UserUpdateForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/e/4ee287e361670968763d61031d965ba8b90384c3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/3/b389f25c8b339ce1b436704fb2621fc200d67653" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/3/b389f25c8b339ce1b436704fb2621fc200d67653" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/6/b65b0fae92424389672da01163c086655f089ecc" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/6/b65b0fae92424389672da01163c086655f089ecc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c1a0bd668cd1d57f1dab3025ac63fcfc938afd4c" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c1a0bd668cd1d57f1dab3025ac63fcfc938afd4c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/9/c96a87eaf7a3b53fe65688f8d5a68d7630e74a5e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/9/c96a87eaf7a3b53fe65688f8d5a68d7630e74a5e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/e/ce04b46b0a4f77891c495a671dad9fa901190d86" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/e/ce04b46b0a4f77891c495a671dad9fa901190d86" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/3/e3e634e31065d79425c482f647e54f0fe82da90c" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/3/e3e634e31065d79425c482f647e54f0fe82da90c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/BookForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/BookForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/UserUpdateForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/UserUpdateFormForAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/service/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/home/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/home/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/repository/CartRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account/updateUser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account/updateUser.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,39 +135,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last.edited.regexp": "010-0000-0001",
-    "last_opened_file_path": "/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates/account",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "모듈",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "495180092bd0712a4c50027fe52ccb8a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last.edited.regexp&quot;: &quot;010-0000-0001&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates/account&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;495180092bd0712a4c50027fe52ccb8a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="books.admin.service" />
@@ -285,14 +288,8 @@
       <workItem from="1677115346220" duration="22812000" />
       <workItem from="1677157441519" duration="15938000" />
       <workItem from="1677458838759" duration="6613000" />
-      <workItem from="1677468827833" duration="2139000" />
-    </task>
-    <task id="LOCAL-00050" summary="feature: 기본 템플릿 검색 ui 추가">
-      <created>1674131347872</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131347873</updated>
+      <workItem from="1677468827833" duration="2576000" />
+      <workItem from="1677471420719" duration="4429000" />
     </task>
     <task id="LOCAL-00051" summary="chore: commit">
       <created>1674131396761</created>
@@ -630,7 +627,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677469931382</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="fix: 사용하지 않는 import 제거">
+      <created>1677471114438</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1677471114438</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -673,7 +677,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feature: 주문 폼 컨트롤러, 서비스 구현&#10;&#10;단일 주문, 장바구니 주문 기능 컨트롤러, 서비스 구현하였고 view 구현 예정" />
     <MESSAGE value="fix: 필드를 설정하지 않았을 때 NullPointerException 이 발생하지 않도록 변경" />
     <MESSAGE value="fix: user_address 테이블에 phone 컬럼 추가" />
     <MESSAGE value="fix: user 엔티티 인자 없는 생성자 제거" />
@@ -698,7 +701,8 @@
     <MESSAGE value="feature: 리뷰 조회기능 구현" />
     <MESSAGE value="feature: 리뷰 삭제기능 구현" />
     <MESSAGE value="design: Entity to DTO 메소드 EntityConverter 유틸리티 클래스로 이동" />
-    <option name="LAST_COMMIT_MESSAGE" value="design: Entity to DTO 메소드 EntityConverter 유틸리티 클래스로 이동" />
+    <MESSAGE value="fix: 사용하지 않는 import 제거" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 사용하지 않는 import 제거" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
