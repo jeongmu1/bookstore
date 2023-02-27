@@ -5,6 +5,7 @@ import books.common.BookProps;
 import books.common.DeliveryState;
 import books.common.DeliveryStateConverter;
 import books.admin.common.ProductBookDto;
+import books.common.EntityConverter;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
@@ -180,27 +181,8 @@ public class AdminServiceImpl implements AdminService {
 
         return cartRepo.findAll(spec, Sort.by(Sort.Direction.DESC, "productOrder.updateTime"))
                 .stream()
-                .map(this::convertProductOrderProductToDto)
+                .map(EntityConverter::convertProductOrderProduct)
                 .collect(Collectors.toList());
-    }
-
-    private OrderInfoDto convertProductOrderProductToDto(ProductOrderProduct pop) {
-        ProductOrder order = pop.getProductOrder();
-        String username = "null";
-        if (order.getUser() != null) {
-            username = order.getUser().getUsername();
-        }
-
-        return OrderInfoDto.builder()
-                .updateTime(new SimpleDateFormat(DATE_FORMAT).format(order.getUpdateTime()))
-                .orderUuid(order.getOrderUuid())
-                .productName(pop.getProductBook().getTitle())
-                .productId(pop.getProductBook().getId())
-                .quantity(pop.getProductCount())
-                .userName(username)
-                .deliveryState(DeliveryStateConverter.deliveryStateToString(DeliveryState.valueOf(pop.getDeliveryState())))
-                .id(pop.getId())
-                .build();
     }
 
     private Specification<ProductOrderProduct> hasDeliveryStates(Set<String> deliveryStates) {
@@ -309,39 +291,14 @@ public class AdminServiceImpl implements AdminService {
 
         return userRepo.findAll(spec)
                 .stream()
-                .map(this::convertUserToDto)
+                .map(EntityConverter::convertUser)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserInfoDto findUserById(Long id) {
-        return convertUserToDto(userRepo.findById(id).orElseThrow());
-    }
-
-    private UserInfoDto convertUserToDto(User user) {
-        return UserInfoDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .createTime(new SimpleDateFormat(DATE_FORMAT).format(user.getCreateTime()))
-                .phone(user.getPhone())
-                .username(user.getUsername())
-                .enabled(user.isEnabled())
-                .authority(getAuthorityByUser(user))
-                .build();
-    }
-
-    private String getAuthorityByUser(User user) {
-        Set<String> authorities = user.getAuthorities()
-                .stream()
-                .map(Authority::getAuthority)
-                .filter(authority -> authority.equals(ROLE_ADMIN.toString()))
-                .collect(Collectors.toSet());
-
-        if (!authorities.isEmpty()) {
-            return ROLE_ADMIN.toString();
-        }
-        return ROLE_USER.toString();
+        return EntityConverter.convertUser(userRepo.findById(id).orElseThrow());
     }
 
     @Override
