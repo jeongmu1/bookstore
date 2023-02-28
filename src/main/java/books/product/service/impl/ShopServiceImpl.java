@@ -1,12 +1,15 @@
 package books.product.service.impl;
 
 import books.common.EntityConverter;
+import books.common.ReviewProps;
 import books.home.common.ProductBookDto;
 import books.product.domain.*;
 import books.product.repository.*;
 import books.product.service.ShopService;
+import books.user.common.ProductReviewForm;
 import books.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,18 +26,15 @@ public class ShopServiceImpl implements ShopService {
     private final ProductImageRepository productImageRepo;
     private final ProductReviewRepository productReviewRepo;
     private final UserRepository userRepo;
+    private final ReviewProps reviewProps;
 
-    @Autowired
-    public ShopServiceImpl(ProductBookRepository productBookRepo
-            , ProductCategoryRepository productCategoryRepo
-            , ProductImageRepository productImageRepo
-            , ProductReviewRepository productReviewRepo
-            , UserRepository userRepo) {
+    public ShopServiceImpl(ProductBookRepository productBookRepo, ProductCategoryRepository productCategoryRepo, ProductImageRepository productImageRepo, ProductReviewRepository productReviewRepo, UserRepository userRepo, ReviewProps reviewProps) {
         this.productBookRepo = productBookRepo;
         this.productCategoryRepo = productCategoryRepo;
         this.productImageRepo = productImageRepo;
         this.productReviewRepo = productReviewRepo;
         this.userRepo = userRepo;
+        this.reviewProps = reviewProps;
     }
 
     @Override
@@ -106,5 +106,32 @@ public class ShopServiceImpl implements ShopService {
                 .stream()
                 .map(EntityConverter::convertProductBook)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void addProductReview(String username, ProductReviewForm reviewForm) {
+        ProductBook book = productBookRepo.findProductBookById(reviewForm.getProductBookId());
+        // 중복 리뷰작성 방지
+        if (productReviewRepo.countProductReviewsByUserAndProductBook(
+                userRepo.findByUsername(username), book) > 0){
+            throw new  DuplicateKeyException("User can write only one review per product.");
+        }
+        // 점수 범위 이탈 방지
+        qualifyProductScore(reviewForm.getProductScore());
+
+        ProductReview review = new ProductReview();
+        review.setProductScore(reviewForm.getProductScore());
+        review.setProductBook(book); // 1차캐시 조회
+        review.setUser(userRepo.findByUsername(username));
+        review.setComment(reviewForm.getComment());
+
+        productReviewRepo.save(review);
+    }
+
+    private void qualifyProductScore(Byte productScore) {
+        if (productScore < reviewProps.getMinScore() || productScore > reviewProps.getMaxScore()) {
+            throw new IllegalArgumentException("productScore is out of range");
+        }
     }
 }

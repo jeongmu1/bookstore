@@ -1,7 +1,6 @@
 package books.user.controller;
 
-import books.admin.common.UserInfoDto;
-import books.admin.service.AdminService;
+import books.user.common.ProductReviewForm;
 import books.user.common.UserUpdateForm;
 import books.user.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -15,11 +14,9 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-    private final AdminService adminService;
 
-    public UserController(UserService userService, AdminService adminService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.adminService = adminService;
     }
 
     @GetMapping
@@ -36,9 +33,8 @@ public class UserController {
 
     @GetMapping("/update")
     public String showUserUpdateForm(Model model, Principal principal) {
-        UserInfoDto userInfoDto = userService.findUserInfoDto(principal.getName());
-        model.addAttribute("userInfo", userInfoDto);
-        model.addAttribute("updateForm", adminService.initializeUserUpdateForm(userInfoDto.getId()));
+        model.addAttribute("userInfo", userService.findUserInfoDto(principal.getName()));
+        model.addAttribute("updateForm", userService.initializeUserUpdateFormByUsername(principal.getName()));
         return "account/updateUser";
     }
 
@@ -52,5 +48,32 @@ public class UserController {
     public String deleteUser(Principal principal) {
         userService.deleteUserByUsername(principal.getName());
         return "redirect:/logout";
+    }
+
+    @GetMapping("/reviews")
+    public String showReviews(Model model, Principal principal) {
+        model.addAttribute("reviews", userService.findProductReviewsByUsername(principal.getName()));
+        return "account/reviews";
+    }
+
+    @GetMapping("/reviews/update")
+    public String showReviewUpdateForm(Model model, Principal principal,
+                                       @RequestParam Long id) throws IllegalAccessException{
+        model.addAttribute("review", userService.findProductReviewForUpdateById(principal.getName(), id));
+        model.addAttribute("updateForm", new ProductReviewForm());
+        return "account/reviewUpdateForm";
+    }
+
+    @PostMapping("/reviews/update")
+    public String updateProductReview(Principal principal, ProductReviewForm productReviewForm) throws IllegalAccessException {
+        userService.updateProductReview(principal.getName(), productReviewForm);
+        return "redirect:/account/reviews";
+    }
+
+    @PostMapping("/reviews/delete")
+    public String deleteProductReview(Principal principal,
+                                      @RequestParam Long id) throws IllegalAccessException {
+        userService.deleteProductReviewById(principal.getName(), id);
+        return "redirect:/account/reviews";
     }
 }

@@ -4,14 +4,14 @@ import books.admin.common.UserInfoDto;
 import books.admin.service.AdminService;
 import books.common.DeliveryState;
 import books.common.EntityConverter;
+import books.common.ReviewProps;
+import books.product.domain.ProductReview;
+import books.product.repository.ProductBookRepository;
 import books.product.repository.ProductReviewRepository;
-import books.user.common.PointHistoryDto;
-import books.user.common.UserDto;
-import books.user.common.UserUpdateForm;
+import books.user.common.*;
 import books.user.domain.*;
 import books.order.repository.CartRepository;
 import books.order.repository.OrderRepository;
-import books.user.common.RegistrationForm;
 import books.user.repository.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,8 +34,9 @@ public class UserServiceImpl implements UserService {
     private final ProductReviewRepository productReviewRepository;
     private final AdminService adminService;
     private final PasswordEncoder passwordEncoder;
+    private final ReviewProps reviewProps;
 
-    public UserServiceImpl(UserRepository userRepo, UserAuthorityRepository authorityRepo, CartRepository cartRepo, OrderRepository orderRepo, PasswordEncoder encoder, UserPointHistoryRepository userPointHistoryRepo, ProductReviewRepository productReviewRepository, AdminService adminService, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepo, UserAuthorityRepository authorityRepo, CartRepository cartRepo, OrderRepository orderRepo, PasswordEncoder encoder, UserPointHistoryRepository userPointHistoryRepo, ProductReviewRepository productReviewRepository, AdminService adminService, PasswordEncoder passwordEncoder, ReviewProps reviewProps) {
         this.userRepo = userRepo;
         this.authorityRepo = authorityRepo;
         this.cartRepo = cartRepo;
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
         this.productReviewRepository = productReviewRepository;
         this.adminService = adminService;
         this.passwordEncoder = passwordEncoder;
+        this.reviewProps = reviewProps;
     }
 
     @Override
@@ -141,5 +143,53 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserByUsername(String username) {
         adminService.deleteUserById(userRepo.findByUsername(username).getId());
+    }
+
+    @Override
+    public List<ProductReview> findProductReviewsByUsername(String username) {
+        return productReviewRepository.findProductReviewsByUser(userRepo.findByUsername(username));
+    }
+
+    @Override
+    public ProductReview findProductReviewForUpdateById(String username, Long id) throws IllegalAccessException {
+        ProductReview review = productReviewRepository.findById(id).orElseThrow();
+        qualifyAccessToProductReview(username, review);
+        return productReviewRepository.findById(id).orElseThrow();
+    }
+
+
+    @Override
+    @Transactional
+    public void updateProductReview(String username, ProductReviewForm form) throws IllegalAccessException {
+        ProductReview review = productReviewRepository.findById(form.getId()).orElseThrow();
+        qualifyAccessToProductReview(username, review);
+
+        if (!review.getComment().equals(form.getComment())) {
+            review.setComment(form.getComment());
+        }
+
+        if (!review.getProductScore().equals(form.getProductScore())) {
+            qualifyProductReviewScore(review.getProductScore());
+            review.setProductScore(form.getProductScore());
+        }
+    }
+
+    private void qualifyAccessToProductReview(String username, ProductReview productReview) throws IllegalAccessException{
+        if (!productReview.getUser().getId().equals(userRepo.findByUsername(username).getId())) {
+            throw new IllegalAccessException("Access denied");
+        }
+    }
+
+    @Override
+    public void deleteProductReviewById(String username, Long id) throws IllegalAccessException {
+        ProductReview review = productReviewRepository.findById(id).orElseThrow();
+        qualifyAccessToProductReview(username, review);
+        productReviewRepository.delete(review);
+    }
+
+    private void qualifyProductReviewScore(Byte score) {
+        if (score < reviewProps.getMinScore() || score > reviewProps.getMaxScore()) {
+            throw new IllegalArgumentException("Out range of score");
+        }
     }
 }

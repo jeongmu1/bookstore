@@ -1,10 +1,8 @@
 package books.user.service;
 
 import books.admin.common.UserInfoDto;
-import books.user.common.PointHistoryDto;
-import books.user.common.RegistrationForm;
-import books.user.common.UserDto;
-import books.user.common.UserUpdateForm;
+import books.product.domain.ProductReview;
+import books.user.common.*;
 import books.user.domain.*;
 
 import java.security.Principal;
@@ -26,4 +24,12 @@ public interface UserService {
     void updateUserByForm(String username, UserUpdateForm updateForm);
 
     void deleteUserByUsername(String username);
+
+    List<ProductReview> findProductReviewsByUsername(String username);
+
+    ProductReview findProductReviewForUpdateById(String username, Long id) throws IllegalAccessException;
+
+    void updateProductReview(String username, ProductReviewForm form) throws IllegalAccessException;
+
+    void deleteProductReviewById(String username, Long id) throws IllegalAccessException;
 }

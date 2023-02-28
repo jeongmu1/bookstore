@@ -21,21 +21,13 @@ n
 >src/main/java/books/product/repository/CategoryRepository.java,7/f/7faa7c2d43d60833f8f7728aefd8c7f1949c6928
 L
 src/test/java/OrderTest.java,a/7/a7c2b7e667be4ed8bb7c777f85bfeab077bb7a61
-M
-src/test/java/SearchTest.java,f/8/f8d7f527e9eb81dbd2f0be2b1228cf0f2c9da578
-T
-$src/test/java/ProductDetailTest.java,2/3/23f6cda1407aaa260bb2ab8f1fca8090897633ea
 T
 $src/test/java/TestConfiguration.java,c/d/cd39f7c96fac283c53e9949055575bbe6be494c2
 K
 src/test/java/UserTest.java,d/a/da17b786f51da7245c1b8003270a586b3dfe3906
-R
-"src/test/java/HomeServiceTest.java,6/7/675cfde4dede386b96c562de06bc33cdfa21404a
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-X
-(src/main/java/books/BookApplication.java,2/e/2eba86eec34386fb1c961da888087c2cfa9450d8
 L
 src/test/java/AdminTest.java,7/d/7d685b8e5d08db77f5dcc1b0520d8b47322f3d36
 b
@@ -50,8 +42,6 @@ a
 1src/main/java/books/admin/common/UserInfoDto.java,2/b/2b802cebcb9e0d14971bb8b488bcf9e798c78444
 ]
 -src/main/java/books/auth/common/UserRole.java,e/c/eca7c56db6bf090a64a44aa47bca2dac4abea852
-7
-pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 Y
 )src/main/java/books/common/BookProps.java,e/f/ef9b74304ea83a0ab3b71335d1929949af07c940
 `
@@ -62,12 +52,8 @@ f
 6src/main/java/books/common/DeliveryStateConverter.java,0/5/05fcf3258f6eca72b93fb4033c92887017566f98
 ]
 -src/main/java/books/common/PageSizeProps.java,9/5/951e6c3fd2095860f7d6892be43ac42b2e71ec4b
-Z
-*src/main/java/books/common/PointProps.java,8/f/8f062484abe88d02bffe71dc08bb16143ffd0f2e
 Y
 )src/main/java/books/common/WebConfig.java,7/9/79a32f9f3b0d2b98a4a97cc2456d0895d6e71ad6
-c
-3src/main/java/books/home/common/ProductBookDto.java,e/d/edc78934ef79a09b288f61e46a94ec066253de01
 a
 1src/main/java/books/home/service/HomeService.java,2/2/228d148cd78fe427832f04da6489f50c58226367
 e
@@ -78,8 +64,6 @@ _
 /src/main/java/books/order/common/OrderForm.java,5/a/5a9ee569d90607fe216e49c8c1975bb1d7f59ee7
 i
 9src/main/java/books/order/controller/OrderController.java,e/0/e0c7358cbf04488c5d4166dca97bdf3dd99683c8
-b
-2src/main/java/books/order/domain/ProductOrder.java,1/c/1cf22772f5e0296498723fc20feb30263d528396
 i
 9src/main/java/books/order/domain/ProductOrderProduct.java,9/7/97429c46daebeb9a81dfdc78acda28eff95f977e
 i
@@ -116,12 +100,8 @@ o
 ?src/main/java/books/product/repository/PublisherRepository.java,f/4/f43575cfa108e9531b776bcc46ed12b5a8e55313
 m
 =src/main/java/books/product/service/impl/CartServiceImpl.java,c/4/c41eaf5d8efd77527b55e74d8065983da1488194
-m
-=src/main/java/books/product/service/impl/ShopServiceImpl.java,5/5/55701a3a95761e399690d05296c7ed48f534ec11
 d
 4src/main/java/books/product/service/CartService.java,3/4/34d9c03298c65782f5dd686206c14a178b2f2149
-d
-4src/main/java/books/product/service/ShopService.java,c/c/cc3cf4ac42487f1b361aae479e93673ec62be61c
 e
 5src/main/java/books/user/common/RegistrationForm.java,1/3/13cd4ea0a348eec31cecc453ad2745f788680ddc
 d
@@ -146,8 +126,6 @@ u
 Esrc/main/java/books/user/repository/PointHistoryDetailRepository.java,3/3/331841cb19ea1fafcb164fab597495457fd33c61
 p
 @src/main/java/books/user/repository/UserAuthorityRepository.java,4/2/42415bb8c35e91ab38c51b4d04028fd67733e29a
-l
-<src/main/java/books/user/service/UserDetailsServiceImpl.java,0/f/0ff33fa765b4a2c251625000c4e4021992adb2fb
 ^
 .src/main/java/books/admin/common/BookForm.java,c/6/c6c95c4965a45978b550806d3893828d54d8de3c
 h
@@ -156,12 +134,6 @@ g
 7src/main/java/books/home/controller/HomeController.java,c/e/ce04b46b0a4f77891c495a671dad9fa901190d86
 d
 4src/main/java/books/user/common/PointHistoryDto.java,c/9/c96a87eaf7a3b53fe65688f8d5a68d7630e74a5e
-s
-Csrc/main/java/books/product/repository/ProductReviewRepository.java,b/2/b234300af402a88915f6831442f224fac2d17017
-^
-.src/main/java/books/common/SecurityConfig.java,e/3/e3e634e31065d79425c482f647e54f0fe82da90c
-j
-:src/main/java/books/product/controller/ShopController.java,c/1/c1a0bd668cd1d57f1dab3025ac63fcfc938afd4c
 s
 Csrc/main/java/books/user/repository/UserPointHistoryRepository.java,b/6/b65b0fae92424389672da01163c086655f089ecc
 i

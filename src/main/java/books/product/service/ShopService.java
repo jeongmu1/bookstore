@@ -4,6 +4,7 @@ import books.home.common.ProductBookDto;
 import books.product.domain.Category;
 import books.product.domain.ProductBook;
 import books.product.domain.ProductReview;
+import books.user.common.ProductReviewForm;
 
 import java.util.List;
 import java.util.Set;
@@ -19,4 +20,6 @@ public interface ShopService {
     Set<ProductReview> findUserInProductReviews(Set<ProductReview> reviews);
 
     List<ProductBookDto> findProductsBySearch(String param, int type);
+
+    void addProductReview(String username, ProductReviewForm reviewForm);
 }

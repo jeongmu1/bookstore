@@ -16,6 +16,7 @@ class HomeServiceTest {
     void queryTest() {
         System.out.println(homeService.findAllCategories());
         System.out.println(homeService.findDisplayBooksForDtos());
+
     }
 
 }
