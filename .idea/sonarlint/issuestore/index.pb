@@ -50,8 +50,6 @@ a
 1src/main/java/books/admin/common/UserInfoDto.java,2/b/2b802cebcb9e0d14971bb8b488bcf9e798c78444
 ]
 -src/main/java/books/auth/common/UserRole.java,e/c/eca7c56db6bf090a64a44aa47bca2dac4abea852
-7
-pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 Y
 )src/main/java/books/common/BookProps.java,e/f/ef9b74304ea83a0ab3b71335d1929949af07c940
 `
@@ -62,8 +60,6 @@ f
 6src/main/java/books/common/DeliveryStateConverter.java,0/5/05fcf3258f6eca72b93fb4033c92887017566f98
 ]
 -src/main/java/books/common/PageSizeProps.java,9/5/951e6c3fd2095860f7d6892be43ac42b2e71ec4b
-Z
-*src/main/java/books/common/PointProps.java,8/f/8f062484abe88d02bffe71dc08bb16143ffd0f2e
 Y
 )src/main/java/books/common/WebConfig.java,7/9/79a32f9f3b0d2b98a4a97cc2456d0895d6e71ad6
 c
@@ -146,8 +142,6 @@ u
 Esrc/main/java/books/user/repository/PointHistoryDetailRepository.java,3/3/331841cb19ea1fafcb164fab597495457fd33c61
 p
 @src/main/java/books/user/repository/UserAuthorityRepository.java,4/2/42415bb8c35e91ab38c51b4d04028fd67733e29a
-l
-<src/main/java/books/user/service/UserDetailsServiceImpl.java,0/f/0ff33fa765b4a2c251625000c4e4021992adb2fb
 ^
 .src/main/java/books/admin/common/BookForm.java,c/6/c6c95c4965a45978b550806d3893828d54d8de3c
 h
@@ -156,10 +150,6 @@ g
 7src/main/java/books/home/controller/HomeController.java,c/e/ce04b46b0a4f77891c495a671dad9fa901190d86
 d
 4src/main/java/books/user/common/PointHistoryDto.java,c/9/c96a87eaf7a3b53fe65688f8d5a68d7630e74a5e
-s
-Csrc/main/java/books/product/repository/ProductReviewRepository.java,b/2/b234300af402a88915f6831442f224fac2d17017
-^
-.src/main/java/books/common/SecurityConfig.java,e/3/e3e634e31065d79425c482f647e54f0fe82da90c
 j
 :src/main/java/books/product/controller/ShopController.java,c/1/c1a0bd668cd1d57f1dab3025ac63fcfc938afd4c
 s

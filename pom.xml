@@ -117,6 +117,13 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.9</version>
+        </dependency>
     </dependencies>
 
     <build>

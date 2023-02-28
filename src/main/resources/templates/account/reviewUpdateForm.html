@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a th:href="@{/account}" id="user" th:text="${member}">Guest</a> .</p>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <!-- 사용자 정보 수정 폼 -->
+    <form method="post" th:action="@{/account/reviews/update}" th:object="${updateForm}">
+        <input type="hidden" name="id" th:value="${review.id}">
+        <table>
+            <tbody>
+            <tr>
+                <td class="le">도서명</td>
+                <td th:text="${review.productBook.title}"></td>
+            </tr>
+            <tr>
+                <td class="le">점수</td>
+                <td>
+                    <label>
+                        <input type="text" name="productScore" th:value="${review.productScore}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="le">내용</td>
+                <td>
+                    <label>
+                        <input type="text" name="comment" th:value="${review.comment}">
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/account/reviews/delete(id=${review.id})}">삭제</a>
+        <input type="submit">
+    </form>
+    <!-- 사용자 정보 수정 폼 끝 -->
+</div>
+<!-- End Main-->
+</body>
+</html>
