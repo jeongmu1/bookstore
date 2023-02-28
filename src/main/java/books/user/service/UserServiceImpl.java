@@ -6,6 +6,7 @@ import books.common.DeliveryState;
 import books.common.EntityConverter;
 import books.common.ReviewProps;
 import books.product.domain.ProductReview;
+import books.product.repository.ProductBookRepository;
 import books.product.repository.ProductReviewRepository;
 import books.user.common.*;
 import books.user.domain.*;

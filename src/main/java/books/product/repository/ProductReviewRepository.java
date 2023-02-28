@@ -2,7 +2,6 @@ package books.product.repository;
 
 import books.product.domain.ProductBook;
 import books.product.domain.ProductReview;
-import books.user.common.ProductReviewForm;
 import books.user.domain.User;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ProductReviewRepository extends JpaRepository<ProductReview, Long>, JpaSpecificationExecutor<ProductReview> {
     List<ProductReview> findAllByProductBook(ProductBook productBook);
@@ -19,6 +19,8 @@ public interface ProductReviewRepository extends JpaRepository<ProductReview, Lo
     Integer countProductReviewsByUser(User user);
 
     void deleteByUser(User user);
+
+    Integer countProductReviewsByUserAndProductBook(User user, ProductBook book);
 
     @NotNull
     @EntityGraph(attributePaths = {"productBook", "user"})

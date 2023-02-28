@@ -1,6 +1,5 @@
 package books.user.controller;
 
-import books.admin.service.AdminService;
 import books.user.common.ProductReviewForm;
 import books.user.common.UserUpdateForm;
 import books.user.service.UserService;
@@ -15,11 +14,9 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-    private final AdminService adminService;
 
-    public UserController(UserService userService, AdminService adminService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.adminService = adminService;
     }
 
     @GetMapping
