@@ -11,7 +11,8 @@ public class OrderInfoDto {
     private String productName;
     private Long productId;
     private int quantity;
-    private String userName;
+    private String username;
     private String deliveryState;
     private Long id;
+    private String deliveryName;
 }

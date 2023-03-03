@@ -62,9 +62,10 @@ public class EntityConverter {
                 .productName(pop.getProductBook().getTitle())
                 .productId(pop.getProductBook().getId())
                 .quantity(pop.getProductCount())
-                .userName(username)
+                .username(username)
                 .deliveryState(DeliveryStateConverter.deliveryStateToString(DeliveryState.valueOf(pop.getDeliveryState())))
                 .id(pop.getId())
+                .deliveryName(order.getDeliveryName())
                 .build();
     }
 
