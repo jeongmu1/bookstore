@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/account")
@@ -58,7 +59,7 @@ public class UserController {
 
     @GetMapping("/reviews/update")
     public String showReviewUpdateForm(Model model, Principal principal,
-                                       @RequestParam Long id) throws IllegalAccessException{
+                                       @RequestParam Long id) throws IllegalAccessException {
         model.addAttribute("review", userService.findProductReviewForUpdateById(principal.getName(), id));
         model.addAttribute("updateForm", new ProductReviewForm());
         return "account/reviewUpdateForm";
@@ -75,5 +76,15 @@ public class UserController {
                                       @RequestParam Long id) throws IllegalAccessException {
         userService.deleteProductReviewById(principal.getName(), id);
         return "redirect:/account/reviews";
+    }
+
+    @GetMapping("/orders")
+    public String showOrders(Model model, Principal principal,
+                             @RequestParam(required = false) Set<String> deliveryStates,
+                             @RequestParam(required = false) String searchCriteria,
+                             @RequestParam(required = false) String keyword) {
+        model.addAttribute("orders", userService.findOrderInfos(principal.getName(), deliveryStates, searchCriteria, keyword));
+        model.addAttribute("deliveryStates", userService.findAllDeliveryStates()); // adminService 의 메소드와 중복됨
+        return "account/orders";
     }
 }

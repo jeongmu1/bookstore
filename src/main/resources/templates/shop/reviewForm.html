@@ -17,11 +17,11 @@
 
 <!-- Header -->
 <div id="header" class="shell">
-    <div id="logo"><h1><a th:href="@{/static}">BestSeller</a></h1><span></span></div>
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
     <!-- Navigation -->
     <div id="navigation">
         <ul>
-            <li><a th:href="@{/static}" class="active">Home</a></li>
+            <li><a th:href="@{/}" class="active">Home</a></li>
             <li><a href="#">Products</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Contacts</a></li>
@@ -45,7 +45,7 @@
     <div class="cl">&nbsp;</div>
     <!-- Login-details -->
     <div id="login-details">
-        <p>Welcome, <a th:href="@{/templates/account}" id="user" th:text="${member}">Guest</a> .</p>
+        <p>Welcome, <a th:href="@{/account}" id="user" th:text="${member}">Guest</a> .</p>
         <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
             <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
             <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DN Book Store</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" th:href="@{/css/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" media="all"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yes-style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/yesUI.css}" type="text/css">
+    <script th:src="@{/js/eventResolver.js}"></script>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="shell">
+    <div id="logo"><h1><a th:href="@{/}">BestSeller</a></h1><span></span></div>
+    <!-- Navigation -->
+    <div id="navigation">
+        <ul>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li>
+                <form th:action="@{/search}" id="searchForm" th:object="${searchForm}">
+                    <select id="type" name="type" title="검색 유형 선택">
+                        <option value="5">통합 검색</option>
+                        <option value="1">제목</option>
+                        <option value="2">저자</option>
+                        <option value="3">출판사</option>
+                    </select>
+                    <label for="param"></label>
+                    <input type="text" id="param" name="param">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+    <!-- End Navigation -->
+    <div class="cl">&nbsp;</div>
+    <!-- Login-details -->
+    <div id="login-details">
+        <p>Welcome, <a th:href="@{/account}" id="user" th:text="${member}">Guest</a> .</p>
+        <p><a th:href="@{/cart}" class="cart"><img th:src="@{/css/images/cart-icon.png}" alt=""/></a>
+            <em th:text="${'Shopping Cart (' + cartTotal + ')'}"></em>
+            <a th:href="@{/cart}" class="sum" th:text="${#numbers.formatInteger(cartTotalPrice,0,'COMMA') + '₩'}"></a>
+        </p>
+    </div>
+    <!-- End Login-details -->
+</div>
+<!-- End Header -->
+<!-- Main -->
+<div id="main" class="shell">
+    <!-- 테이블 상단 -->
+    <div>
+        <form th:action="@{/account/orders}" method="get">
+            <table>
+                <tbody>
+                <tr>
+                    <td>주문검색</td>
+                    <td>
+                        <label>
+                            <select th:name="searchCriteria">
+                                <option th:value="orderUuid" th:text="주문번호"></option>
+                                <option th:value="productName" th:text="상품명"></option>
+                            </select>
+                        </label>
+                        <label>
+                            <input type="text" name="keyword">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>주문상태</td>
+                    <td>
+                        <label>
+                            <input th:each="deliveryState : ${deliveryStates}" type="checkbox" name="deliveryStates"
+                                   th:value="${deliveryState}" th:text="${deliveryState}">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>처리일자</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit">
+        </form>
+    </div>
+    <!-- 테이블 상단 끝 -->
+    <!-- 주문 정보 테이블 -->
+    <table width="100%" class="tb_nor tb_cart">
+        <colgroup>
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+        </colgroup>
+        <thead>
+        <tr bgcolor="#cfcfcf">
+            <th scope="col" class="txt">주문일</th>
+            <th scope="col" class="txt">주문번호</th>
+            <th scope="col" class="txt">상품명</th>
+            <th scope="col" class="txt">수취인</th>
+            <th scope="col" class="txt">배송상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align: center" th:each="orderInfo : ${orders}">
+            <td class="goods_date" th:text="${orderInfo.updateTime}"></td>
+            <td class="goods_num" th:text="${orderInfo.orderUuid}"></td>
+            <td class="goods_name" th:text="${orderInfo.productName}"></td>
+            <td class="le" th:text="${orderInfo.deliveryName}"></td>
+            <td class="le" th:text="${orderInfo.deliveryState}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- End Main-->
+</body>
+</html>
