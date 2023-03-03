@@ -281,21 +281,7 @@
       <workItem from="1677468827833" duration="2576000" />
       <workItem from="1677471420719" duration="37663000" />
       <workItem from="1677718943900" duration="165000" />
-      <workItem from="1677725981766" duration="27835000" />
-    </task>
-    <task id="LOCAL-00054" summary="fix: 장바구니 품목 조회 시 제품 정보도 즉시 조회 하도록 변경&#10;&#10;ProductOrderProduct 엔티티 조회 시 ProductBook 도 함께 조회하도록 fetch 방식 LAZY 에서 EAGER 로 변경">
-      <created>1674131688974</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131688974</updated>
-    </task>
-    <task id="LOCAL-00055" summary="fix: 인터페이스 메소드 public 에서 default 로 변경">
-      <created>1674131744021</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131744021</updated>
+      <workItem from="1677725981766" duration="28143000" />
     </task>
     <task id="LOCAL-00056" summary="fix: java.util 패키지 전부 불러오도록 변경">
       <created>1674131778563</created>
@@ -626,7 +612,21 @@
       <option name="project" value="LOCAL" />
       <updated>1677579971058</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="feat: 사용자 주문 내역 조회 구현">
+      <created>1677837925215</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1677837925216</updated>
+    </task>
+    <task id="LOCAL-00104" summary="feat: 사용자 주문 내역 조회 구현">
+      <created>1677838130403</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1677838130403</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
