@@ -38,4 +38,6 @@ public interface UserService {
     List<OrderInfoDto> findOrderInfos(String username, Set<String> deliveryStates, String searchCriteria, String keyword);
 
     List<String> findAllDeliveryStates();
+
+    void updateDeliveryStateToConfirmed(String username, Long popId) throws IllegalAccessException;
 }

@@ -251,11 +251,37 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
     public List<String> findAllDeliveryStates() {
         return Arrays
                 .stream(DeliveryState.values())
                 .filter(deliveryState -> deliveryState != BEFORE)
                 .map(DeliveryStateConverter::deliveryStateToString)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void updateDeliveryStateToConfirmed(String username, Long popId) throws IllegalAccessException {
+        ProductOrderProduct pop = cartRepo.findById(popId).orElseThrow();
+        ProductOrder order = pop.getProductOrder();
+
+        if (!order.getUser().getUsername().equals(username)) {
+            throw new IllegalAccessException();
+        }
+        if (!pop.getDeliveryState().equals(DeliveryState.DELIVERY_COMPLETED.toString())) {
+            throw new IllegalArgumentException("배송 완료 상태가 아닙니다.");
+        }
+
+        pop.setDeliveryState(DeliveryState.CONFIRMED.toString());
+
+        // 주문의 전 상품들의 배송상태가 구매확정으로 변경 되었을 시 주문 또한 변경
+        if (order.getProductOrderProducts().size()
+                == order.getProductOrderProducts()
+                .stream()
+                .filter(productOrderProduct -> productOrderProduct.getDeliveryState().equals(DeliveryState.CONFIRMED.toString()))
+                .count()) {
+            order.setDeliveryState(DeliveryState.CONFIRMED.toString());
+        }
     }
 }

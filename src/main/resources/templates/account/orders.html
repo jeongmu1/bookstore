@@ -104,6 +104,7 @@
             <col width="120">
             <col width="120">
             <col width="120">
+            <col width="120">
         </colgroup>
         <thead>
         <tr bgcolor="#cfcfcf">
@@ -112,6 +113,7 @@
             <th scope="col" class="txt">상품명</th>
             <th scope="col" class="txt">수취인</th>
             <th scope="col" class="txt">배송상태</th>
+            <th scope="col" class="txt">구매확정</th>
         </tr>
         </thead>
         <tbody>
@@ -121,6 +123,8 @@
             <td class="goods_name" th:text="${orderInfo.productName}"></td>
             <td class="le" th:text="${orderInfo.deliveryName}"></td>
             <td class="le" th:text="${orderInfo.deliveryState}"></td>
+            <td class="le"><a th:if="${orderInfo.waitingConfirmationPurchase}"
+                              th:href="@{/account/orders/confirmOrder(popId=${orderInfo.id})}">구매확정</a></td>
         </tr>
         </tbody>
     </table>

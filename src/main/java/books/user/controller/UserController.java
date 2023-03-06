@@ -88,4 +88,10 @@ public class UserController {
         return "account/orders";
     }
 
+    @GetMapping("/orders/confirmOrder")
+    public String confirmOrder(Principal principal,
+                               @RequestParam Long popId) throws IllegalAccessException {
+        userService.updateDeliveryStateToConfirmed(principal.getName(), popId);
+        return "redirect:/account/orders";
+    }
 }

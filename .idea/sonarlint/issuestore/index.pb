@@ -140,8 +140,6 @@ Z
 logs/logback.log,7/d/7d72ca92b41f8f346c9ba233e460237fdc59fb8a
 [
 +src/main/java/books/common/ReviewProps.java,e/9/e9ab42527065af301e4e13f5bec50a294228f4a5
-7
-pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 c
 3src/main/java/books/home/common/ProductBookDto.java,e/d/edc78934ef79a09b288f61e46a94ec066253de01
 b
@@ -172,8 +170,6 @@ q
 Asrc/main/java/books/product/repository/ProductBookRepository.java,5/9/59dc44945d7f4c2692975be5a580ad4ace17d372
 n
 >src/main/java/books/product/repository/CategoryRepository.java,7/f/7faa7c2d43d60833f8f7728aefd8c7f1949c6928
-L
-src/test/java/AdminTest.java,7/d/7d685b8e5d08db77f5dcc1b0520d8b47322f3d36
 L
 src/test/java/OrderTest.java,a/7/a7c2b7e667be4ed8bb7c777f85bfeab077bb7a61
 M

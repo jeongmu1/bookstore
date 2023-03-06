@@ -15,4 +15,5 @@ public class OrderInfoDto {
     private String deliveryState;
     private Long id;
     private String deliveryName;
+    private boolean waitingConfirmationPurchase;
 }
