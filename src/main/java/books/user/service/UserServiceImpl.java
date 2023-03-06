@@ -1,10 +1,14 @@
 package books.user.service;
 
+import books.admin.common.OrderInfoDto;
 import books.admin.common.UserInfoDto;
 import books.admin.service.AdminService;
 import books.common.DeliveryState;
+import books.common.DeliveryStateConverter;
 import books.common.EntityConverter;
 import books.common.ReviewProps;
+import books.order.domain.ProductOrder;
+import books.order.domain.ProductOrderProduct;
 import books.product.domain.ProductReview;
 import books.product.repository.ProductBookRepository;
 import books.product.repository.ProductReviewRepository;
@@ -13,14 +17,20 @@ import books.user.domain.*;
 import books.order.repository.CartRepository;
 import books.order.repository.OrderRepository;
 import books.user.repository.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import static books.common.DeliveryState.BEFORE;
 
 
 @Service
@@ -85,6 +95,7 @@ public class UserServiceImpl implements UserService {
                 ).collect(Collectors.toList());
     }
 
+    // 리팩터링 필요
     private UserDto principalToDto(Principal principal) {
         User user = userRepo.findByUsername(principal.getName());
         return UserDto.builder()
@@ -95,6 +106,7 @@ public class UserServiceImpl implements UserService {
                 .cart(countProductOrderProduct(user))
                 .payedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.PREPARING.toString()))
                 .shippingOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.DELIVERING.toString()))
+                .deliveryCompletedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.DELIVERY_COMPLETED.toString()))
                 .completedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.CONFIRMED.toString()))
                 .build();
     }
@@ -174,7 +186,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private void qualifyAccessToProductReview(String username, ProductReview productReview) throws IllegalAccessException{
+    private void qualifyAccessToProductReview(String username, ProductReview productReview) throws IllegalAccessException {
         if (!productReview.getUser().getId().equals(userRepo.findByUsername(username).getId())) {
             throw new IllegalAccessException("Access denied");
         }
@@ -190,6 +202,86 @@ public class UserServiceImpl implements UserService {
     private void qualifyProductReviewScore(Byte score) {
         if (score < reviewProps.getMinScore() || score > reviewProps.getMaxScore()) {
             throw new IllegalArgumentException("Out range of score");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<OrderInfoDto> findOrderInfos(String username, Set<String> deliveryStates, String searchCriteria, String keyword) {
+        Specification<ProductOrderProduct> spec = Specification.where((root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("productOrder").get("user").get("username"), username));
+        if (!(deliveryStates == null || deliveryStates.isEmpty())) {
+            // 장바구니에 있는 상품 요청시 예외발생
+            deliveryStates.forEach(state -> {
+                if (state.equals(DeliveryStateConverter.deliveryStateToString(BEFORE))) {
+                    throw new IllegalArgumentException();
+                }
+            });
+
+            spec = Objects.requireNonNull(spec).and((root, criteriaQuery, criteriaBuilder)
+                    -> root
+                    .get("deliveryState")
+                    .in(deliveryStates
+                            .stream()
+                            .map(deliveryState -> Objects.requireNonNull(DeliveryStateConverter.stringToDeliveryState(deliveryState)).toString())
+                            .collect(Collectors.toSet())
+                    ));
+        }
+
+        if (!(searchCriteria == null || searchCriteria.isBlank()) && !(keyword == null || keyword.isBlank())) {
+            switch (searchCriteria) {
+                case "orderUuid":
+                    spec = Objects.requireNonNull(spec).and((root, criteriaQuery, criteriaBuilder) ->
+                            criteriaBuilder.like(root.get("productOrder").get("orderUuid"), "%" + keyword + "%"));
+                    break;
+                case "productName":
+                    spec = Objects.requireNonNull(spec).and((root, criteriaQuery, criteriaBuilder) ->
+                            criteriaBuilder.like(root.get("productBook").get("title"), "%" + keyword + "%"));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+
+        return cartRepo.findAll(spec)
+                .stream()
+                .filter(pop -> !pop.getDeliveryState().equals(BEFORE.toString()))
+                .map(EntityConverter::convertProductOrderProduct)
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<String> findAllDeliveryStates() {
+        return Arrays
+                .stream(DeliveryState.values())
+                .filter(deliveryState -> deliveryState != BEFORE)
+                .map(DeliveryStateConverter::deliveryStateToString)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void updateDeliveryStateToConfirmed(String username, Long popId) throws IllegalAccessException {
+        ProductOrderProduct pop = cartRepo.findById(popId).orElseThrow();
+        ProductOrder order = pop.getProductOrder();
+
+        if (!order.getUser().getUsername().equals(username)) {
+            throw new IllegalAccessException();
+        }
+        if (!pop.getDeliveryState().equals(DeliveryState.DELIVERY_COMPLETED.toString())) {
+            throw new IllegalArgumentException("배송 완료 상태가 아닙니다.");
+        }
+
+        pop.setDeliveryState(DeliveryState.CONFIRMED.toString());
+
+        // 주문의 전 상품들의 배송상태가 구매확정으로 변경 되었을 시 주문 또한 변경
+        if (order.getProductOrderProducts().size()
+                == order.getProductOrderProducts()
+                .stream()
+                .filter(productOrderProduct -> productOrderProduct.getDeliveryState().equals(DeliveryState.CONFIRMED.toString()))
+                .count()) {
+            order.setDeliveryState(DeliveryState.CONFIRMED.toString());
         }
     }
 }

@@ -13,5 +13,6 @@ public class UserDto {
     private int cart;
     private int payedOrders;
     private int shippingOrders;
+    private int deliveryCompletedOrders;
     private int completedOrders;
 }

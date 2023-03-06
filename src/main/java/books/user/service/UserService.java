@@ -1,5 +1,6 @@
 package books.user.service;
 
+import books.admin.common.OrderInfoDto;
 import books.admin.common.UserInfoDto;
 import books.product.domain.ProductReview;
 import books.user.common.*;
@@ -7,6 +8,7 @@ import books.user.domain.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     UserDto findUserInfo(Principal principal);
@@ -32,4 +34,10 @@ public interface UserService {
     void updateProductReview(String username, ProductReviewForm form) throws IllegalAccessException;
 
     void deleteProductReviewById(String username, Long id) throws IllegalAccessException;
+
+    List<OrderInfoDto> findOrderInfos(String username, Set<String> deliveryStates, String searchCriteria, String keyword);
+
+    List<String> findAllDeliveryStates();
+
+    void updateDeliveryStateToConfirmed(String username, Long popId) throws IllegalAccessException;
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/account")
@@ -44,7 +45,7 @@ public class UserController {
         return "redirect:/account";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String deleteUser(Principal principal) {
         userService.deleteUserByUsername(principal.getName());
         return "redirect:/logout";
@@ -58,7 +59,7 @@ public class UserController {
 
     @GetMapping("/reviews/update")
     public String showReviewUpdateForm(Model model, Principal principal,
-                                       @RequestParam Long id) throws IllegalAccessException{
+                                       @RequestParam Long id) throws IllegalAccessException {
         model.addAttribute("review", userService.findProductReviewForUpdateById(principal.getName(), id));
         model.addAttribute("updateForm", new ProductReviewForm());
         return "account/reviewUpdateForm";
@@ -75,5 +76,22 @@ public class UserController {
                                       @RequestParam Long id) throws IllegalAccessException {
         userService.deleteProductReviewById(principal.getName(), id);
         return "redirect:/account/reviews";
+    }
+
+    @GetMapping("/orders")
+    public String showOrders(Model model, Principal principal,
+                             @RequestParam(required = false) Set<String> deliveryStates,
+                             @RequestParam(required = false) String searchCriteria,
+                             @RequestParam(required = false) String keyword) {
+        model.addAttribute("orders", userService.findOrderInfos(principal.getName(), deliveryStates, searchCriteria, keyword));
+        model.addAttribute("deliveryStates", userService.findAllDeliveryStates()); // adminService 의 메소드와 중복됨
+        return "account/orders";
+    }
+
+    @GetMapping("/orders/confirmOrder")
+    public String confirmOrder(Principal principal,
+                               @RequestParam Long popId) throws IllegalAccessException {
+        userService.updateDeliveryStateToConfirmed(principal.getName(), popId);
+        return "redirect:/account/orders";
     }
 }

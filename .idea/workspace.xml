@@ -4,27 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feat: 리뷰 수정 기능 구현">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/reviewForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/e/2eba86eec34386fb1c961da888087c2cfa9450d8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/5/55701a3a95761e399690d05296c7ed48f534ec11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/f/8f062484abe88d02bffe71dc08bb16143ffd0f2e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c1a0bd668cd1d57f1dab3025ac63fcfc938afd4c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/c/cc3cf4ac42487f1b361aae479e93673ec62be61c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/d/edc78934ef79a09b288f61e46a94ec066253de01" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/8/f8d7f527e9eb81dbd2f0be2b1228cf0f2c9da578" beforeDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feat: 사용자 페이지 버튼 매핑">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/repository/ProductReviewRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/common/ProductReviewForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/ProductReviewForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/common/OrderInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/common/OrderInfoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/EntityConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/EntityConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/HomeServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/HomeServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ProductDetailTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProductDetailTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account/orders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,40 +126,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last.edited.regexp": "010-0000-0001",
-    "last_opened_file_path": "/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates/account",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "모듈",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "495180092bd0712a4c50027fe52ccb8a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last.edited.regexp&quot;: &quot;010-0000-0001&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/templates/account&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;495180092bd0712a4c50027fe52ccb8a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="books.admin.service" />
@@ -189,17 +179,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/static/sysimage/renew/detail" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.BookApplication">
-    <configuration name="AdminTest.findProductBookTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DNBookStore" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AdminTest" />
-      <option name="METHOD_NAME" value="findProductBookTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.UserTest.confirmDeliveryStateTest">
     <configuration name="AdminTest.findProductReviewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
@@ -210,21 +190,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminTest.updateProductStockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DNBookStore" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AdminTest" />
-      <option name="METHOD_NAME" value="updateProductStockTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ProductDetailTest.testQuery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ProductDetailTest" />
       <option name="METHOD_NAME" value="testQuery" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserTest.confirmDeliveryStateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DNBookStore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserTest" />
+      <option name="METHOD_NAME" value="confirmDeliveryStateTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserTest.findOrderInfosTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DNBookStore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserTest" />
+      <option name="METHOD_NAME" value="findOrderInfosTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -245,11 +235,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserTest.confirmDeliveryStateTest" />
         <item itemvalue="Spring Boot.BookApplication" />
+        <item itemvalue="JUnit.UserTest.findOrderInfosTest" />
         <item itemvalue="JUnit.ProductDetailTest.testQuery" />
         <item itemvalue="JUnit.AdminTest.findProductReviewTest" />
-        <item itemvalue="JUnit.AdminTest.updateProductStockTest" />
-        <item itemvalue="JUnit.AdminTest.findProductBookTest" />
       </list>
     </recent_temporary>
   </component>
@@ -291,49 +281,12 @@
       <workItem from="1677157441519" duration="15938000" />
       <workItem from="1677458838759" duration="6613000" />
       <workItem from="1677468827833" duration="2576000" />
-      <workItem from="1677471420719" duration="33220000" />
-    </task>
-    <task id="LOCAL-00053" summary="fix: 사용하지 않는 메소드 제거&#10;&#10;findPublisherByProductBooks(ProductBook book) 메소드 제거">
-      <created>1674131572878</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131572878</updated>
-    </task>
-    <task id="LOCAL-00054" summary="fix: 장바구니 품목 조회 시 제품 정보도 즉시 조회 하도록 변경&#10;&#10;ProductOrderProduct 엔티티 조회 시 ProductBook 도 함께 조회하도록 fetch 방식 LAZY 에서 EAGER 로 변경">
-      <created>1674131688974</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131688974</updated>
-    </task>
-    <task id="LOCAL-00055" summary="fix: 인터페이스 메소드 public 에서 default 로 변경">
-      <created>1674131744021</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131744021</updated>
-    </task>
-    <task id="LOCAL-00056" summary="fix: java.util 패키지 전부 불러오도록 변경">
-      <created>1674131778563</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1674131778563</updated>
-    </task>
-    <task id="LOCAL-00057" summary="fix: 장바구니 물품 삭제 시 NullPointerException 발생 버그 수정">
-      <created>1674609662145</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1674609662145</updated>
-    </task>
-    <task id="LOCAL-00058" summary="feature: 화면 상단 장바구니 정보 추가, 검색 추가">
-      <created>1674646512544</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1674646512544</updated>
+      <workItem from="1677471420719" duration="37663000" />
+      <workItem from="1677718943900" duration="165000" />
+      <workItem from="1677725981766" duration="28202000" />
+      <workItem from="1677838542064" duration="4358000" />
+      <workItem from="1678063865402" duration="2762000" />
+      <workItem from="1678083803865" duration="9216000" />
     </task>
     <task id="LOCAL-00059" summary="feature: 화면 상단 장바구니 정보 추가, 검색 추가">
       <created>1674646525835</created>
@@ -636,7 +589,49 @@
       <option name="project" value="LOCAL" />
       <updated>1677555037821</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="feat: 리뷰 등록 기능 구현">
+      <created>1677579971058</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1677579971058</updated>
+    </task>
+    <task id="LOCAL-00103" summary="feat: 사용자 주문 내역 조회 구현">
+      <created>1677837925215</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1677837925216</updated>
+    </task>
+    <task id="LOCAL-00104" summary="feat: 사용자 주문 내역 조회 구현">
+      <created>1677838130403</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1677838130403</updated>
+    </task>
+    <task id="LOCAL-00105" summary="feat: 사용자 주문 내역 조회 구현">
+      <created>1677838215884</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1677838215884</updated>
+    </task>
+    <task id="LOCAL-00106" summary="feat: 사용자 주문 내역 조회 구현">
+      <created>1677838580089</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1677838580089</updated>
+    </task>
+    <task id="LOCAL-00107" summary="feat: 사용자 페이지 버튼 매핑">
+      <created>1678101901514</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1678101901514</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,9 +675,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix: user 엔티티 인자 없는 생성자 제거" />
-    <MESSAGE value="fix: userPointHistory id 생성 전략 버그 수정" />
-    <MESSAGE value="feature: 주문 기능 구현, view 예외 처리 구현 예정&#10;&#10;주문 기능 구현&#10;예외 종류 : 재고소진, 카트에 아이템 없음" />
     <MESSAGE value="feature: 바로주문 링크 추가" />
     <MESSAGE value="feature: 주문 시 포인트 적립 구현" />
     <MESSAGE value="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경" />
@@ -705,7 +697,10 @@
     <MESSAGE value="fix: 사용하지 않는 import 제거" />
     <MESSAGE value="feature: 사용자 정보 업데이트기능 구현" />
     <MESSAGE value="feat: 리뷰 수정 기능 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 리뷰 수정 기능 구현" />
+    <MESSAGE value="feat: 리뷰 등록 기능 구현" />
+    <MESSAGE value="feat: 사용자 주문 내역 조회 구현" />
+    <MESSAGE value="feat: 사용자 페이지 버튼 매핑" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 사용자 페이지 버튼 매핑" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

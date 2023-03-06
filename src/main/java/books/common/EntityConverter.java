@@ -62,9 +62,11 @@ public class EntityConverter {
                 .productName(pop.getProductBook().getTitle())
                 .productId(pop.getProductBook().getId())
                 .quantity(pop.getProductCount())
-                .userName(username)
+                .username(username)
                 .deliveryState(DeliveryStateConverter.deliveryStateToString(DeliveryState.valueOf(pop.getDeliveryState())))
                 .id(pop.getId())
+                .deliveryName(order.getDeliveryName())
+                .waitingConfirmationPurchase(pop.getDeliveryState().equals(DeliveryState.DELIVERY_COMPLETED.toString()))
                 .build();
     }
 
