@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="feat: 사용자 주문 내역 조회 구현">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/account/orders.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/f/7faa7c2d43d60833f8f7728aefd8c7f1949c6928" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/1/b1ebab64a34f5c1492a3360e0f2dccb74cba7fe1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/6/d611384c5165277b5a149f38d34aab796164b9d7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/5/05fcf3258f6eca72b93fb4033c92887017566f98" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/6/16ccf7e59331360880fbd4ae7c8b2a8f63cae0e1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/6/f68e1498614c21dae08c9273550554eb6e111931" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/common/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/UserDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop/reviewForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/reviewForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account/info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account/info.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,13 +283,9 @@
       <workItem from="1677471420719" duration="37663000" />
       <workItem from="1677718943900" duration="165000" />
       <workItem from="1677725981766" duration="28202000" />
-    </task>
-    <task id="LOCAL-00057" summary="fix: 장바구니 물품 삭제 시 NullPointerException 발생 버그 수정">
-      <created>1674609662145</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1674609662145</updated>
+      <workItem from="1677838542064" duration="4358000" />
+      <workItem from="1678063865402" duration="2762000" />
+      <workItem from="1678083803865" duration="3961000" />
     </task>
     <task id="LOCAL-00058" summary="feature: 화면 상단 장바구니 정보 추가, 검색 추가">
       <created>1674646512544</created>
@@ -626,7 +623,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677838215884</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="feat: 사용자 주문 내역 조회 구현">
+      <created>1677838580089</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1677838580089</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -95,6 +95,7 @@ public class UserServiceImpl implements UserService {
                 ).collect(Collectors.toList());
     }
 
+    // 리팩터링 필요
     private UserDto principalToDto(Principal principal) {
         User user = userRepo.findByUsername(principal.getName());
         return UserDto.builder()
@@ -105,6 +106,7 @@ public class UserServiceImpl implements UserService {
                 .cart(countProductOrderProduct(user))
                 .payedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.PREPARING.toString()))
                 .shippingOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.DELIVERING.toString()))
+                .deliveryCompletedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.DELIVERY_COMPLETED.toString()))
                 .completedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.CONFIRMED.toString()))
                 .build();
     }

@@ -65,10 +65,10 @@
             <div class="modify">i</div>
         </div>
         <div class="summaryContainer">
-            <div class="item">
+            <a th:href="@{/account/reviews}" class="item">
                 <div class="number" th:text="${user.reviews}"></div>
                 <div>상품후기</div>
-            </div>
+            </a>
             <a th:href="@{/account/pointInfo}" class="item">
                 <div class="number" th:text="${user.point}"></div>
                 <div>적립금</div>
@@ -89,22 +89,22 @@
                 </div>
                 <div class="item">
                     <div>
-                        <div class="number" th:text="${user.payedOrders}"></div>
-                        <div class="text">결제완료</div>
+                        <div class="number" th:text="${user.shippingOrders}"></div>
+                        <a class="text" th:href="@{/account/orders(deliveryStates='배송중')}">배송중</a>
                     </div>
                     <div class="icon"> > </div>
                 </div>
                 <div class="item">
                     <div>
-                        <div class="green number" th:text="${user.shippingOrders}"></div>
-                        <div class="text">배송중</div>
+                        <div class="green number" th:text="${user.deliveryCompletedOrders}"></div>
+                        <a class="text" th:href="@{/account/orders(deliveryStates='배송완료')}">배송완료</a>
                     </div>
                     <div class="icon"> > </div>
                 </div>
                 <div class="item">
                     <div>
                         <div class="green number" th:text="${user.completedOrders}"></div>
-                        <div class="text">구매확정</div>
+                        <a class="text" th:href="@{/account/orders(deliveryStates='구매확정')}">구매확정</a>
                     </div>
                 </div>
 
@@ -112,34 +112,38 @@
 
         </div>
         <div class="listContainer">
-            <a href="#" class="item">
+            <a th:href="@{/account/orders}" class="item">
                 <div class="icon">ii</div>
                 <div class="text">주문목록</div>
                 <div class="right"> > </div>
             </a>
-            <a href="#" class="item">
+            <a th:href="@{/account/reviews}" class="item">
                 <div class="icon">ii</div>
                 <div class="text">상품후기</div>
                 <div class="right"> > </div>
             </a>
-            <a href="#" class="item">
+            <a th:href="@{/account/update}" class="item">
                 <div class="icon">ii</div>
-                <div class="text">상품문의</div>
+                <div class="text">사용자 정보 변경</div>
                 <div class="right"> > </div>
             </a>
+            <a th:href="@{/account/delete}" class="item">
+                <div class="icon">ii</div>
+                <div class="text">회원 탈퇴</div>
+                <div class="right"> > </div>
             </a>
         </div>
-        <div class="infoContainer">
-            <a href="#" class="item">
-                <div>공지사항</div>
-            </a>
-            <a href="#" class="item">
-                <div>이용안내</div>
-            </a>
-            <a href="#" class="item">
-                <div>고객센터</div>
-            </a>
-        </div>
+<!--        <div class="infoContainer">-->
+<!--            <a href="#" class="item">-->
+<!--                <div>공지사항</div>-->
+<!--            </a>-->
+<!--            <a href="#" class="item">-->
+<!--                <div>이용안내</div>-->
+<!--            </a>-->
+<!--            <a href="#" class="item">-->
+<!--                <div>고객센터</div>-->
+<!--            </a>-->
+<!--        </div>-->
     </div>
 </div>
 <!-- End Main-->
