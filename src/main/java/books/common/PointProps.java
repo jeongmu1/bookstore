@@ -9,5 +9,6 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class PointProps {
     private int savingRate;
+    private int unitPointUsage;
 }
 

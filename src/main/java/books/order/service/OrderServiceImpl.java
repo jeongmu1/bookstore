@@ -2,8 +2,7 @@ package books.order.service;
 
 import books.common.DeliveryState;
 import books.common.PointProps;
-import books.order.common.NoItemException;
-import books.order.common.OrderForm;
+import books.order.common.*;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.order.repository.CartRepository;
@@ -88,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public void addOrderByCartItems(OrderForm orderForm, String username)
-            throws NoItemException {
+            throws NoItemException, TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage {
         ProductOrder order = getProductOrder(username);
 
         if (cartRepo.findAllByProductOrder(order).isEmpty()) throw new NoItemException("No items in cart");
@@ -102,7 +101,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) {
+    public void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) throws NotEnoughPointException, TooMuchPointsException, OutOfUnitPointUsage{
         ProductOrderProduct pop = new ProductOrderProduct();
         ProductBook book = productBookRepo.findProductBookById(productBookId);
         pop.setProductCount(quantity);
@@ -125,6 +124,7 @@ public class OrderServiceImpl implements OrderService {
                 .orElseThrow();
     }
 
+    // Builder 패턴 적용 필요
     @NotNull
     private ProductOrder setProductOrder(OrderForm form, ProductOrder order) {
         order.setCcNumber(form.getCcNumber());
@@ -136,28 +136,58 @@ public class OrderServiceImpl implements OrderService {
         order.setDeliveryPhone(form.getPhone());
         order.setEnabled(true);
         order.setDeliveryState(DeliveryState.PREPARING.toString());
+        order.setUsingPoint(form.getUsingPoint());
 
         return order;
     }
 
-    private void addPointHistory(String username, ProductOrder order) {
+    private void addPointHistory(String username, ProductOrder order) throws OutOfUnitPointUsage, TooMuchPointsException, NotEnoughPointException {
         User user = userRepo.findByUsername(username);
-        int pointChange = order
-                .getProductOrderProducts()
-                .stream()
-                .mapToInt(pop -> pop
-                        .getProductBook()
-                        .getPrice() / pointProps.getSavingRate())
-                .sum();
-        int totalPoint = user.getPoint() + pointChange;
 
-        UserPointHistory userPointHistory = new UserPointHistory();
-        userPointHistory.setUser(user);
-        userPointHistory.setPointHistoryDetail(pointHistoryDetailRepo.findPointHistoryDetailById(2));
-        userPointHistory.setPointChange(pointChange);
-        userPointHistory.setChangeResult(totalPoint);
+        // 포인트 사용 안할 시
+        if (order.getUsingPoint() == null || order.getUsingPoint() <= 0) {
+            int pointChange = order
+                    .getProductOrderProducts()
+                    .stream()
+                    .mapToInt(pop -> pop
+                            .getProductBook()
+                            .getPrice() / pointProps.getSavingRate())
+                    .sum();
+            int totalPoint = user.getPoint() + pointChange;
+
+            UserPointHistory userPointHistory = UserPointHistory.builder()
+                    .user(user)
+                    .pointHistoryDetail(pointHistoryDetailRepo.findPointHistoryDetailById(2))
+                    .pointChange(pointChange)
+                    .changeResult(totalPoint)
+                    .build();
+
+            userPointHistoryRepo.save(userPointHistory);
+            user.setPoint(totalPoint);
+            return;
+        }
+
+        // 포인트 사용 시
+        if (order.getUsingPoint() % pointProps.getUnitPointUsage() != 0) {
+            throw new OutOfUnitPointUsage("포인트 사용 단위에 맞지 않습니다");
+        }
+
+        if (order.getUsingPoint() > user.getPoint()) {
+            throw new NotEnoughPointException("사용 가능한 포인트 액수를 벗어납니다.");
+        }
+
+        if (order.getUsingPoint() > order.getProductOrderProducts().stream().mapToInt(pop -> pop.getProductBook().getPrice() * pop.getProductCount()).sum()) {
+            throw new TooMuchPointsException("주문 금액 이상의 포인트는 사용할 수 없습니다.");
+        }
+
+        user.setPoint(user.getPoint() - order.getUsingPoint());
+        UserPointHistory userPointHistory = UserPointHistory.builder()
+                .user(user)
+                .pointHistoryDetail(pointHistoryDetailRepo.findPointHistoryDetailById(3))
+                .pointChange(order.getUsingPoint())
+                .changeResult(user.getPoint())
+                .build();
 
         userPointHistoryRepo.save(userPointHistory);
-        user.setPoint(totalPoint);
     }
 }

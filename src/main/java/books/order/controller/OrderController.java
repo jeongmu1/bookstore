@@ -1,7 +1,6 @@
 package books.order.controller;
 
-import books.order.common.NoItemException;
-import books.order.common.OrderForm;
+import books.order.common.*;
 import books.order.service.OrderService;
 import books.product.common.CartItemDto;
 import books.product.service.CartService;
@@ -57,13 +56,13 @@ public class OrderController {
             @Valid OrderForm orderForm
             , Principal principal
             , @RequestParam Long productBookId
-            , @RequestParam int quantity) {
+            , @RequestParam int quantity) throws TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage {
         orderService.addOrderByProduct(orderForm, principal.getName(), productBookId, quantity);
         return "redirect:/";
     }
 
     @PostMapping("/cart")
-    public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws NoItemException {
+    public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage, NoItemException {
         orderService.addOrderByCartItems(orderForm, principal.getName());
         return "redirect:/";
     }

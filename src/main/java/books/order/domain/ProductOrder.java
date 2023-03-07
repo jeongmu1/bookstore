@@ -80,8 +80,11 @@ public class ProductOrder {
     @Column(name = "delivery_state", nullable = false)
     private String deliveryState;
 
+    @Column(name = "using_point", nullable = false)
+    private Integer usingPoint;
+
     @PrePersist
-    public void persist() {
+    public void prePersist() {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         this.createTime = currentTime;
         this.updateTime = currentTime;
@@ -91,7 +94,7 @@ public class ProductOrder {
     }
 
     @PreUpdate
-    void update() {
+    void preUpdate() {
         this.updateTime = new Timestamp(System.currentTimeMillis());
     }
 
