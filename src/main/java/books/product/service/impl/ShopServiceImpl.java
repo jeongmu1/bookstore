@@ -134,4 +134,11 @@ public class ShopServiceImpl implements ShopService {
             throw new IllegalArgumentException("productScore is out of range");
         }
     }
+
+    @Override
+    public void checkDuplicateReview(String username, Long productId) throws IllegalAccessException {
+        if (productReviewRepo.countProductReviewsByUserAndProductBook(userRepo.findByUsername(username), productBookRepo.findById(productId).orElseThrow()) > 0) {
+            throw new IllegalAccessException();
+        }
+    }
 }

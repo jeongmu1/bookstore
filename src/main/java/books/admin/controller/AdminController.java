@@ -22,7 +22,7 @@ public class AdminController {
 
     @GetMapping
     public String showAdminPage() {
-        return null;
+        return "admin/main";
     }
 
     @GetMapping(value = "/product")

@@ -10,7 +10,6 @@ import books.common.ReviewProps;
 import books.order.domain.ProductOrder;
 import books.order.domain.ProductOrderProduct;
 import books.product.domain.ProductReview;
-import books.product.repository.ProductBookRepository;
 import books.product.repository.ProductReviewRepository;
 import books.user.common.*;
 import books.user.domain.*;

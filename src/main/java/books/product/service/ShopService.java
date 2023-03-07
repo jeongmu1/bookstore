@@ -22,4 +22,5 @@ public interface ShopService {
     List<ProductBookDto> findProductsBySearch(String param, int type);
 
     void addProductReview(String username, ProductReviewForm reviewForm);
+    void checkDuplicateReview(String username, Long productId) throws IllegalAccessException;
 }

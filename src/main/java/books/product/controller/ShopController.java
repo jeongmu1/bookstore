@@ -48,7 +48,8 @@ public class ShopController {
 
     @GetMapping("/product/reviewForm")
     public String showProductReviewForm(Model model, Principal principal,
-                                        @RequestParam Long id) {
+                                        @RequestParam Long id) throws IllegalAccessException{
+        shopService.checkDuplicateReview(principal.getName(), id);
         model.addAttribute("bookId", id);
         model.addAttribute("reviewForm", new ProductReviewForm());
         return "shop/reviewForm";
