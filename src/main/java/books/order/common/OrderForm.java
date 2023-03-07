@@ -1,12 +1,11 @@
 package books.order.common;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +24,25 @@ public class OrderForm {
     private String deliveryAddress;
     @Pattern(regexp = "(01\\d)(-)(\\d\\d\\d\\d)(-)(\\d\\d\\d\\d)", message = "휴대폰 번호를 - 포함하여 입력하세요")
     private String phone;
+    @Min(0)
+    private Integer usingPoint;
+
+    @Builder
+    public OrderForm(final String ccNumber,
+                     final String ccExpiration,
+                     final String ccCvv,
+                     final String deliveryName,
+                     final String deliveryZipCode,
+                     final String deliveryAddress,
+                     final String phone,
+                     final Integer usingPoint) {
+        this.ccNumber = ccNumber;
+        this.ccExpiration = ccExpiration;
+        this.ccCvv = ccCvv;
+        this.deliveryName = deliveryName;
+        this.deliveryZipCode = deliveryZipCode;
+        this.deliveryAddress = deliveryAddress;
+        this.phone = phone;
+        this.usingPoint = usingPoint;
+    }
 }

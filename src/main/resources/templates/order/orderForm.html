@@ -193,13 +193,20 @@
                   th:errors="*{ccCvv}">CVV 오류</span>
             <br/>
 
+            <label>
+                포인트사용:
+                <input type="text" th:field="*{usingPoint}">
+            </label>
+
 
             <button th:if="${type == 'cart'}" type="submit" class="btnC w_80 btn_blue">
                             <span class="bWrap">
                                 <em class="txt">주문하기</em>
                             </span>
             </button>
-            <button th:if="${type == 'product'}" type="submit" th:formaction="@{/order/product(productBookId = ${productBookId}, quantity = ${quantity})}" class="btnC w_80 btn_blue">
+            <button th:if="${type == 'product'}" type="submit"
+                    th:formaction="@{/order/product(productBookId = ${productBookId}, quantity = ${quantity})}"
+                    class="btnC w_80 btn_blue">
                             <span class="bWrap">
                                 <em class="txt">주문하기</em>
                             </span>

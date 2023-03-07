@@ -31,6 +31,7 @@ bookstore:
     images: /Users/gangjeongmu/IdeaProjects/DNBookStore/DNBookStore/src/main/resources/static/images/
   point:
     savingRate: 10
+    unitPointUsage: 1000
   page-size:
     userOrders: 10
     pointHistories: 10

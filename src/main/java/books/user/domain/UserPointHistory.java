@@ -61,4 +61,19 @@ public class UserPointHistory {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    @Builder
+    public UserPointHistory(final Long id,
+                            final PointHistoryDetail pointHistoryDetail,
+                            final User user,
+                            final Timestamp createTime,
+                            final Integer pointChange,
+                            final Integer changeResult) {
+        this.id = id;
+        this.pointHistoryDetail = pointHistoryDetail;
+        this.user = user;
+        this.createTime = createTime;
+        this.pointChange = pointChange;
+        this.changeResult = changeResult;
+    }
 }
