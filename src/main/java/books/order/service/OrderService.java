@@ -5,13 +5,12 @@ import books.order.common.OrderForm;
 import books.product.common.CartItemDto;
 import books.user.domain.UserAddress;
 
-import java.security.Principal;
 import java.util.List;
 
 public interface OrderService {
-    UserAddress findDefaultUserAddress(Principal principal);
+    UserAddress findDefaultUserAddress(String username);
     List<CartItemDto> findProduct(Long productBookId, int quantity);
-    void addOrderByCartItems(OrderForm orderForm, Principal principal) throws NoItemException;
+    void addOrderByCartItems(OrderForm orderForm, String username) throws NoItemException;
 
-    void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity) ;
+    void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) ;
 }

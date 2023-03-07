@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,10 +49,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserAddress findDefaultUserAddress(Principal principal) {
+    public UserAddress findDefaultUserAddress(String username) {
         return userAddressRepo
                 .findUserAddressByUserAndDefaultFlag(
-                        userRepo.findByUsername(principal.getName()), true
+                        userRepo.findByUsername(username), true
                 ).orElse(getEmptyUserAddressEntity());
     }
 
@@ -88,22 +87,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void addOrderByCartItems(OrderForm orderForm, Principal principal)
+    public void addOrderByCartItems(OrderForm orderForm, String username)
             throws NoItemException {
-        ProductOrder order = getProductOrder(principal);
+        ProductOrder order = getProductOrder(username);
 
         if (cartRepo.findAllByProductOrder(order).isEmpty()) throw new NoItemException("No items in cart");
         order.getProductOrderProducts().forEach(pop -> pop.setDeliveryState(DeliveryState.PREPARING.toString()));
 
-        order = setProductOrder(orderForm, getProductOrder(principal));
+        order = setProductOrder(orderForm, getProductOrder(username));
         orderRepo.save(order);
 
-        addPointHistory(principal, order);
+        addPointHistory(username, order);
     }
 
     @Override
     @Transactional
-    public void addOrderByProduct(OrderForm orderForm, Principal principal, Long productBookId, int quantity) {
+    public void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) {
         ProductOrderProduct pop = new ProductOrderProduct();
         ProductBook book = productBookRepo.findProductBookById(productBookId);
         pop.setProductCount(quantity);
@@ -111,18 +110,18 @@ public class OrderServiceImpl implements OrderService {
         pop.setDeliveryState(DeliveryState.PREPARING.toString());
 
         ProductOrder order = setProductOrder(orderForm, new ProductOrder());
-        order.setUser(userRepo.findByUsername(principal.getName()));
+        order.setUser(userRepo.findByUsername(username));
         orderRepo.save(order);
         order.setEnabled(true);
         pop.setProductOrder(order);
         order.setProductOrderProducts(Collections.singletonList(pop));
         cartRepo.save(pop);
 
-        addPointHistory(principal, order);
+        addPointHistory(username, order);
     }
 
-    private ProductOrder getProductOrder(Principal principal) {
-        return orderRepo.findProductOrderByUserAndEnabled(userRepo.findByUsername(principal.getName()), false)
+    private ProductOrder getProductOrder(String username) {
+        return orderRepo.findProductOrderByUserAndEnabled(userRepo.findByUsername(username), false)
                 .orElseThrow();
     }
 
@@ -141,8 +140,8 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
-    private void addPointHistory(Principal principal, ProductOrder order) {
-        User user = userRepo.findByUsername(principal.getName());
+    private void addPointHistory(String username, ProductOrder order) {
+        User user = userRepo.findByUsername(username);
         int pointChange = order
                 .getProductOrderProducts()
                 .stream()

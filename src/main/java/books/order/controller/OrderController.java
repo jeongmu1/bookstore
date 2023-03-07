@@ -30,7 +30,7 @@ public class OrderController {
     @GetMapping("/cart")
     public String showCartOrderForm(Model model, Principal principal) {
         List<CartItemDto> cartItemDtos = cartService.findCartByUser(principal);
-        model.addAttribute("address", orderService.findDefaultUserAddress(principal));
+        model.addAttribute("address", orderService.findDefaultUserAddress(principal.getName()));
         model.addAttribute("cart", cartItemDtos);
         model.addAttribute("total", cartService.getTotalPrice(cartItemDtos));
         model.addAttribute("orderForm", new OrderForm());
@@ -43,7 +43,7 @@ public class OrderController {
             , @RequestParam int quantity
             , @RequestParam Long productBookId) {
         List<CartItemDto> cartItemDtos = orderService.findProduct(productBookId, quantity);
-        model.addAttribute("address", orderService.findDefaultUserAddress(principal));
+        model.addAttribute("address", orderService.findDefaultUserAddress(principal.getName()));
         model.addAttribute("cart", cartItemDtos);
         model.addAttribute("total", cartService.getTotalPrice(cartItemDtos));
         model.addAttribute("orderForm", new OrderForm());
@@ -58,13 +58,13 @@ public class OrderController {
             , Principal principal
             , @RequestParam Long productBookId
             , @RequestParam int quantity) {
-        orderService.addOrderByProduct(orderForm, principal, productBookId, quantity);
+        orderService.addOrderByProduct(orderForm, principal.getName(), productBookId, quantity);
         return "redirect:/";
     }
 
     @PostMapping("/cart")
     public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws NoItemException {
-        orderService.addOrderByCartItems(orderForm, principal);
+        orderService.addOrderByCartItems(orderForm, principal.getName());
         return "redirect:/";
     }
 }
