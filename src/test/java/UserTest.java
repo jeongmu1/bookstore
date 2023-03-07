@@ -20,6 +20,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -64,6 +65,7 @@ class UserTest {
         userService.findOrderInfos(username, deliveryStates,searchCriteria, keyword).forEach(orderInfoDto -> log.info(orderInfoDto.toString()));
     }
 
+
     @Test
     @Transactional
     void confirmDeliveryStateTest() throws IllegalAccessException {
@@ -71,43 +73,19 @@ class UserTest {
         String confirmed = DeliveryState.CONFIRMED.toString();
         String username = "admin";
 
-        Set<ProductOrder> orders = new HashSet<>();
+        Set<ProductOrder> orderList = orderRepository.findAllByUser(userRepository.findByUsername(username));
+        for (ProductOrder order : orderList) {
+            for (ProductOrderProduct pop : order.getProductOrderProducts()) {
+                pop.setDeliveryState(deliveryCompleted);
+                userService.updateDeliveryStateToConfirmed(username, pop.getId());
+            }
+        }
 
-        // orderId == 14, pop.size == 2
-        ProductOrder order1 = orderRepository.findById(14L).get();
-        ProductOrderProduct pop1_1 = order1.getProductOrderProducts().get(0);
-        ProductOrderProduct pop1_2 = order1.getProductOrderProducts().get(1);
-        orders.add(order1);
-
-        pop1_1.setDeliveryState(deliveryCompleted);
-        pop1_2.setDeliveryState(deliveryCompleted);
-
-        // orderId == 25, pop.size == 2
-        ProductOrder order2 = orderRepository.findById(25L).get();
-        ProductOrderProduct pop2_1 = order2.getProductOrderProducts().get(0);
-        ProductOrderProduct pop2_2 = order2.getProductOrderProducts().get(1);
-        orders.add(order2);
-
-        pop2_1.setDeliveryState(deliveryCompleted);
-        pop2_2.setDeliveryState(deliveryCompleted);
-
-        // orderId == 15, pop.size == 1
-        ProductOrder order3 = orderRepository.findById(15L).get();
-        ProductOrderProduct pop3_1 = order3.getProductOrderProducts().get(0);
-        orders.add(order3);
-
-        pop3_1.setDeliveryState(deliveryCompleted);
-
-        userService.updateDeliveryStateToConfirmed(username, pop1_1.getId());
-        userService.updateDeliveryStateToConfirmed(username, pop1_2.getId());
-        userService.updateDeliveryStateToConfirmed(username, pop2_1.getId());
-        userService.updateDeliveryStateToConfirmed(username, pop2_2.getId());
-        userService.updateDeliveryStateToConfirmed(username, pop3_1.getId());
-
-        orders.forEach(order -> {
+        orderList.forEach(order -> {
+            log.info("id : " + order.getId() + "\tdeliveryState : " + order.getDeliveryState());
             assertThat(order.getDeliveryState(), is(equalTo(confirmed)));
-            log.info(order.getDeliveryState());
         });
     }
+
 
 }

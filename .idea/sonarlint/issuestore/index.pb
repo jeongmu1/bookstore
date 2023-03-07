@@ -84,10 +84,6 @@ e
 5src/main/java/books/user/common/RegistrationForm.java,1/3/13cd4ea0a348eec31cecc453ad2745f788680ddc
 d
 4src/main/java/books/user/common/UserDetailsImpl.java,3/9/3976ed38c048b2901b966222f98dc545891fd592
-o
-?src/main/java/books/user/controller/RegistrationController.java,c/1/c1ec4b625de21e22dee362e8e84997f40043f074
-^
-.src/main/java/books/user/domain/Authority.java,0/1/0148419e35c9cc4901c0aa667694da3dd266efa7
 g
 7src/main/java/books/user/domain/PointHistoryDetail.java,b/5/b59674e880e28cd4ac77ae18b33d1ede9e08d013
 Y
@@ -132,8 +128,6 @@ c
 3src/main/java/books/user/common/UserUpdateForm.java,c/1/c1e56410dc64c2b4b2791f4f10f5e8f4ea72fe93
 g
 7src/main/java/books/user/repository/UserRepository.java,4/e/4ee287e361670968763d61031d965ba8b90384c3
-l
-<src/main/java/books/user/service/UserDetailsServiceImpl.java,0/f/0ff33fa765b4a2c251625000c4e4021992adb2fb
 Z
 *src/main/java/books/common/PointProps.java,8/f/8f062484abe88d02bffe71dc08bb16143ffd0f2e
 @
@@ -152,16 +146,6 @@ T
 $src/test/java/ProductDetailTest.java,2/3/23f6cda1407aaa260bb2ab8f1fca8090897633ea
 f
 6src/main/java/books/user/common/ProductReviewForm.java,c/c/cc938aa303d095021baa62290b2a0908c9cafcb3
-^
-.src/main/java/books/common/SecurityConfig.java,e/3/e3e634e31065d79425c482f647e54f0fe82da90c
-d
-4src/main/java/books/product/service/ShopService.java,c/c/cc3cf4ac42487f1b361aae479e93673ec62be61c
-m
-=src/main/java/books/product/service/impl/ShopServiceImpl.java,5/5/55701a3a95761e399690d05296c7ed48f534ec11
-j
-:src/main/java/books/product/controller/ShopController.java,c/1/c1a0bd668cd1d57f1dab3025ac63fcfc938afd4c
-s
-Csrc/main/java/books/product/repository/ProductReviewRepository.java,b/2/b234300af402a88915f6831442f224fac2d17017
 r
 Bsrc/main/java/books/product/repository/ProductImageRepository.java,b/1/b1ebab64a34f5c1492a3360e0f2dccb74cba7fe1
 u
@@ -178,5 +162,3 @@ i
 9src/main/java/books/order/repository/OrderRepository.java,f/1/f1798bfe60f7ea05eaa2c3d63c94fd744cda5bae
 c
 3src/main/java/books/admin/service/AdminService.java,0/f/0f9466c6a9c4b8a1b3c7d37d4c3cee3c7ccb271d
-i
-9src/main/java/books/admin/controller/AdminController.java,5/a/5a8ab501ba85bf6daef46520bf0b3c4b07016d7b
