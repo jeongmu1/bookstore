@@ -32,6 +32,7 @@ bookstore:
   point:
     savingRate: 10
     unitPointUsage: 1000
+    usablePointStamp: 10
   page-size:
     userOrders: 10
     pointHistories: 10

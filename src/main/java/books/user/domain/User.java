@@ -87,12 +87,17 @@ public class User {
     @ToString.Exclude
     private Set<UserCreditCard> userCreditCards = new LinkedHashSet<>();
 
+    @NotNull
+    @Column(name = "point_stamp")
+    private Integer pointStamp;
+
     @PrePersist
     public void persistTime() {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         this.createTime = currentTime;
         this.updateTime = currentTime;
         this.enabled = true;
+        this.pointStamp = 0;
     }
 
     @PreUpdate

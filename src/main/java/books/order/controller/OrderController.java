@@ -28,7 +28,7 @@ public class OrderController {
 
     @GetMapping("/cart")
     public String showCartOrderForm(Model model, Principal principal) {
-        List<CartItemDto> cartItemDtos = cartService.findCartByUser(principal);
+        List<CartItemDto> cartItemDtos = cartService.findCartByUser(principal.getName());
         model.addAttribute("address", orderService.findDefaultUserAddress(principal.getName()));
         model.addAttribute("cart", cartItemDtos);
         model.addAttribute("total", cartService.getTotalPrice(cartItemDtos));
@@ -56,13 +56,13 @@ public class OrderController {
             @Valid OrderForm orderForm
             , Principal principal
             , @RequestParam Long productBookId
-            , @RequestParam int quantity) throws TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage {
+            , @RequestParam int quantity) throws NotEnoughPointStampException, TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage {
         orderService.addOrderByProduct(orderForm, principal.getName(), productBookId, quantity);
         return "redirect:/";
     }
 
     @PostMapping("/cart")
-    public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage, NoItemException {
+    public String createOrderByCart(@Valid OrderForm orderForm, Principal principal) throws NotEnoughPointStampException, TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage, NoItemException {
         orderService.addOrderByCartItems(orderForm, principal.getName());
         return "redirect:/";
     }

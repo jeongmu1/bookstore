@@ -10,5 +10,6 @@ import org.springframework.context.annotation.Configuration;
 public class PointProps {
     private int savingRate;
     private int unitPointUsage;
+    private int usablePointStamp;
 }
 

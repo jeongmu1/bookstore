@@ -11,7 +11,7 @@ public interface OrderService {
 
     List<CartItemDto> findProduct(Long productBookId, int quantity);
 
-    void addOrderByCartItems(OrderForm orderForm, String username) throws NoItemException, NotEnoughPointException, OutOfUnitPointUsage, TooMuchPointsException;
+    void addOrderByCartItems(OrderForm orderForm, String username) throws NoItemException, NotEnoughPointStampException, NotEnoughPointException, OutOfUnitPointUsage, TooMuchPointsException;
 
-    void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) throws NotEnoughPointException, OutOfUnitPointUsage, TooMuchPointsException;
+    void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) throws NotEnoughPointStampException, NotEnoughPointException, OutOfUnitPointUsage, TooMuchPointsException;
 }
