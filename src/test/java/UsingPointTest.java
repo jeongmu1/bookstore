@@ -1,11 +1,9 @@
 import books.common.PointProps;
-import books.order.common.NotEnoughPointException;
-import books.order.common.OrderForm;
-import books.order.common.OutOfUnitPointUsage;
-import books.order.common.TooMuchPointsException;
+import books.order.common.*;
 import books.order.service.OrderService;
 import books.product.domain.ProductBook;
 import books.product.repository.ProductBookRepository;
+import books.product.service.CartService;
 import books.user.domain.User;
 import books.user.repository.UserPointHistoryRepository;
 import books.user.repository.UserRepository;
@@ -15,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.security.Principal;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -37,17 +37,21 @@ class UsingPointTest {
     private ProductBookRepository productBookRepository;
     @Autowired
     private PointProps pointProps;
+    @Autowired
+    private CartService cartService;
 
     @Test
     @Transactional
     void testUsePoint() throws Exception {
         User user = userRepository.findByUsername("test2");
         user.setPoint(5000);
+        user.setPointStamp(10);
         OrderForm orderForm = getTemporaryOrderForm(1000);
         int beforeHistorySize = user.getUserPointHistories().size();
         orderService.addOrderByProduct(orderForm, user.getUsername(), 1L, 1);
 
         assertThat(user.getPoint(), is(4000));
+        assertThat(user.getPointStamp(), is(0));
         assertThat(userPointHistoryRepository.findAllByUser(user).size(), is(beforeHistorySize + 1));
     }
 
@@ -55,12 +59,13 @@ class UsingPointTest {
     @Transactional
     void testSavePoint() throws Exception {
         Long bookId = 1L;
-        int quantity = 1;
+        int quantity = 3;
         int beforePoint = 5000;
 
         ProductBook book = productBookRepository.findProductBookById(bookId);
         User user = userRepository.findByUsername("test2");
         user.setPoint(beforePoint);
+        int beforePointStamp = user.getPointStamp();
 
 
         OrderForm orderForm = getTemporaryOrderForm(null);
@@ -70,11 +75,34 @@ class UsingPointTest {
 
         assertThat(user.getPoint(), is(beforePoint + book.getPrice() / pointProps.getSavingRate()));
         log.info("After Point : " + user.getPoint());
+        assertThat(user.getPointStamp(), is(beforePointStamp + quantity));
     }
 
     @Test
     @Transactional
-    void shouldThrowExceptionWenNotEnoughPoints() {
+    void shouldThrowExceptionWhenNotEnoughPointStamp() throws Exception {
+        int defaultPoint = 5000;
+        int usingPoint = 1000;
+        int defaultPointStamp = 9;
+        Long productBookId = 1L;
+        int quantity = 1;
+
+        User user = userRepository.findByUsername("test2");
+        user.setPoint(defaultPoint);
+        user.setPointStamp(defaultPointStamp);
+        OrderForm orderForm = getTemporaryOrderForm(usingPoint);
+        int beforeHistorySize = user.getUserPointHistories().size();
+
+        assertThrows(NotEnoughPointStampException.class, () ->
+                orderService.addOrderByProduct(orderForm, user.getUsername(), productBookId, quantity));
+        assertThat(user.getPoint(), is(defaultPoint));
+        assertThat(user.getPointStamp(), is(defaultPointStamp));
+        assertThat(userPointHistoryRepository.findAllByUser(user).size(), is(beforeHistorySize));
+    }
+
+    @Test
+    @Transactional
+    void shouldThrowExceptionWhenNotEnoughPoints() {
         User user = userRepository.findByUsername("test2");
         user.setPoint(5000);
 
@@ -86,7 +114,7 @@ class UsingPointTest {
 
     @Test
     @Transactional
-    void shouldThrowOutOfUnitPointUsage() {
+    void shouldThrowExceptionWhenOutOfUnitPointUsage() {
         User user = userRepository.findByUsername("test2");
         user.setPoint(5000);
 
@@ -97,7 +125,7 @@ class UsingPointTest {
 
     @Test
     @Transactional
-    void shouldThrowExceptionTooMuchPoints() {
+    void shouldThrowExceptionWhenTooMuchPoints() {
         User user = userRepository.findByUsername("test2");
         user.setPoint(60000);
         OrderForm orderForm = getTemporaryOrderForm(50000);
@@ -105,7 +133,7 @@ class UsingPointTest {
                 orderService.addOrderByProduct(orderForm, user.getUsername(), 1L, 1));
     }
 
-    private OrderForm getTemporaryOrderForm(Integer point) {
+    private OrderForm getTemporaryOrderForm(Integer usingPoint) {
         return OrderForm.builder()
                 .ccNumber("7173631156263632")
                 .ccExpiration("12/12")
@@ -114,7 +142,7 @@ class UsingPointTest {
                 .deliveryAddress("주소")
                 .deliveryZipCode("우편번호")
                 .phone("010-1234-1234")
-                .usingPoint(point)
+                .usingPoint(usingPoint)
                 .build();
     }
 }

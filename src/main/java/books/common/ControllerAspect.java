@@ -35,7 +35,7 @@ public class ControllerAspect {
 
         } else {
             m.addAttribute("member", userService.loadUserByUsername(p.getName()).getName());
-            List<CartItemDto> cart = cartService.findCartByUser(p);
+            List<CartItemDto> cart = cartService.findCartByUser(p.getName());
             m.addAttribute("cartTotal", cart.size());
             m.addAttribute("cartTotalPrice", cartService.getTotalPrice(cart).get("totalPrice"));
         }

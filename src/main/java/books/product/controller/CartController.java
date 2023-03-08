@@ -22,7 +22,7 @@ public class CartController {
 
     @GetMapping
     public String showCartItems(Model model, Principal principal) {
-        List<CartItemDto> cart = cartService.findCartByUser(principal);
+        List<CartItemDto> cart = cartService.findCartByUser(principal.getName());
         model.addAttribute("cart", cart);
         model.addAttribute("total", cartService.getTotalPrice(cart));
         return "shop/cart";
@@ -30,25 +30,25 @@ public class CartController {
 
     @PostMapping
     public String productAdd(Principal principal, int cartCnt, @RequestParam long itemId) {
-        cartService.addProductInCart(principal, cartCnt, itemId);
+        cartService.addProductInCart(principal.getName(), cartCnt, itemId);
         return REDIRECT_PATH;
     }
 
     @PostMapping("/amount")
     public String productModify(Principal principal, String count) {
-        cartService.modifyProductCount(principal, count);
+        cartService.modifyProductCount(principal.getName(), count);
         return REDIRECT_PATH;
     }
 
     @PostMapping("/delete")
     public String productRemove(Principal principal, @RequestParam long itemId) {
-        cartService.deleteProduct(principal, itemId);
+        cartService.deleteProduct(principal.getName(), itemId);
         return REDIRECT_PATH;
     }
 
     @PostMapping("/deleteAll")
     public String productRemoveAll(Principal principal) {
-        cartService.deleteAll(principal);
+        cartService.deleteAll(principal.getName());
         return REDIRECT_PATH;
     }
 }

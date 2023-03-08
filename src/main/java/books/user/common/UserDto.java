@@ -15,4 +15,5 @@ public class UserDto {
     private int shippingOrders;
     private int deliveryCompletedOrders;
     private int completedOrders;
+    private int pointStamp;
 }

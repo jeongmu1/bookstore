@@ -87,21 +87,21 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public void addOrderByCartItems(OrderForm orderForm, String username)
-            throws NoItemException, TooMuchPointsException, NotEnoughPointException, OutOfUnitPointUsage {
+            throws NoItemException, TooMuchPointsException, NotEnoughPointException, NotEnoughPointStampException, OutOfUnitPointUsage {
         ProductOrder order = getProductOrder(username);
 
         if (cartRepo.findAllByProductOrder(order).isEmpty()) throw new NoItemException("No items in cart");
         order.getProductOrderProducts().forEach(pop -> pop.setDeliveryState(DeliveryState.PREPARING.toString()));
 
         order = setProductOrder(orderForm, getProductOrder(username));
-        orderRepo.save(order);
+        order = orderRepo.save(order);
 
         addPointHistory(username, order);
     }
 
     @Override
     @Transactional
-    public void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) throws NotEnoughPointException, TooMuchPointsException, OutOfUnitPointUsage{
+    public void addOrderByProduct(OrderForm orderForm, String username, Long productBookId, int quantity) throws NotEnoughPointStampException, NotEnoughPointException, TooMuchPointsException, OutOfUnitPointUsage {
         ProductOrderProduct pop = new ProductOrderProduct();
         ProductBook book = productBookRepo.findProductBookById(productBookId);
         pop.setProductCount(quantity);
@@ -141,7 +141,7 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
-    private void addPointHistory(String username, ProductOrder order) throws OutOfUnitPointUsage, TooMuchPointsException, NotEnoughPointException {
+    private void addPointHistory(String username, ProductOrder order) throws NotEnoughPointStampException, OutOfUnitPointUsage, TooMuchPointsException, NotEnoughPointException {
         User user = userRepo.findByUsername(username);
 
         // 포인트 사용 안할 시
@@ -164,6 +164,10 @@ public class OrderServiceImpl implements OrderService {
 
             userPointHistoryRepo.save(userPointHistory);
             user.setPoint(totalPoint);
+            user.setPointStamp(user.getPointStamp() + order.getProductOrderProducts()
+                    .stream()
+                    .mapToInt(ProductOrderProduct::getProductCount)
+                    .sum());
             return;
         }
 
@@ -180,7 +184,12 @@ public class OrderServiceImpl implements OrderService {
             throw new TooMuchPointsException("주문 금액 이상의 포인트는 사용할 수 없습니다.");
         }
 
+        if (user.getPointStamp() < pointProps.getUsablePointStamp()) {
+            throw new NotEnoughPointStampException("포인트 스탬프가 " + pointProps.getUsablePointStamp() + " 이하 입니다.");
+        }
+
         user.setPoint(user.getPoint() - order.getUsingPoint());
+        user.setPointStamp(user.getPointStamp() - pointProps.getUsablePointStamp());
         UserPointHistory userPointHistory = UserPointHistory.builder()
                 .user(user)
                 .pointHistoryDetail(pointHistoryDetailRepo.findPointHistoryDetailById(3))

@@ -4,18 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="fix: 사용자 구매확정 테스트 코드 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/1/0148419e35c9cc4901c0aa667694da3dd266efa7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c1ec4b625de21e22dee362e8e84997f40043f074" beforeDir="false" />
+    <list default="true" id="953e2177-0872-409f-b4d7-4ae517a0887b" name="변경" comment="refactor: cartService 로 직접 Principal 객체를 주입하지 못하도록 변경">
+      <change afterPath="$PROJECT_DIR$/src/main/java/books/order/common/NotEnoughPointStampException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e4e1b461-02cb-46a6-8f0a-48ce7a56bdf0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21d3774d69de2f8c996fe205bce02ed08e4faf34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/b/2b802cebcb9e0d14971bb8b488bcf9e798c78444" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/4/34d9c03298c65782f5dd686206c14a178b2f2149" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a9ee569d90607fe216e49c8c1975bb1d7f59ee7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a9ee569d90607fe216e49c8c1975bb1d7f59ee7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/7/a7c2b7e667be4ed8bb7c777f85bfeab077bb7a61" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/2/b251c13421c3896a496ea1d201123cdce348ee4f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/4/c41eaf5d8efd77527b55e74d8065983da1488194" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/e/ce04b46b0a4f77891c495a671dad9fa901190d86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/0/e0c7358cbf04488c5d4166dca97bdf3dd99683c8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5a6d5b1d6858c111469956740a2387114abd0b0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/admin/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/ShopService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/product/service/impl/ShopServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/common/PointProps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/common/PointProps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/order/service/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/common/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/common/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/domain/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/books/user/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop/productDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account/info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account/info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UsingPointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UsingPointTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,26 +195,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BookApplication">
-    <configuration name="AdminTest.findProductReviewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DNBookStore" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AdminTest" />
-      <option name="METHOD_NAME" value="findProductReviewTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductDetailTest.testQuery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DNBookStore" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ProductDetailTest" />
-      <option name="METHOD_NAME" value="testQuery" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UserTest.confirmDeliveryStateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
@@ -211,11 +205,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTest.findOrderInfosTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UsingPointTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNBookStore" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserTest" />
-      <option name="METHOD_NAME" value="findOrderInfosTest" />
+      <option name="MAIN_CLASS_NAME" value="UsingPointTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsingPointTest.testSavePoint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DNBookStore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UsingPointTest" />
+      <option name="METHOD_NAME" value="testSavePoint" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsingPointTest.testSavingPointStampsByCart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DNBookStore" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UsingPointTest" />
+      <option name="METHOD_NAME" value="testSavingPointStampsByCart" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -237,10 +250,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.BookApplication" />
+        <item itemvalue="JUnit.UsingPointTest" />
+        <item itemvalue="JUnit.UsingPointTest.testSavingPointStampsByCart" />
+        <item itemvalue="JUnit.UsingPointTest.testSavePoint" />
         <item itemvalue="JUnit.UserTest.confirmDeliveryStateTest" />
-        <item itemvalue="JUnit.UserTest.findOrderInfosTest" />
-        <item itemvalue="JUnit.ProductDetailTest.testQuery" />
-        <item itemvalue="JUnit.AdminTest.findProductReviewTest" />
       </list>
     </recent_temporary>
   </component>
@@ -287,35 +300,8 @@
       <workItem from="1677725981766" duration="28202000" />
       <workItem from="1677838542064" duration="4358000" />
       <workItem from="1678063865402" duration="2762000" />
-      <workItem from="1678083803865" duration="17079000" />
-    </task>
-    <task id="LOCAL-00061" summary="feature: ProductBookDto 클래스명 및 메소드명 변경">
-      <created>1674646889098</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1674646889098</updated>
-    </task>
-    <task id="LOCAL-00062" summary="feature: 검색 기능 구현">
-      <created>1674646987952</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1674646987952</updated>
-    </task>
-    <task id="LOCAL-00063" summary="fix: register.html 경로 이동">
-      <created>1674647018894</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1674647018894</updated>
-    </task>
-    <task id="LOCAL-00064" summary="fix: service 메소드명 변경&#10;&#10;get(**) 에서 find(**) 형식으로 변경">
-      <created>1674647070700</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1674647070700</updated>
+      <workItem from="1678083803865" duration="28989000" />
+      <workItem from="1678237153802" duration="6606000" />
     </task>
     <task id="LOCAL-00065" summary="feature: 유저 페이지 메인 구현, 포인트 내역 구현&#10;&#10;유저 페이지 메인에 상품후기, 적립금, 주문 상품 수량 등 간단한 정보 표현하도록 구현, 포인트 내역 페이지 구현">
       <created>1674725399332</created>
@@ -632,7 +618,35 @@
       <option name="project" value="LOCAL" />
       <updated>1678157611455</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="feat: 페이지 이동 매핑">
+      <created>1678181954066</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1678181954066</updated>
+    </task>
+    <task id="LOCAL-00111" summary="refactor: OrderService 로 Principal 객체가 직접 인자로 들어가지 않도록 변경">
+      <created>1678184078107</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1678184078107</updated>
+    </task>
+    <task id="LOCAL-00112" summary="feat: 주문 시 포인트 사용 기능 구현">
+      <created>1678190199032</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1678190199032</updated>
+    </task>
+    <task id="LOCAL-00113" summary="refactor: cartService 로 직접 Principal 객체를 주입하지 못하도록 변경">
+      <created>1678193191791</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1678193191792</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,10 +690,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix: 도서 정보 조회 시 Entity 를 DTO 로 변환해서 view 로 전달되도록 변경" />
-    <MESSAGE value="fix: Utility Class 를 외부에서 생성할 수 없도록 변경" />
-    <MESSAGE value="fix: 올바른 인자가 아닐 시 예외 발생시키도록 변경" />
-    <MESSAGE value="fix: 유틸리티 객체 이름 변경" />
     <MESSAGE value="fix: deliveryState 테이블 제거" />
     <MESSAGE value="fix: 주문관리 조회 시 productOrder 엔티티가 아닌 ProductOrderProduct 엔티티로 조회하도록 변경" />
     <MESSAGE value="feature: 배송상태 변경 추가" />
@@ -701,7 +711,11 @@
     <MESSAGE value="feat: 사용자 페이지 버튼 매핑" />
     <MESSAGE value="feat: 구매 확정 기능 구현" />
     <MESSAGE value="fix: 사용자 구매확정 테스트 코드 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 사용자 구매확정 테스트 코드 수정" />
+    <MESSAGE value="feat: 페이지 이동 매핑" />
+    <MESSAGE value="refactor: OrderService 로 Principal 객체가 직접 인자로 들어가지 않도록 변경" />
+    <MESSAGE value="feat: 주문 시 포인트 사용 기능 구현" />
+    <MESSAGE value="refactor: cartService 로 직접 Principal 객체를 주입하지 못하도록 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: cartService 로 직접 Principal 객체를 주입하지 못하도록 변경" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

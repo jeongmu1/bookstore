@@ -107,6 +107,7 @@ public class UserServiceImpl implements UserService {
                 .shippingOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.DELIVERING.toString()))
                 .deliveryCompletedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.DELIVERY_COMPLETED.toString()))
                 .completedOrders(orderRepo.countProductOrdersByUserAndDeliveryState(user, DeliveryState.CONFIRMED.toString()))
+                .pointStamp(user.getPointStamp())
                 .build();
     }
 

@@ -43,9 +43,9 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public List<CartItemDto> findCartByUser(@NotNull Principal principal) {
+    public List<CartItemDto> findCartByUser(@NotNull String username) {
         return cartRepo
-                .findAllByProductOrder(getOrderEntity(principal))
+                .findAllByProductOrder(getOrderEntity(username))
                 .stream()
                 .map(this::itemEntityToDto)
                 .collect(Collectors.toList());
@@ -53,8 +53,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void addProductInCart(Principal principal, int amount, long itemId) {
-        ProductOrderProduct product = findItem(principal, itemId);
+    public void addProductInCart(String username, int amount, long itemId) {
+        ProductOrderProduct product = findItem(username, itemId);
         if (product != null) {
             product.setProductCount(product.getProductCount() + amount);
             product.setDeliveryState(DeliveryState.PREPARING.toString());
@@ -63,7 +63,7 @@ public class CartServiceImpl implements CartService {
         }
         cartRepo.save(
                 getCartItemEntity(
-                        principal
+                        username
                         , productBookRepo.findProductBookById(itemId)
                         , amount
                 ));
@@ -90,17 +90,17 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void modifyProductCount(@NotNull Principal principal, @NotNull String amounts) {
+    public void modifyProductCount(@NotNull String username, @NotNull String amounts) {
         List<Integer> intAmounts = Arrays.stream(amounts.split(",")).map(Integer::valueOf).collect(Collectors.toList());
 
         List<CartItemDto> cart = cartRepo
-                .findAllByProductOrder(getOrderEntity(principal))
+                .findAllByProductOrder(getOrderEntity(username))
                 .stream()
                 .map(this::itemEntityToDtoForChangeCount)
                 .collect(Collectors.toList());
         for (int i = 0; i < cart.size(); i++) {
             CartItemDto itemDto = cart.get(i);
-            ProductOrderProduct product = findItem(principal, itemDto.getItemId());
+            ProductOrderProduct product = findItem(username, itemDto.getItemId());
             Objects.requireNonNull(product).setProductCount(intAmounts.get(i));
             cartRepo.save(product);
         }
@@ -108,8 +108,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void deleteProduct(Principal principal, long itemId) {
-        ProductOrderProduct item = findItem(principal, itemId);
+    public void deleteProduct(String username, long itemId) {
+        ProductOrderProduct item = findItem(username, itemId);
         if (item != null) {
             cartRepo.deleteById(item.getId());
             return;
@@ -120,15 +120,15 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void deleteAll(@NotNull Principal principal) {
+    public void deleteAll(@NotNull String username) {
         cartRepo.deleteAllByProductOrder(
-                getOrderEntity(principal)
+                getOrderEntity(username)
         );
     }
 
-    private @Nullable ProductOrderProduct findItem(@NotNull Principal principal, long itemId) {
+    private @Nullable ProductOrderProduct findItem(@NotNull String username, long itemId) {
         List<ProductOrderProduct> cart = cartRepo
-                .findAllByProductOrder(getOrderEntity(principal));
+                .findAllByProductOrder(getOrderEntity(username));
 
         for (ProductOrderProduct product : cart) {
             if (product.getProductBook().getId() == itemId) {
@@ -139,17 +139,17 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
-    private @NotNull ProductOrderProduct getCartItemEntity(Principal principal, ProductBook book, int amount) {
+    private @NotNull ProductOrderProduct getCartItemEntity(String username, ProductBook book, int amount) {
         ProductOrderProduct cartItem = new ProductOrderProduct();
-        cartItem.setProductOrder(getOrderEntity(principal));
+        cartItem.setProductOrder(getOrderEntity(username));
         cartItem.setProductBook(book);
         cartItem.setProductCount(amount);
         cartItem.setDeliveryState(DeliveryState.BEFORE.toString());
         return cartItem;
     }
 
-    private ProductOrder getOrderEntity(Principal principal) {
-        User user = userRepo.findByUsername(principal.getName());
+    private ProductOrder getOrderEntity(String username) {
+        User user = userRepo.findByUsername(username);
         Optional<ProductOrder> optionalProductOrder = orderRepo.findProductOrderByUserAndEnabled(user, false);
         return optionalProductOrder.orElseGet(() -> getOrderNewEntityForCart(user));
     }
